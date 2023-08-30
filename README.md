@@ -10,7 +10,7 @@ val transcodeVideo = { ffmpeg.openFile("/home/banana/Videos/gameplay.mov")
 + ffmpeg.setVideoBitrate(0, 4000, "k")
 + ffmpeg.setVideoResolution(1920, 1080)
 + ffmpeg.changePixFmt("yuv420p")
-+ ffmpeg.setAudioEncoder("libopus")
++ ffmpeg.setAudioEncoder("opus")
 + ffmpeg.setAudioBitrate(320, "k")
 + ffmpeg.setOutput("gameplay_new", "mp4")
 }
