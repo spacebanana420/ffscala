@@ -23,7 +23,7 @@ The equivalent command should be
 ```
 ffmpeg -i /home/banana/Videos/gameplay.mov -c:v libx264 -b:v 4000k -filter:v scale=1920:1080 -pix_fmt yuv420p -c:a libopus -b:a 320k /home/banana/Videos/gameplay_new.mp4
 ```
-As it is when you use FFmpeg directly, most parameters are optional, as you can see in the second example.
+Like when you use FFmpeg directly, most parameters are optional, as you can see in the second example. The order of most parameters does not matter either.
 
 ### Example 2 - Image conversion and resize
 ```scala
@@ -48,6 +48,8 @@ Your path names can have spaces between them, as the command execution is shell-
 
 # Documentation
 Most functions return an empty string or int of value -1 when there is an error in the arguments you passed to them
+
+The order of the function calls is not important for most cases, as long as the first function called is ```openFile``` and the last one is ```setOutput```
 
 ```scala
 def openFile(path: String): String
