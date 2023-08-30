@@ -5,7 +5,7 @@ FFscala is a simple wrapper library for the FFmpeg command line, written in Scal
 
 FFscala works by using functions to transform your video encoding properties into a string composed of FFmpeg arguments. Before executing the command, the string is converted into a list of arguments so the command execution is independent of shell and OS, which makes it more portable.
 
-### Example 1
+### Example 1 - Video transcoding
 ```scala
 val transcodeVideo = { ffmpeg.openFile("/home/banana/Videos/gameplay.mov")
 + ffmpeg.setVideoEncoder("libx264")
@@ -23,8 +23,9 @@ The equivalent command should be
 ```
 ffmpeg -i /home/banana/Videos/gameplay.mov -c:v libx264 -b:v 4000k -filter:v scale=1920:1080 -pix_fmt yuv420p -c:a libopus -b:a 320k /home/banana/Videos/gameplay_new.mp4
 ```
+As it is when you use FFmpeg directly, most parameters are optional, as you can see in the second example.
 
-### Example 2 
+### Example 2 - Image conversion
 ```scala
 val convertImage = ffmpeg.openFile("image.bmp") + ffmpeg.setVideoResolution(700, 800) + ffmpeg.setOutput("biggerimage", "png")
 ffmpeg.execute(0, convertImage)
@@ -33,7 +34,7 @@ The equivalent command should be
 ```
 ffmpeg -i image.bmp -filter:v scale=700:800 biggerimage.png
 ```
-Note that the relative paths for the images can be used instead of the absolute paths. You don't also need to use many functions to get a working FFmpeg command.
+Here, the relative paths for the images are used. Many less parameters are used here, you don't have to use all functions of this library.
 
 Your path names can have spaces between them, as the command execution is shell-independent.
 
