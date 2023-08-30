@@ -97,6 +97,16 @@ def setVideoResolution(width: Int, height: Int): String
 Sets the video's width and height resolution in pixels
 
 ```scala
+def setScaleFilter(filter: String): String
+```
+Sets the video's scaling filter in case you use ```setVideoResolution```
+
+#### Supported scaling filters:
+* bicubic
+* bilinear
+* neighbour
+
+```scala
 def setPixFmt(newfmt: String): String
 ```
 Sets the video/image's pixel format
