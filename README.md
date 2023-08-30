@@ -3,6 +3,8 @@
 
 FFscala is a simple wrapper library for the FFmpeg command line, written in Scala.
 
+FFscala works by using functions to transform your video encoding properties into a string composed of FFmpeg arguments. Before executing the command, the string is converted into a list of arguments so the command execution is independent of shell and OS, which makes it more portable.
+
 ### Example 1
 ```scala
 val transcodeVideo = { ffmpeg.openFile("/home/banana/Videos/gameplay.mov")
