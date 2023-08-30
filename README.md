@@ -24,7 +24,7 @@ ffmpeg -i /home/banana/Videos/gameplay.mov -c:v libx264 -b:v 4000k -filter:v sca
 
 ### Example 2 
 ```scala
-val convertImage = ffmpeg.OpenFile("/home/user/image.bmp") + ffmpeg.SetVideoResolution(700, 800) + ffmpeg.setOutput("biggerimage", "png")
+val convertImage = ffmpeg.openFile("/home/user/image.bmp") + ffmpeg.SetVideoResolution(700, 800) + ffmpeg.setOutput("biggerimage", "png")
 ffmpeg.execute(0, convertImage)
 ```
 The equivalent command should be
