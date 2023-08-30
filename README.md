@@ -54,12 +54,16 @@ The order of the function calls is not important for most cases, as long as the 
 ```scala
 def openFile(path: String): String
 ```
-Returns the initial arguments for importing the file in FFmpeg.
+Sets the input media for FFmpeg to read.
+
+This must be the first function to be called, as the returned string should be at the start of your FFmpeg command's arguments.
 
 ```scala
 def setOutput(name: String, format: String): String
 ```
-Returns the path, a combination of the name and format. Use relative paths only for the paths in starting working directory of your program
+Returns the output path, a combination of the name and format. Use relative paths only for the paths in starting working directory of your program.
+
+This must be the last function to be called before calling ```execute```, as the returned string should be at the end of your FFmpeg command's arguments.
 
 ```scala
 def execute(mediaType: String, args: String): Int
@@ -69,7 +73,7 @@ Executes the final command ```args``` and checks for errors in the command based
 * image
 * audio
 
-Any other string is accepted for mediaType, but "image" and "audio" will result in error checking in the context of image and audio encode respectively
+Any other string is accepted for mediaType, but "image" and "audio" will result in error checking in the context of image and audio encode respectively.
 
 ```scala
 def setVideoEncoder(encoder: String): String
@@ -88,7 +92,7 @@ Sets the video encoder
 ```scala
 def setVideoBitrate(method: String, bitrate: Int, dimension: String): String
 ```
-Sets the video bitrate control method, bitrate and unit (dimension)
+Sets the video bitrate control method, bitrate and unit (dimension).
 #### Supported methods:
 * cbr
 * crf
@@ -100,7 +104,7 @@ Sets the video bitrate control method, bitrate and unit (dimension)
 ```scala
 def setVideoResolution(width: Int, height: Int): String
 ```
-Sets the video's width and height resolution in pixels
+Sets the video's width and height resolution in pixels.
 
 ```scala
 def setScaleFilter(filter: String): String
@@ -127,12 +131,12 @@ Sets the video/image's pixel format
 ```scala
 def setKeyframeInterval(interval: Int): String
 ```
-Sets the video's keyframe interval in frames (0 or higher)
+Sets the video's keyframe interval in frames (0 or higher).
 
 ```scala
 def setBFrames(interval: Byte): String
 ```
-Sets the video's bframes (between 0 and 16)
+Sets the video's bframes (between 0 and 16).
 
 ```scala
 def setAudioEncoder(encoder: String): String
@@ -153,7 +157,7 @@ Sets the audio encoder
 ```scala
 def setAudioBitrate(bitrate: Int, dimension: String): String
 ```
-Sets the audio bitrate and unit (dimension)
+Sets the audio bitrate and unit (dimension).
 #### Unit examples:
 * k - kilobits/second
 * M - megabits/second
@@ -161,13 +165,13 @@ Sets the audio bitrate and unit (dimension)
 ```scala
 def normalizeAudio(): String
 ```
-Normalizes the audio with the loudnorm filter
+Normalizes the audio with the loudnorm filter.
 
 
 ```scala
 def removeElement(element: String): String
 ```
-Removes a whole type of element of the input media, such as the video channels, audio channels or subtitle channels
+Removes a whole type of element of the input media, such as the video channels, audio channels or subtitle channels.
 #### Values:
 * "video" - removes video
 * "audio" - removes audio
