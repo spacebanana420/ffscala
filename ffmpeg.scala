@@ -107,21 +107,18 @@ def setVideoEncoder(encoder: String): String = {
     "-c:v " + encoder
 }
 
-def setVideoBitrate(method: Byte, bitrate: Int, dimension: String): String = {
+def setVideoBitrate(method: String, bitrate: Int, dimension: String): String = {
     method match
-        case 0 =>
-            //method = "cbr"
+        case "cbr" =>
             if bitrate <= 0 then return ""
             if dimension == "" then
                 "-b:v " + bitrate + "k"
             else
                 "-b:v " + bitrate + dimension
-        case 1 =>
-            //method = "crf"
+        case "crf" =>
             if bitrate < 0 then return ""
             "-crf " + bitrate
-        case 2 =>
-            //method = "cqp"
+        case "cqp" =>
             ""
         case _ =>
             ""
