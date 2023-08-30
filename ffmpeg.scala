@@ -171,7 +171,7 @@ def setBFrames(interval: Byte): String = {
     "-bf " + interval
 }
 
-def changePixFmt(newfmt: String): String = { //needs to check for variants like rgb48be
+def setPixFmt(newfmt: String): String = { //needs to check for variants like rgb48be
     val supportedFormats = List("rgb24", "rgb8", "rgb48", "gray", "yuv420p", "yuv422p", "yuv444p")
     //val ffmpegEquivalents = List("rgb24", "rgb8", "rgb48", "gray", "yuv420p", "yuv422p", "yuv444p")
     val foundformat = belongsToList(newfmt, supportedFormats)
