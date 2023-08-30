@@ -25,7 +25,7 @@ ffmpeg -i /home/banana/Videos/gameplay.mov -c:v libx264 -b:v 4000k -filter:v sca
 ```
 As it is when you use FFmpeg directly, most parameters are optional, as you can see in the second example.
 
-### Example 2 - Image conversion
+### Example 2 - Image conversion and resize
 ```scala
 val convertImage = ffmpeg.openFile("image.bmp") + ffmpeg.setVideoResolution(700, 800) + ffmpeg.setOutput("biggerimage", "png")
 ffmpeg.execute(0, convertImage)
