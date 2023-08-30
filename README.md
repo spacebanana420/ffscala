@@ -26,7 +26,7 @@ ffmpeg -i /home/banana/Videos/gameplay.mov -c:v libx264 -b:v 4000k -filter:v sca
 
 ### Example 2 
 ```scala
-val convertImage = ffmpeg.openFile("/image.bmp") + ffmpeg.setVideoResolution(700, 800) + ffmpeg.setOutput("biggerimage", "png")
+val convertImage = ffmpeg.openFile("image.bmp") + ffmpeg.setVideoResolution(700, 800) + ffmpeg.setOutput("biggerimage", "png")
 ffmpeg.execute(0, convertImage)
 ```
 The equivalent command should be
@@ -34,6 +34,8 @@ The equivalent command should be
 ffmpeg -i image.bmp -filter:v scale=700:800 biggerimage.png
 ```
 Note that the relative paths for the images can be used instead of the absolute paths. You don't also need to use many functions to get a working FFmpeg command.
+
+Your path names can have spaces between them, as the command execution is shell-independent.
 
 # Requirements
 
