@@ -51,7 +51,7 @@ def openFile(path: String): String
 Returns the initial arguments for importing the file in FFmpeg.
 
 ```scala
-def setOutput(name: String, format: String): String String
+def setOutput(name: String, format: String): String
 ```
 Returns the path, a combination of the name and format. Use relative paths only for the paths in starting working directory of your program
 
