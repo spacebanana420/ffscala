@@ -44,7 +44,7 @@ private def isAlright_Audio(cmd: List[String]): Boolean = {
     true
 }
 
-private def stringToArray(text: String): Array[String] = {
+private def stringToList(text: String): Array[String] = {
     var stringArray: Array[String] = Array()
     var arg = ""
     for i <- text do {
@@ -54,7 +54,8 @@ private def stringToArray(text: String): Array[String] = {
         else
             arg += i
     }
-    stringArray
+    stringArray :+= arg
+    stringArray.toList
 }
 
 def execute(mediaType: Byte, args: String): Int = { // types: 0 = image, 1 = video, 2 = audio
@@ -67,7 +68,7 @@ def execute(mediaType: Byte, args: String): Int = { // types: 0 = image, 1 = vid
         isAlright = true
     if isAlright == false then
         return -1
-    val cmd: List[String] = "ffmpeg" +: stringToArray(args)
+    val cmd: List[String] = "ffmpeg" +: stringToList(args)
     val output = cmd.!
     output
 }
