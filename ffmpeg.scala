@@ -76,11 +76,11 @@ private def stringToList(text: String): List[String] = {
     stringArray.toList
 }
 
-def execute(mediaType: Byte, args: String): Int = { // types: 0 = image, 1 = video, 2 = audio
+def execute(mediaType: String, args: String): Int = { // types: 0 = image, 1 = video, 2 = audio
     var isAlright = false
-    if mediaType == 0 then
+    if mediaType == "image" then
         isAlright = isAlright_Image(args)
-    else if mediaType == 2 then
+    else if mediaType == "audio" then
         isAlright = isAlright_Audio(args)
     else
         isAlright = true
@@ -184,13 +184,13 @@ def setAudioBitrate(bitrate: Int, dimension: String): String = {
 
 def normalizeAudio(): String = "-filter:a loudnorm"
 
-def removeElement(element: Byte): String = {
+def removeElement(element: String): String = {
     element match
-        case 0 =>
+        case "video" =>
             "-vn"
-        case 1 =>
+        case "audio" =>
             "-an"
-        case 2 =>
+        case "subtitle" =>
             "-sn"
         case _ =>
             ""
