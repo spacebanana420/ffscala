@@ -59,13 +59,14 @@ def setOutput(name: String, format: String): String
 Returns the path, a combination of the name and format. Use relative paths only for the paths in starting working directory of your program
 
 ```scala
-def execute(mediaType: Byte, args: String): Int
+def execute(mediaType: String, args: String): Int
 ```
 Executes the final command ```args``` and checks for errors in the command based on the media type.
 #### Values for mediaType:
-* 0: image
-* 1: video
-* 2: audio
+* image
+* audio
+
+Any other string is accepted for mediaType, but "image" and "audio" will result in error checking in the context of image and audio encode respectively
 
 ```scala
 def setVideoEncoder(encoder: String): String
@@ -82,7 +83,7 @@ Sets the video encoder
 * cfhd
 
 ```scala
-def setVideoBitrate(method: Byte, bitrate: Int, dimension: String): String
+def setVideoBitrate(method: String, bitrate: Int, dimension: String): String
 ```
 Sets the video bitrate control method, bitrate and unit (dimension)
 #### Supported methods:
@@ -161,10 +162,10 @@ Normalizes the audio with the loudnorm filter
 
 
 ```scala
-def removeElement(element: Byte): String
+def removeElement(element: String): String
 ```
 Removes a whole type of element of the input media, such as the video channels, audio channels or subtitle channels
 #### Values:
-* 0 - removes video
-* 1 - removes audio
-* 2 - removes subtitles
+* "video" - removes video
+* "audio" - removes audio
+* "subtitle" - removes subtitles
