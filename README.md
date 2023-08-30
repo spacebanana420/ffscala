@@ -9,14 +9,14 @@ FFscala works by using functions to transform your video encoding properties int
 ```scala
 val transcodeVideo = { ffmpeg.openFile("/home/banana/Videos/gameplay.mov")
 + ffmpeg.setVideoEncoder("libx264")
-+ ffmpeg.setVideoBitrate(0, 4000, "k")
++ ffmpeg.setVideoBitrate("cbr", 4000, "k")
 + ffmpeg.setVideoResolution(1920, 1080)
 + ffmpeg.setPixFmt("yuv420p")
 + ffmpeg.setAudioEncoder("opus")
 + ffmpeg.setAudioBitrate(320, "k")
 + ffmpeg.setOutput("/home/banana/Videos/gameplay_new", "mp4")
 }
-ffmpeg.execute(1, transcodeVideo)
+ffmpeg.execute("", transcodeVideo)
 ```
 
 The equivalent command should be
@@ -25,12 +25,13 @@ ffmpeg -i /home/banana/Videos/gameplay.mov -c:v libx264 -b:v 4000k -filter:v sca
 ```
 As it is when you use FFmpeg directly, most parameters are optional, as you can see in the second example.
 
-In this example, all string concatenations are separated by lines to increase readability of the code.
-
 ### Example 2 - Image conversion and resize
 ```scala
-val convertImage = ffmpeg.openFile("image.bmp") + ffmpeg.setVideoResolution(700, 800) + ffmpeg.setOutput("biggerimage", "png")
-ffmpeg.execute(0, convertImage)
+val convertImage = { ffmpeg.openFile("image.bmp")
++ ffmpeg.setVideoResolution(700, 800)
++ ffmpeg.setOutput("biggerimage", "png")
+}
+ffmpeg.execute("image", convertImage)
 ```
 The equivalent command should be
 ```
