@@ -14,25 +14,26 @@ val transcodeVideo = { ffmpeg.openFile("/home/banana/Videos/gameplay.mov")
 + ffmpeg.setPixFmt("yuv420p")
 + ffmpeg.setAudioEncoder("opus")
 + ffmpeg.setAudioBitrate(320, "k")
-+ ffmpeg.setOutput("gameplay_new", "mp4")
++ ffmpeg.setOutput("/home/banana/Videos/gameplay_new", "mp4")
 }
 ffmpeg.execute(1, transcodeVideo)
 ```
 
 The equivalent command should be
 ```
-ffmpeg -i /home/banana/Videos/gameplay.mov -c:v libx264 -b:v 4000k -filter:v scale=1920:1080 -pix_fmt yuv420p -c:a libopus -b:a 320k gameplay_new.mp4
+ffmpeg -i /home/banana/Videos/gameplay.mov -c:v libx264 -b:v 4000k -filter:v scale=1920:1080 -pix_fmt yuv420p -c:a libopus -b:a 320k /home/banana/Videos/gameplay_new.mp4
 ```
 
 ### Example 2 
 ```scala
-val convertImage = ffmpeg.openFile("/home/user/image.bmp") + ffmpeg.setVideoResolution(700, 800) + ffmpeg.setOutput("biggerimage", "png")
+val convertImage = ffmpeg.openFile("/image.bmp") + ffmpeg.setVideoResolution(700, 800) + ffmpeg.setOutput("biggerimage", "png")
 ffmpeg.execute(0, convertImage)
 ```
 The equivalent command should be
 ```
-ffmpeg -i /home/user/image.bmp -filter:v scale=700:800 biggerimage.png
+ffmpeg -i image.bmp -filter:v scale=700:800 biggerimage.png
 ```
+Note that the relative paths for the images can be used instead of the absolute paths. You don't also need to use many functions to get a working FFmpeg command.
 
 # Requirements
 
