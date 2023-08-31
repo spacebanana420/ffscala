@@ -53,9 +53,9 @@ The order of the function calls is not important for most cases, as long as the 
 
 The documentation is separated into multiple pages, each being respective to a component of the library.
 
-### [FFmpeg doc](https://github.com/spacebanana420/ffscala/blob/main/docs_ffmpeg.md)
-### [Video doc](https://github.com/spacebanana420/ffscala/blob/main/docs_video.md)
-### [Filters doc](https://github.com/spacebanana420/ffscala/blob/main/docs_filters.md)
+### [FFmpeg doc](https://github.com/spacebanana420/ffscala/blob/main/docs/ffmpeg.md)
+### [Video doc](https://github.com/spacebanana420/ffscala/blob/main/docs/video.md)
+### [Filters doc](https://github.com/spacebanana420/ffscala/blob/main/docs/filters.md)
 
 FFmpeg doc contains the documentation for the main functions of this library
 
