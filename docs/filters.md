@@ -22,7 +22,7 @@ Adds a filter to normalize the audio.
 ```scala
 def setVolume(volume: String): String
 ```
-Sets the video's volume.
+Adjusts the media's volume.
 
 You can set the volume percentage with "1.0", "0.5", "1.6", etc.
 You can also increase or lower the volume in decibels: "4dB", "-7dB"

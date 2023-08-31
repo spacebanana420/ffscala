@@ -10,7 +10,7 @@ FFscala works by using functions to transform your video encoding properties int
 val transcodeVideo = { ffmpeg.openFile("/home/banana/Videos/gameplay.mov")
 + ffmpeg.setVideoEncoder("x264")
 + ffmpeg.setVideoBitrate("cbr", 4000, "k")
-+ ffmpeg.setVideoResolution(1920, 1080)
++ filters.setVideoResolution(1920, 1080)
 + ffmpeg.setPixFmt("yuv420p")
 + ffmpeg.setAudioEncoder("opus")
 + ffmpeg.setAudioBitrate(320, "k")
@@ -28,7 +28,7 @@ Like when you use FFmpeg directly, most parameters are optional, as you can see 
 ### Example 2 - Image conversion and resize
 ```scala
 val convertImage = { ffmpeg.openFile("image.bmp")
-+ ffmpeg.setVideoResolution(700, 800)
++ filters.setVideoResolution(700, 800)
 + ffmpeg.setOutput("biggerimage", "png")
 }
 ffmpeg.execute("image", convertImage)
@@ -53,12 +53,14 @@ The order of the function calls is not important for most cases, as long as the 
 
 The documentation is separated into multiple pages, each being respective to a component of the library.
 
-### [FFmpeg doc](https://github.com/spacebanana420/ffscala/blob/main/docs/ffmpeg.md)
-### [Video doc](https://github.com/spacebanana420/ffscala/blob/main/docs/video.md)
-### [Filters doc](https://github.com/spacebanana420/ffscala/blob/main/docs/filters.md)
+#### [FFmpeg doc](https://github.com/spacebanana420/ffscala/blob/main/docs/ffmpeg.md)
+#### [Video doc](https://github.com/spacebanana420/ffscala/blob/main/docs/video.md)
+#### [Filters doc](https://github.com/spacebanana420/ffscala/blob/main/docs/filters.md)
 
 FFmpeg doc contains the documentation for the main functions of this library
 
 Video doc contains the documentation for the functions related to encoder-specific parameters and presets
 
 Filters doc contains the documentation for FFmpeg filters
+
+#### [List of examples](https://github.com/spacebanana420/ffscala/blob/main/docs/examples.md)
