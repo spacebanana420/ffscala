@@ -8,7 +8,7 @@ FFscala works by using functions to transform your video encoding properties int
 ### Example 1 - Video transcoding
 ```scala
 val transcodeVideo = { ffmpeg.openFile("/home/banana/Videos/gameplay.mov")
-+ ffmpeg.setVideoEncoder("libx264")
++ ffmpeg.setVideoEncoder("x264")
 + ffmpeg.setVideoBitrate("cbr", 4000, "k")
 + ffmpeg.setVideoResolution(1920, 1080)
 + ffmpeg.setPixFmt("yuv420p")
@@ -51,128 +51,14 @@ Most functions return an empty string or int of value -1 when there is an error 
 
 The order of the function calls is not important for most cases, as long as the first function called is ```openFile``` and the last one is ```setOutput```
 
-```scala
-def openFile(path: String): String
-```
-Sets the input media for FFmpeg to read.
+The documentation is separated into multiple pages, each being respective to a component of the library.
 
-This must be the first function to be called, as the returned string should be at the start of your FFmpeg command's arguments.
+### [FFmpeg doc](https://github.com/spacebanana420/ffscala/blob/main/docs_ffmpeg.md)
+### [Video doc](https://github.com/spacebanana420/ffscala/blob/main/docs_video.md)
+### [Filters doc](https://github.com/spacebanana420/ffscala/blob/main/docs_filters.md)
 
-```scala
-def setOutput(name: String, format: String): String
-```
-Returns the output path, a combination of the name and format. Use relative paths only for the paths in starting working directory of your program.
+FFmpeg doc contains the documentation for the main functions of this library
 
-This must be the last function to be called before calling ```execute```, as the returned string should be at the end of your FFmpeg command's arguments.
+Video doc contains the documentation for the functions related to encoder-specific parameters and presets
 
-```scala
-def execute(mediaType: String, args: String): Int
-```
-Executes the final command ```args``` and checks for errors in the command based on the media type.
-#### Values for mediaType:
-* image
-* audio
-
-Any other string is accepted for mediaType, but "image" and "audio" will result in error checking in the context of image and audio encode respectively.
-
-```scala
-def setVideoEncoder(encoder: String): String
-```
-Sets the video encoder
-#### Supported video encoders:
-* copy
-* libx264
-* libx265
-* utvideo
-* png
-* dnxhd
-* tiff
-* cfhd
-
-```scala
-def setVideoBitrate(method: String, bitrate: Int, dimension: String): String
-```
-Sets the video bitrate control method, bitrate and unit (dimension).
-#### Supported methods:
-* cbr
-* crf
-* cqp (to be added)
-#### Unit examples:
-* k - kilobits/second
-* M - megabits/second
-
-```scala
-def setVideoResolution(width: Int, height: Int): String
-```
-Sets the video's width and height resolution in pixels.
-
-```scala
-def setScaleFilter(filter: String): String
-```
-Sets the video's scaling filter in case you use ```setVideoResolution```
-
-#### Supported scaling filters:
-* bicubic
-* bilinear
-* neighbour
-
-```scala
-def setPixFmt(newfmt: String): String
-```
-Sets the video/image's pixel format
-#### Supported pixel formats:
-* rgb24
-* rgb48
-* gray
-* yuv420p
-* yuv422p
-* yuv444p
-
-```scala
-def setKeyframeInterval(interval: Int): String
-```
-Sets the video's keyframe interval in frames (0 or higher).
-
-```scala
-def setBFrames(interval: Byte): String
-```
-Sets the video's bframes (between 0 and 16).
-
-```scala
-def setAudioEncoder(encoder: String): String
-```
-Sets the audio encoder
-#### Supported encoders:
-* copy
-* aac
-* opus
-* vorbis
-* mp3
-* ac3
-* flac
-* pcm16
-* pcm24
-* pcm32
-
-```scala
-def setAudioBitrate(bitrate: Int, dimension: String): String
-```
-Sets the audio bitrate and unit (dimension).
-#### Unit examples:
-* k - kilobits/second
-* M - megabits/second
-
-```scala
-def normalizeAudio(): String
-```
-Normalizes the audio with the loudnorm filter.
-
-
-```scala
-def removeElement(element: String): String
-```
-Removes a whole type of element of the input media, such as the video channels, audio channels or subtitle channels.
-#### Values:
-* "video" - removes video
-* "audio" - removes audio
-* "subtitle" - removes subtitles
+Filters doc contains the documentation for FFmpeg filters

@@ -1,22 +1,8 @@
 package ffmpeg
+
 import scala.sys.process._
 import java.io.File
-
-private def belongsToList(text: String, group: List[String]): Boolean = {
-    for i <- group do {
-        if text == i then
-            return true
-    }
-    false
-}
-
-private def indexFromList(text: String, group: List[String]): Int = {
-    for i <- 0 to group.length - 1 do {
-        if text == group(i) then
-            return i
-    }
-    -1
-}
+import misc.*
 
 // private def isAlright_Image(cmd: List[String]): Boolean = {
 //     var cmdstring: String = ""
@@ -62,21 +48,7 @@ private def isAlright_Audio(args: String): Boolean = {
     true
 }
 
-private def stringToList(text: String): List[String] = {
-    var stringArray: Array[String] = Array()
-    var arg = ""
-    for i <- text do {
-        if i == ' ' then
-            stringArray :+= arg
-            arg = ""
-        else
-            arg += i
-    }
-    stringArray :+= arg
-    stringArray.toList
-}
-
-def execute(mediaType: String, args: String): Int = { // types: 0 = image, 1 = video, 2 = audio
+def execute(mediaType: String, args: String): Int = { //remove mediatype, do check automatically
     var isAlright = false
     if mediaType == "image" then
         isAlright = isAlright_Image(args)
@@ -92,19 +64,19 @@ def execute(mediaType: String, args: String): Int = { // types: 0 = image, 1 = v
 }
 
 def openFile(path: String): String = {
-    //val supportedFormats = List(".png", ".bmp", ".gif")
     if File(path).exists() == false || File(path).isFile == false then
         return ""
-    "-i " + path
+    "-i " + path + " "
 }
 
 def setVideoEncoder(encoder: String): String = {
-    val supportedFormats = List("copy", "libx264", "libx265", "utvideo", "png", "dnxhd", "tiff", "cfhd")
+    val supportedFormats = List("copy", "x264", "x265", "nvenc", "nvenc265" "utvideo", "png", "dnxhd", "tiff", "cfhd", "vp9")
+    val ffmpegEquivalents = List("copy", "libx264", "libx265", "h264_nvenc", "h265_nvenc", "utvideo", "png", "dnxhd", "tiff", "cfhd", "libvpx-vp9")
     val supported = belongsToList(encoder, supportedFormats)
 
     if supported == false then
         return ""
-    "-c:v " + encoder
+    "-c:v " + encoder  + " "
 }
 
 def setVideoBitrate(method: String, bitrate: Int, dimension: String): String = {
@@ -112,44 +84,28 @@ def setVideoBitrate(method: String, bitrate: Int, dimension: String): String = {
         case "cbr" =>
             if bitrate <= 0 then return ""
             if dimension == "" then
-                "-b:v " + bitrate + "k"
+                "-b:v " + bitrate + "k "
             else
-                "-b:v " + bitrate + dimension
+                "-b:v " + bitrate + dimension  + " "
         case "crf" =>
             if bitrate < 0 then return ""
-            "-crf " + bitrate
+            "-crf " + bitrate  + " "
         case "cqp" =>
             ""
         case _ =>
             ""
 }
 
-def setVideoResolution(width: Int, height: Int): String = {
-    if width <= 0 || height <= 0 then
-        ""
-    else
-        "-filter:v scale=" + width + ":" + height
-}
-
-def setScaleFilter(filter: String): String = {
-    val supportedFilters = List("bicubic", "bilinear", "neighbour")
-    val foundFilter = belongsToList(filter, supportedFilters)
-    if foundFilter == false then
-        ""
-    else
-        "-sws_flags " + filter
-}
-
 def setKeyframeInterval(interval: Int): String = {
     if interval < 0 then
         return ""
-    "-g " + interval
+    "-g " + interval  + " "
 }
 
 def setBFrames(interval: Byte): String = {
     if interval < 0 || interval > 16 then
         return ""
-    "-bf " + interval
+    "-bf " + interval  + " "
 }
 
 def setPixFmt(newfmt: String): String = { //needs to check for variants like rgb48be
@@ -159,7 +115,7 @@ def setPixFmt(newfmt: String): String = { //needs to check for variants like rgb
 
     if foundformat == false then
         return ""
-    "-pix_fmt " + newfmt
+    "-pix_fmt " + newfmt  + " "
 }
 
 def setAudioEncoder(encoder: String): String = {
@@ -168,27 +124,25 @@ def setAudioEncoder(encoder: String): String = {
     val i = indexFromList(encoder, supportedFormats)
     if i == -1 then
         return ""
-    "-c:a " + ffmpegEquivalents(i)
+    "-c:a " + ffmpegEquivalents(i)  + " "
 }
 
 def setAudioBitrate(bitrate: Int, dimension: String): String = {
     if bitrate <= 0 then return ""
     if dimension == "" then
-        "-b:a " + bitrate + "k"
+        "-b:a " + bitrate + "k "
     else
-        "-b:a " + bitrate + dimension
+        "-b:a " + bitrate + dimension  + " "
 }
-
-def normalizeAudio(): String = "-filter:a loudnorm"
 
 def removeElement(element: String): String = {
     element match
         case "video" =>
-            "-vn"
+            "-vn "
         case "audio" =>
-            "-an"
+            "-an "
         case "subtitle" =>
-            "-sn"
+            "-sn "
         case _ =>
             ""
 }
@@ -203,5 +157,9 @@ def setOutput(name: String, format: String): String = {
 
     if isSupported == false then
         return ""
-    name + "." + format
+    name + "." + format  + " "
+}
+
+def getScreenshot(input: String, output: String, time: String): String = {
+    execute("image", "-ss " + time + " -i " + input + " -frames:v 1 " + output)
 }
