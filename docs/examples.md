@@ -74,7 +74,7 @@ Here. the time argument will tell FFmpeg to get the frame at 320.5 seconds
 ```scala
 val transcodeVideo = { ffmpeg.openFile("/home/banana/Videos/gameplay.mov")
 + ffmpeg.setVideoEncoder("x264")
-+ ffmpeg.setVideoBitrate("CRF", 12, "")
++ ffmpeg.setVideoBitrate("crf", 12, "")
 + video.x264_setPreset("veryfast")
 + ffmpeg.setAudioEncoder("copy")
 + ffmpeg.setOutput("/home/banana/Videos/gameplay_new", "mp4")
@@ -87,7 +87,7 @@ This will transcode the input video into a video encoded in x264 with the preset
 ### Example 6 - Unusual function order
 ```scala
 val transcodeVideo = { ffmpeg.openFile("/home/banana/Videos/gameplay.mov")
-+ ffmpeg.setVideoBitrate("CRF", 12, "")
++ ffmpeg.setVideoBitrate("crf", 12, "")
 + ffmpeg.setAudioEncoder("copy")
 + ffmpeg.setVideoEncoder("x264")
 + video.x264_setPreset("veryfast")
