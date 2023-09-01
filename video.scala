@@ -37,7 +37,7 @@ def vp9_setDeadline(preset: String): String = {
 def vp9_setLossless(): String = "-lossless "
 
 def cfhd_setQuality(value: Int): String = {
-    if value < 0 || value > 12
+    if value < 0 || value > 12 then
         ""
     else
         "-quality " + value + " "

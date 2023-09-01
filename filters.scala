@@ -27,20 +27,20 @@ def normalizeAudio(): String = "-filter:a loudnorm "
 //         "-filter:a acompressor " + threshold + " "
 // }
 
-def setVolume(volume: String): String = { //1.0  1.8  10dB -5dB
+def changeVolume(volume: String): String = { //1.0  1.8  10dB -5dB
     "-filter:a volume=" + volume + " "
 }
 
 
 def crop(x: Int, y: Int, width: Int, height: Int): String = {
-    if x < 0 || y < 0 || width <= 0 || height <= 0
+    if x < 0 || y < 0 || width <= 0 || height <= 0 then
         ""
     else
         "-filter:v crop=" + width + ":" + height + ":" + x + ":" + y + " "
 }
 
 def cropCenter(width: Int, height: Int): String = {
-    if width <= 0 || height <= 0
+    if width <= 0 || height <= 0 then
         ""
     else
         "-filter:v crop=" + width + ":" + height + " "

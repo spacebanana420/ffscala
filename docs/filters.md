@@ -20,7 +20,7 @@ def normalizeAudio(): String
 Adds a filter to normalize the audio.
 
 ```scala
-def setVolume(volume: String): String
+def changeVolume(volume: String): String
 ```
 Adjusts the media's volume.
 

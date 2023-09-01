@@ -63,14 +63,14 @@ def execute(mediaType: String, args: String): Int = { //remove mediatype, do che
     output
 }
 
-def openFile(path: String): String = {
+def openFile(path: String): String = { //add support for multiple inputs and detection
     if File(path).exists() == false || File(path).isFile == false then
         return ""
     "-i " + path + " "
 }
 
 def setVideoEncoder(encoder: String): String = {
-    val supportedFormats = List("copy", "x264", "x265", "nvenc", "nvenc265" "utvideo", "png", "dnxhd", "tiff", "cfhd", "vp9")
+    val supportedFormats = List("copy", "x264", "x265", "nvenc", "nvenc265", "utvideo", "png", "dnxhd", "tiff", "cfhd", "vp9")
     val ffmpegEquivalents = List("copy", "libx264", "libx265", "h264_nvenc", "h265_nvenc", "utvideo", "png", "dnxhd", "tiff", "cfhd", "libvpx-vp9")
     val supported = belongsToList(encoder, supportedFormats)
 
@@ -160,6 +160,6 @@ def setOutput(name: String, format: String): String = {
     name + "." + format  + " "
 }
 
-def getScreenshot(input: String, output: String, time: String): String = {
+def getScreenshot(input: String, output: String, time: String) = {
     execute("image", "-ss " + time + " -i " + input + " -frames:v 1 " + output)
 }

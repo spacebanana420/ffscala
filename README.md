@@ -56,11 +56,14 @@ The documentation is separated into multiple pages, each being respective to a c
 #### [FFmpeg doc](https://github.com/spacebanana420/ffscala/blob/main/docs/ffmpeg.md)
 #### [Video doc](https://github.com/spacebanana420/ffscala/blob/main/docs/video.md)
 #### [Filters doc](https://github.com/spacebanana420/ffscala/blob/main/docs/filters.md)
+#### [FFprobe doc](https://github.com/spacebanana420/ffscala/blob/main/docs/ffprobe.md)
 
-FFmpeg doc contains the documentation for the main functions of this library
+FFmpeg doc contains the documentation for the main functions of this library.
 
-Video doc contains the documentation for the functions related to encoder-specific parameters and presets
+Video doc contains the documentation for the functions related to encoder-specific parameters and presets.
 
-Filters doc contains the documentation for FFmpeg filters
+Filters doc contains the documentation for FFmpeg filters.
+
+FFprobe doc contains the documentation for parsing media information.
 
 #### [List of examples](https://github.com/spacebanana420/ffscala/blob/main/docs/examples.md)
