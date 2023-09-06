@@ -60,7 +60,7 @@ def tiff_setCompression(compression: String): String = {
         ""
 }
 
-def webp_setLossless(): String = "-lossless 1"
+def webp_setLossless(): String = "-lossless 1 "
 
 
 def webp_setQuality(value: Int): String = {
