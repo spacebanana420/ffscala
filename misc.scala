@@ -26,6 +26,7 @@ def stringToList(text: String): List[String] = {
         else
             arg += i
     }
-    stringArray :+= arg
+    if arg != "" then
+        stringArray :+= arg
     stringArray.toList
 }

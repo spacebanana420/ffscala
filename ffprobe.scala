@@ -1,4 +1,4 @@
-package ffprobe
+package ffscala
 
 import java.io.File
 import scala.sys.process._

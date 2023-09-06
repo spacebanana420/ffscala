@@ -2,11 +2,11 @@
 ```scala
 val transcodeVideo = { ffmpeg.openFile("/home/banana/Videos/gameplay.mov")
 + ffmpeg.setVideoEncoder("x264")
-+ ffmpeg.setVideoBitrate("cbr", 4000, "k")
++ ffmpeg.setVideoBitrate("cbr", 4000)
 + filters.setVideoResolution(1920, 1080)
 + ffmpeg.setPixFmt("yuv420p")
 + ffmpeg.setAudioEncoder("opus")
-+ ffmpeg.setAudioBitrate(320, "k")
++ ffmpeg.setAudioBitrate(320)
 + ffmpeg.setOutput("/home/banana/Videos/gameplay_new", "mp4")
 }
 ffmpeg.execute("", transcodeVideo)
@@ -14,7 +14,7 @@ ffmpeg.execute("", transcodeVideo)
 
 The equivalent command should be
 ```
-ffmpeg -i /home/banana/Videos/gameplay.mov -c:v libx264 -b:v 4000k -filter:v scale=1920:1080 -pix_fmt yuv420p -c:a libopus -b:a 320k /home/banana/Videos/gameplay_new.mp4
+ffmpeg -y -loglevel 32 -i /home/banana/Videos/gameplay.mov -c:v libx264 -b:v 4000k -filter:v scale=1920:1080 -pix_fmt yuv420p -c:a libopus -b:a 320k /home/banana/Videos/gameplay_new.mp4
 ```
 Like when you use FFmpeg directly, most parameters are optional, as you can see in the second example. The order of most parameters does not matter either.
 
@@ -74,7 +74,7 @@ Here. the time argument will tell FFmpeg to get the frame at 320.5 seconds
 ```scala
 val transcodeVideo = { ffmpeg.openFile("/home/banana/Videos/gameplay.mov")
 + ffmpeg.setVideoEncoder("x264")
-+ ffmpeg.setVideoBitrate("crf", 12, "")
++ ffmpeg.setVideoBitrate("crf", 12)
 + video.x264_setPreset("veryfast")
 + ffmpeg.setAudioEncoder("copy")
 + ffmpeg.setOutput("/home/banana/Videos/gameplay_new", "mp4")
@@ -87,7 +87,7 @@ This will transcode the input video into a video encoded in x264 with the preset
 ### Example 6 - Unusual function order
 ```scala
 val transcodeVideo = { ffmpeg.openFile("/home/banana/Videos/gameplay.mov")
-+ ffmpeg.setVideoBitrate("crf", 12, "")
++ ffmpeg.setVideoBitrate("crf", 12)
 + ffmpeg.setAudioEncoder("copy")
 + ffmpeg.setVideoEncoder("x264")
 + video.x264_setPreset("veryfast")
@@ -97,3 +97,30 @@ ffmpeg.execute("", transcodeVideo)
 ```
 
 This is the same example as above, but with the order of the function calls altered. The command is still functional and the output is the same, as long as you start with ```openFile``` and end with ```setOutput```. This however is more unpredictable if you want to include multiple input sources.
+
+
+### Example 7 - Program example
+
+```scala
+import ffscala.*
+
+@main def main() = {
+    val encodeVideo = {openFile("/path/to/video.mov")
+    + setVideoEncoder("x265")
+    + x264_setPreset("veryfast")
+    + setVideoBitrate("crf", 18)
+    + setAudioEncoder("opus")
+    + setAudioBitrate(320)
+    + setVideoResolution(1280, 720)
+    + setScaleFilter("bilinear")
+    + setOutput("/path/to/newvideo", "mp4")
+    }
+    println("The command arguments are " + encodeVideo + "\n")
+    executeSilent("", encodeVideo)
+}
+
+```
+
+This is a real-world example of a simple FFscala implementation.
+
+This code is functional and would compile if /path/to/video.mov was the path to a real video file.

@@ -23,6 +23,18 @@ Executes the final command ```args``` and checks for errors in the command based
 Any other string is accepted for mediaType, but "image" and "audio" will result in error checking in the context of image and audio encode respectively.
 
 ```scala
+def executeSilent(mediaType: String, args: String, quiet: Boolean): Int
+```
+Executes the final command ```args``` and checks for errors in the command based on the media type.
+
+Unlike execute(), executeSilent() only outputs warnings and errors to the terminal
+#### Values for mediaType:
+* image
+* audio
+
+Any other string is accepted for mediaType, but "image" and "audio" will result in error checking in the context of image and audio encode respectively.
+
+```scala
 def setVideoEncoder(encoder: String): String
 ```
 Sets the video encoder
@@ -40,16 +52,19 @@ Sets the video encoder
 * vp9
 
 ```scala
-def setVideoBitrate(method: String, bitrate: Int, dimension: String): String
+def setVideoBitrate(method: String, bitrate: Int): String
 ```
-Sets the video bitrate control method, bitrate and unit (dimension).
+Sets the video bitrate control method and value.
+
+For CBR, the bitrate is measured in kilobits
+
+For CRF, the "bitrate" value is just the CRF value.
+
+CQP is not implemented yet
 #### Supported methods:
 * cbr
 * crf
 * cqp (to be added)
-#### Unit examples:
-* k - kilobits/second
-* M - megabits/second
 
 ```scala
 def setPixFmt(newfmt: String): String
@@ -90,12 +105,9 @@ Sets the audio encoder
 * pcm32
 
 ```scala
-def setAudioBitrate(bitrate: Int, dimension: String): String
+def setAudioBitrate(bitrate: Int): String
 ```
-Sets the audio bitrate and unit (dimension).
-#### Unit examples:
-* k - kilobits/second
-* M - megabits/second
+Sets the audio bitrate in kilobits.
 
 ```scala
 def removeElement(element: String): String

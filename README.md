@@ -9,11 +9,11 @@ FFscala works by using functions to transform your video encoding properties int
 ```scala
 val transcodeVideo = { ffmpeg.openFile("/home/banana/Videos/gameplay.mov")
 + ffmpeg.setVideoEncoder("x264")
-+ ffmpeg.setVideoBitrate("cbr", 4000, "k")
++ ffmpeg.setVideoBitrate("cbr", 4000)
 + filters.setVideoResolution(1920, 1080)
 + ffmpeg.setPixFmt("yuv420p")
 + ffmpeg.setAudioEncoder("opus")
-+ ffmpeg.setAudioBitrate(320, "k")
++ ffmpeg.setAudioBitrate(320)
 + ffmpeg.setOutput("/home/banana/Videos/gameplay_new", "mp4")
 }
 ffmpeg.execute("", transcodeVideo)
@@ -43,8 +43,14 @@ Your path names can have spaces between them, as the command execution is shell-
 
 # Requirements
 
-* You need to have [FFmpeg](https://ffmpeg.org/) installed
+* You need to have [FFmpeg](https://ffmpeg.org/) installed (tested in version 6, but most versions should work)
 * Library only tested with Scala 3
+
+# How to use
+
+Import the .scala files of this repository into yours
+
+In the code files where you want to use the library, import ```ffscala```
 
 # Documentation
 Most functions return an empty string or int of value -1 when there is an error in the arguments you passed to them

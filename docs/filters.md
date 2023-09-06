@@ -1,12 +1,21 @@
 ```scala
 def setVideoResolution(width: Int, height: Int): String
 ```
-Sets the video's width and height resolution in pixels.
+Sets the video/image's width and height resolution in pixels.
+
+```scala
+def setVideoResolution_factor(width: Float, height: Float): String
+```
+Sets the video/image's resolution factor.
+
+For example, a width of 2 and a height of 2 will correspond to 2x the input's width and height
 
 ```scala
 def setScaleFilter(filter: String): String
 ```
 Sets the video's scaling filter in case you use ```setVideoResolution```
+
+If unspecified, it will default to bicubic
 
 #### Supported scaling filters:
 * bicubic

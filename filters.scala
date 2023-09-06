@@ -1,4 +1,4 @@
-package filters
+package ffscala
 
 import misc.*
 
@@ -7,6 +7,13 @@ def setVideoResolution(width: Int, height: Int): String = {
         ""
     else
         "-filter:v scale=" + width + ":" + height  + " "
+}
+
+def setVideoResolution_factor(width: Float, height: Float): String = {
+    if width <= 0 || height <= 0 then
+        ""
+    else
+        "-filter:v scale=iw*" + width + ":ih*" + height  + " "
 }
 
 def setScaleFilter(filter: String): String = {
