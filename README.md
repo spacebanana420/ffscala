@@ -1,5 +1,5 @@
 # FFscala
-### This library is untested and unfinished and is not meant to be used yet while in this state until a release is published on this repo
+### This library is unfinished and is not meant to be used in serious cases yet until a release is published on this repo
 
 FFscala is a simple wrapper library for the FFmpeg command line, written in Scala 3.
 
