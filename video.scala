@@ -54,8 +54,8 @@ def cfhd_setQuality(value: Int): String = {
 
 def tiff_setCompression(compression: String): String = {
     val formats = List("packbits", "raw", "lzw", "deflate")
-    if belongsToList(preset, presets) == true then
-        "-compression_algo " + preset + " "
+    if belongsToList(compression, formats) == true then
+        "-compression_algo " + compression + " "
     else
         ""
 }

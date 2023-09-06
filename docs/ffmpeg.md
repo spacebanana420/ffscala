@@ -81,7 +81,7 @@ Sets the video/image's pixel format
 * yuv444p10le
 
 ```scala
-def setKeyframeInterval(interval: Int): String
+def setKeyframeInterval(interval: Short): String
 ```
 Sets the video's keyframe interval in frames (0 or higher).
 

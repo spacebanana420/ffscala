@@ -115,7 +115,7 @@ def setVideoBitrate(method: String, bitrate: Int): String = {
             ""
 }
 
-def setKeyframeInterval(interval: Int): String = {
+def setKeyframeInterval(interval: Short): String = {
     if interval < 0 then
         ""
     else
