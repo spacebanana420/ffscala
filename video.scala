@@ -35,7 +35,6 @@ def vp9_setDeadline(preset: String): String = {
 }
 
 def vp9_setcpu_used(value: Byte): String = {
-    val presets = List("best", "good", "realtime")
     if value >= -8 && value < 8
         "-cpu-used " + value + " "
     else
