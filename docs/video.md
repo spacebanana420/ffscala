@@ -76,8 +76,31 @@ Sets lossless encoding for VP9.
 ```scala
 def cfhd_setQuality(value: Int): String
 ```
-Sets the encoding quality for Cineform. This affects the bitrate used
+Sets the encoding quality for Cineform. This affects the bitrate used.
 
-It must be a value between 0 and 12
+It must be a value between 0 and 12.
 
-Higher value = lower bitrate and quality
+Higher value = lower bitrate and quality.
+
+```scala
+def tiff_setCompression(compression: String): String
+```
+Sets the compression algorithm for the tiff encoder.
+
+#### Supported values:
+* packbits
+* raw
+* lzw
+* deflate
+
+```scala
+def webp_setLossless(): String
+```
+Sets lossless compression for webp.
+
+```scala
+def webp_setQuality(value: Int): String
+```
+Sets the quality value for webp encoding.
+
+Values between 0 and 100 are accepted

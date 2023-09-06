@@ -112,6 +112,14 @@ def setAudioBitrate(bitrate: Int): String
 Sets the audio bitrate in kilobits.
 
 ```scala
+def setSampleFormat(fmt: String): String
+```
+Sets the audio's sample format
+#### Supported sample formats:
+* s16
+* s32
+
+```scala
 def removeElement(element: String): String
 ```
 Removes a whole type of element of the input media, such as the video channels, audio channels or subtitle channels.

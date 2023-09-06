@@ -156,6 +156,16 @@ def setAudioBitrate(bitrate: Int): String = {
         "-b:a " + bitrate + "k "
 }
 
+def setSampleFormat(fmt: String): String = {
+    val supportedFormats = List("s16", "s32")
+    val foundformat = belongsToList(fmt, supportedFormats)
+
+    if foundformat == false then
+        ""
+    else
+        "-sample_fmt " + fmt  + " "
+}
+
 def removeElement(element: String): String = {
     element match
         case "video" =>

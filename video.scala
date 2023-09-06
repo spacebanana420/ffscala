@@ -51,3 +51,21 @@ def cfhd_setQuality(value: Int): String = {
     else
         "-quality " + value + " "
 }
+
+def tiff_setCompression(compression: String): String = {
+    val formats = List("packbits", "raw", "lzw", "deflate")
+    if belongsToList(preset, presets) == true then
+        "-compression_algo " + preset + " "
+    else
+        ""
+}
+
+def webp_setLossless(): String = "-lossless 1"
+
+
+def webp_setQuality(value: Int): String = {
+    if value < 0 || value > 100 then
+        ""
+    else
+        "-quality " + value + " "
+}
