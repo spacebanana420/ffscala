@@ -12,27 +12,40 @@ Returns the output path, a combination of the name and format. Use relative path
 
 This must be the last function to be called before calling ```execute```, as the returned string should be at the end of your FFmpeg command's arguments.
 
+#### Supported formats:
+* png
+* apng
+* avif
+* jpeg
+* jpg
+* tiff
+* tif
+* bmp
+* gif
+* webp
+* mp4
+* mov
+* m4v
+* avi
+* mkv
+* webm
+* flac
+* wav
+* ogg
+* opus
+* m4a
+* mp3
+* aiff
+
 ```scala
-def execute(mediaType: String, args: String): Int
+def execute(args: String): Int
 ```
-Executes the final command ```args``` and checks for errors in the command based on the media type.
-#### Values for mediaType:
-* image
-* audio
-
-Any other string is accepted for mediaType, but "image" and "audio" will result in error checking in the context of image and audio encode respectively.
+Executes the final command ```args``` and checks for errors in the command.
 
 ```scala
-def executeSilent(mediaType: String, args: String, quiet: Boolean): Int
+def executeSilent(args: String): Int
 ```
-Executes the final command ```args``` and checks for errors in the command based on the media type.
-
-Unlike execute(), executeSilent() only outputs warnings and errors to the terminal
-#### Values for mediaType:
-* image
-* audio
-
-Any other string is accepted for mediaType, but "image" and "audio" will result in error checking in the context of image and audio encode respectively.
+Executes the final command ```args``` silently and checks for errors in the command.
 
 ```scala
 def setVideoEncoder(encoder: String): String

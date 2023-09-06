@@ -9,7 +9,7 @@ val transcodeVideo = { ffscala.openFile("/home/banana/Videos/gameplay.mov")
 + ffscala.setAudioBitrate(320)
 + ffscala.setOutput("/home/banana/Videos/gameplay_new", "mp4")
 }
-ffmpeg.execute("", transcodeVideo)
+ffmpeg.execute(transcodeVideo)
 ```
 
 The equivalent command should be
@@ -24,7 +24,7 @@ val convertImage = { ffscala.openFile("image.bmp")
 + ffscala.scale(700, 800)
 + ffscala.setOutput("biggerimage", "png")
 }
-ffmpeg.execute("image", convertImage)
+ffmpeg.execute(convertImage)
 ```
 The equivalent command should be
 ```
@@ -43,7 +43,7 @@ val getAudio = { ffscala.openFile("/path/to/video.mp4")
 + ffscala.setAudioEncoder("copy")
 + ffscala.setOutput("/path/to/audio.ogg")
 }
-ffmpeg.execute("audio", getAudio)
+ffmpeg.execute(getAudio)
 ```
 
 It's assumed in this example that the audio is encoded in opus, an encoding format supported by the ogg file.
@@ -79,7 +79,7 @@ val transcodeVideo = { ffscala.openFile("/home/banana/Videos/gameplay.mov")
 + ffscala.setAudioEncoder("copy")
 + ffscala.setOutput("/home/banana/Videos/gameplay_new", "mp4")
 }
-ffmpeg.execute("", transcodeVideo)
+ffmpeg.execute(transcodeVideo)
 ```
 
 This will transcode the input video into a video encoded in x264 with the preset veryfast, using the CRF bitrate control method with a CRF value of 12. The output audio will stay intact, exactly the same as from the input.
@@ -93,7 +93,7 @@ val transcodeVideo = { ffscala.openFile("/home/banana/Videos/gameplay.mov")
 + ffscala.x264_setPreset("veryfast")
 + ffscala.setOutput("/home/banana/Videos/gameplay_new", "mp4")
 }
-ffmpeg.execute("", transcodeVideo)
+ffmpeg.execute(transcodeVideo)
 ```
 
 This is the same example as above, but with the order of the function calls altered. The command is still functional and the output is the same, as long as you start with ```openFile``` and end with ```setOutput```. This however is more unpredictable if you want to include multiple input sources.
@@ -116,7 +116,7 @@ import ffscala.*
     + setOutput("/path/to/newvideo", "mp4")
     }
     println("The command arguments are " + encodeVideo + "\n")
-    executeSilent("", encodeVideo)
+    executeSilent(encodeVideo)
 }
 
 ```

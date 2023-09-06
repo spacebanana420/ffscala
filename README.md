@@ -16,7 +16,7 @@ val transcodeVideo = { ffscala.openFile("/home/banana/Videos/gameplay.mov")
 + ffscala.setAudioBitrate(320)
 + ffscala.setOutput("/home/banana/Videos/gameplay_new", "mp4")
 }
-ffmpeg.execute("", transcodeVideo)
+ffmpeg.execute(transcodeVideo)
 ```
 
 The equivalent command should be
@@ -31,7 +31,7 @@ val convertImage = { ffscala.openFile("image.bmp")
 + ffscala.scale(700, 800)
 + ffscala.setOutput("biggerimage", "png")
 }
-ffmpeg.execute("image", convertImage)
+ffmpeg.execute(convertImage)
 ```
 The equivalent command should be
 ```

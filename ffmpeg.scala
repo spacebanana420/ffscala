@@ -48,35 +48,66 @@ private def isAlright_Audio(args: String): Boolean = {
     true
 }
 
-def execute(mediaType: String, args: String): Int = { //remove mediatype, do check automatically
+def execute(args: String): Int = { //remove mediatype, do check automatically
+    var i = args.length()-1
+    var done = false
+    var foundfmt = ""
+    while done == false && i > 0 do {
+        if args(i) == '.' then
+            done = true
+        else
+            foundfmt += args(i)
+        i -= 1
+    }
+    val imageFormats = List("png", "apng", "avif", "jpeg", "jpg", "tiff", "tif", "bmp", "gif", "webp")
+    //val videoFormats = List("mp4", "mov", "m4v", "avi", "mkv", "webm")
+    val audioFormats = List("flac", "wav", "ogg", "opus", "m4a", "mp3", "aiff")
     var isAlright = false
-    if mediaType == "image" then
+
+    if belongsToList(foundfmt, imageFormats) == true then
         isAlright = isAlright_Image(args)
-    else if mediaType == "audio" then
+    else if belongsToList(foundfmt, audioFormats) == true then
         isAlright = isAlright_Audio(args)
     else
         isAlright = true
-    if isAlright == false then
-        return -1
 
-    val cmd: List[String] = "ffmpeg" +: "-y" +: stringToList(args)
-    val output = cmd.!
-    output
+    if isAlright == false then
+        -1
+    else
+        val cmd: List[String] = "ffmpeg" +: "-y" +: stringToList(args)
+        val output = cmd.!
+        output
 }
 
-def executeSilent(mediaType: String, args: String): Int = { //remove mediatype, do check automatically
+def executeSilent(args: String): Int = { //remove mediatype, do check automatically
+    var i = args.length()-1
+    var done = false
+    var foundfmt = ""
+    while done == false && i > 0 do {
+        if args(i) == '.' then
+            done = true
+        else
+            foundfmt += args(i)
+        i -= 1
+    }
+    val imageFormats = List("png", "apng", "avif", "jpeg", "jpg", "tiff", "tif", "bmp", "gif", "webp")
+    //val videoFormats = List("mp4", "mov", "m4v", "avi", "mkv", "webm")
+    val audioFormats = List("flac", "wav", "ogg", "opus", "m4a", "mp3", "aiff")
     var isAlright = false
-    if mediaType == "image" then
+
+    if belongsToList(foundfmt, imageFormats) == true then
         isAlright = isAlright_Image(args)
-    else if mediaType == "audio" then
+    else if belongsToList(foundfmt, audioFormats) == true then
         isAlright = isAlright_Audio(args)
     else
         isAlright = true
+
     if isAlright == false then
-        return -1
-    val cmd: List[String] = "ffmpeg" +: "-y" +: "-loglevel" +: "quiet" +: stringToList(args)
-    val output = cmd.!
-    output
+        -1
+    else
+        val cmd: List[String] = "ffmpeg" +: "-y" +: "-loglevel" +: "quiet" +: stringToList(args)
+        val output = cmd.!
+        output
 }
 
 def openFile(path: String): String = { //add support for multiple inputs and detection
@@ -179,19 +210,16 @@ def removeElement(element: String): String = {
 }
 
 def setOutput(name: String, format: String): String = { //replace wrong format instead of returning empty
-    if name == "" || format == "" then
-        return ""
-
     val supportedFormats = List("png", "apng", "avif", "jpeg", "jpg", "tiff", "tif", "bmp", "gif", "webp", "mp4", "mov",
     "m4v", "avi", "mkv", "webm", "flac", "wav", "ogg", "opus", "m4a", "mp3", "aiff")
     val isSupported = belongsToList(format, supportedFormats)
 
-    if isSupported == false then
+    if isSupported == false || name == "" || format == "" then
         ""
     else
         name + "." + format  + " "
 }
 
 def getScreenshot(input: String, output: String, time: String) = {
-    execute("image", "-ss " + time + " -i " + input + " -frames:v 1 " + output)
+    execute("-y -loglevel quiet -ss " + time + " -i " + input + " -frames:v 1 " + output)
 }
