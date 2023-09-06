@@ -57,6 +57,18 @@ Sets the deadline for VP9, which will define the compression efficiency as well 
 * realtime
 
 ```scala
+def vp9_setcpu_used(value: Byte): String
+```
+Sets the cpu-used value for VP9, which will fine-tune the compression efficiency further.
+
+Values between -8 and 8 are accepted.
+
+```scala
+def vp9_setRowMT(): String
+```
+Enables row-based multi-threading for VP9.
+
+```scala
 def vp9_setLossless(): String
 ```
 Sets lossless encoding for VP9.

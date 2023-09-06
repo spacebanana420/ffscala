@@ -3,7 +3,7 @@
 val transcodeVideo = { ffmpeg.openFile("/home/banana/Videos/gameplay.mov")
 + ffmpeg.setVideoEncoder("x264")
 + ffmpeg.setVideoBitrate("cbr", 4000)
-+ filters.setVideoResolution(1920, 1080)
++ filters.scale(1920, 1080)
 + ffmpeg.setPixFmt("yuv420p")
 + ffmpeg.setAudioEncoder("opus")
 + ffmpeg.setAudioBitrate(320)
@@ -21,7 +21,7 @@ Like when you use FFmpeg directly, most parameters are optional, as you can see 
 ### Example 2 - Image conversion and resize
 ```scala
 val convertImage = { ffmpeg.openFile("image.bmp")
-+ filters.setVideoResolution(700, 800)
++ filters.scale(700, 800)
 + ffmpeg.setOutput("biggerimage", "png")
 }
 ffmpeg.execute("image", convertImage)
@@ -111,8 +111,8 @@ import ffscala.*
     + setVideoBitrate("crf", 18)
     + setAudioEncoder("opus")
     + setAudioBitrate(320)
-    + setVideoResolution(1280, 720)
-    + setScaleFilter("bilinear")
+    + scale(1280, 720)
+    + scaleFilter("bilinear")
     + setOutput("/path/to/newvideo", "mp4")
     }
     println("The command arguments are " + encodeVideo + "\n")

@@ -77,6 +77,8 @@ Sets the video/image's pixel format
 * yuv420p
 * yuv422p
 * yuv444p
+* yuv422p10le
+* yuv444p10le
 
 ```scala
 def setKeyframeInterval(interval: Int): String

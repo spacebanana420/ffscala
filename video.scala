@@ -34,6 +34,16 @@ def vp9_setDeadline(preset: String): String = {
         ""
 }
 
+def vp9_setcpu_used(value: Byte): String = {
+    val presets = List("best", "good", "realtime")
+    if value >= -8 && value < 8
+        "-cpu-used " + value + " "
+    else
+        ""
+}
+
+def vp9_setRowMT(): String = "-row-mt true "
+
 def vp9_setLossless(): String = "-lossless "
 
 def cfhd_setQuality(value: Int): String = {

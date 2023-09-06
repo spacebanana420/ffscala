@@ -130,7 +130,7 @@ def setBFrames(interval: Byte): String = {
 }
 
 def setPixFmt(newfmt: String): String = { //needs to check for variants like rgb48be
-    val supportedFormats = List("rgb24", "rgb8", "rgb48", "gray", "yuv420p", "yuv422p", "yuv444p")
+    val supportedFormats = List("rgb24", "rgb8", "rgb48", "gray", "yuv420p", "yuv422p", "yuv444p", "yuv422p10le", "yuv444p10le")
     //val ffmpegEquivalents = List("rgb24", "rgb8", "rgb48", "gray", "yuv420p", "yuv422p", "yuv444p")
     val foundformat = belongsToList(newfmt, supportedFormats)
 
@@ -168,7 +168,7 @@ def removeElement(element: String): String = {
             ""
 }
 
-def setOutput(name: String, format: String): String = {
+def setOutput(name: String, format: String): String = { //replace wrong format instead of returning empty
     if name == "" || format == "" then
         return ""
 
@@ -177,8 +177,9 @@ def setOutput(name: String, format: String): String = {
     val isSupported = belongsToList(format, supportedFormats)
 
     if isSupported == false then
-        return ""
-    name + "." + format  + " "
+        ""
+    else
+        name + "." + format  + " "
 }
 
 def getScreenshot(input: String, output: String, time: String) = {

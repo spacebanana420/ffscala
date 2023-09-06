@@ -1,10 +1,10 @@
 ```scala
-def setVideoResolution(width: Int, height: Int): String
+def scale(width: Int, height: Int): String
 ```
 Sets the video/image's width and height resolution in pixels.
 
 ```scala
-def setVideoResolution_factor(width: Float, height: Float): String
+def scaleFactor(width: Float, height: Float): String
 ```
 Sets the video/image's resolution factor.
 
