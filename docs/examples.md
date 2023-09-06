@@ -1,6 +1,6 @@
 ### Example 1 - Video transcoding
 ```scala
-val transcodeVideo = { ffmpeg.openFile("/home/banana/Videos/gameplay.mov")
+val transcodeVideo = { ffscala.openFile("/home/banana/Videos/gameplay.mov")
 + ffscala.setVideoEncoder("x264")
 + ffscala.setVideoBitrate("cbr", 4000)
 + ffscala.scale(1920, 1080)
@@ -20,7 +20,7 @@ Like when you use FFmpeg directly, most parameters are optional, as you can see 
 
 ### Example 2 - Image conversion and resize
 ```scala
-val convertImage = { ffmpeg.openFile("image.bmp")
+val convertImage = { ffscala.openFile("image.bmp")
 + ffscala.scale(700, 800)
 + ffscala.setOutput("biggerimage", "png")
 }
@@ -38,7 +38,7 @@ Your path names can have spaces between them, as the command execution is shell-
 (Assuming the audio is encoded in opus)
 
 ```scala
-val getAudio = { ffmpeg.openFile("/path/to/video.mp4")
+val getAudio = { ffscala.openFile("/path/to/video.mp4")
 + ffscala.removeElement("video")
 + ffscala.setAudioEncoder("copy")
 + ffscala.setOutput("/path/to/audio.ogg")
@@ -72,7 +72,7 @@ Here. the time argument will tell FFmpeg to get the frame at 320.5 seconds
 
 ### Example 5 - CRF video encoding, with audio intact
 ```scala
-val transcodeVideo = { ffmpeg.openFile("/home/banana/Videos/gameplay.mov")
+val transcodeVideo = { ffscala.openFile("/home/banana/Videos/gameplay.mov")
 + ffscala.setVideoEncoder("x264")
 + ffscala.setVideoBitrate("crf", 12)
 + ffscala.x264_setPreset("veryfast")
@@ -86,7 +86,7 @@ This will transcode the input video into a video encoded in x264 with the preset
 
 ### Example 6 - Unusual function order
 ```scala
-val transcodeVideo = { ffmpeg.openFile("/home/banana/Videos/gameplay.mov")
+val transcodeVideo = { ffscala.openFile("/home/banana/Videos/gameplay.mov")
 + ffscala.setVideoBitrate("crf", 12)
 + ffscala.setAudioEncoder("copy")
 + ffscala.setVideoEncoder("x264")
