@@ -1,13 +1,13 @@
 ### Example 1 - Video transcoding
 ```scala
 val transcodeVideo = { ffmpeg.openFile("/home/banana/Videos/gameplay.mov")
-+ ffmpeg.setVideoEncoder("x264")
-+ ffmpeg.setVideoBitrate("cbr", 4000)
-+ filters.scale(1920, 1080)
-+ ffmpeg.setPixFmt("yuv420p")
-+ ffmpeg.setAudioEncoder("opus")
-+ ffmpeg.setAudioBitrate(320)
-+ ffmpeg.setOutput("/home/banana/Videos/gameplay_new", "mp4")
++ ffscala.setVideoEncoder("x264")
++ ffscala.setVideoBitrate("cbr", 4000)
++ ffscala.scale(1920, 1080)
++ ffscala.setPixFmt("yuv420p")
++ ffscala.setAudioEncoder("opus")
++ ffscala.setAudioBitrate(320)
++ ffscala.setOutput("/home/banana/Videos/gameplay_new", "mp4")
 }
 ffmpeg.execute("", transcodeVideo)
 ```
@@ -21,8 +21,8 @@ Like when you use FFmpeg directly, most parameters are optional, as you can see 
 ### Example 2 - Image conversion and resize
 ```scala
 val convertImage = { ffmpeg.openFile("image.bmp")
-+ filters.scale(700, 800)
-+ ffmpeg.setOutput("biggerimage", "png")
++ ffscala.scale(700, 800)
++ ffscala.setOutput("biggerimage", "png")
 }
 ffmpeg.execute("image", convertImage)
 ```
@@ -39,9 +39,9 @@ Your path names can have spaces between them, as the command execution is shell-
 
 ```scala
 val getAudio = { ffmpeg.openFile("/path/to/video.mp4")
-+ ffmpeg.removeElement("video")
-+ ffmpeg.setAudioEncoder("copy")
-+ ffmpeg.setOutput("/path/to/audio.ogg")
++ ffscala.removeElement("video")
++ ffscala.setAudioEncoder("copy")
++ ffscala.setOutput("/path/to/audio.ogg")
 }
 ffmpeg.execute("audio", getAudio)
 ```
@@ -73,11 +73,11 @@ Here. the time argument will tell FFmpeg to get the frame at 320.5 seconds
 ### Example 5 - CRF video encoding, with audio intact
 ```scala
 val transcodeVideo = { ffmpeg.openFile("/home/banana/Videos/gameplay.mov")
-+ ffmpeg.setVideoEncoder("x264")
-+ ffmpeg.setVideoBitrate("crf", 12)
-+ video.x264_setPreset("veryfast")
-+ ffmpeg.setAudioEncoder("copy")
-+ ffmpeg.setOutput("/home/banana/Videos/gameplay_new", "mp4")
++ ffscala.setVideoEncoder("x264")
++ ffscala.setVideoBitrate("crf", 12)
++ ffscala.x264_setPreset("veryfast")
++ ffscala.setAudioEncoder("copy")
++ ffscala.setOutput("/home/banana/Videos/gameplay_new", "mp4")
 }
 ffmpeg.execute("", transcodeVideo)
 ```
@@ -87,11 +87,11 @@ This will transcode the input video into a video encoded in x264 with the preset
 ### Example 6 - Unusual function order
 ```scala
 val transcodeVideo = { ffmpeg.openFile("/home/banana/Videos/gameplay.mov")
-+ ffmpeg.setVideoBitrate("crf", 12)
-+ ffmpeg.setAudioEncoder("copy")
-+ ffmpeg.setVideoEncoder("x264")
-+ video.x264_setPreset("veryfast")
-+ ffmpeg.setOutput("/home/banana/Videos/gameplay_new", "mp4")
++ ffscala.setVideoBitrate("crf", 12)
++ ffscala.setAudioEncoder("copy")
++ ffscala.setVideoEncoder("x264")
++ ffscala.x264_setPreset("veryfast")
++ ffscala.setOutput("/home/banana/Videos/gameplay_new", "mp4")
 }
 ffmpeg.execute("", transcodeVideo)
 ```

@@ -8,13 +8,13 @@ FFscala works by using functions to transform your video encoding properties int
 ### Example 1 - Video transcoding
 ```scala
 val transcodeVideo = { ffmpeg.openFile("/home/banana/Videos/gameplay.mov")
-+ ffmpeg.setVideoEncoder("x264")
-+ ffmpeg.setVideoBitrate("cbr", 4000)
-+ filters.scale(1920, 1080)
-+ ffmpeg.setPixFmt("yuv420p")
-+ ffmpeg.setAudioEncoder("opus")
-+ ffmpeg.setAudioBitrate(320)
-+ ffmpeg.setOutput("/home/banana/Videos/gameplay_new", "mp4")
++ ffscala.setVideoEncoder("x264")
++ ffscala.setVideoBitrate("cbr", 4000)
++ ffscala.scale(1920, 1080)
++ ffscala.setPixFmt("yuv420p")
++ ffscala.setAudioEncoder("opus")
++ ffscala.setAudioBitrate(320)
++ ffscala.setOutput("/home/banana/Videos/gameplay_new", "mp4")
 }
 ffmpeg.execute("", transcodeVideo)
 ```
@@ -28,8 +28,8 @@ Like when you use FFmpeg directly, most parameters are optional, as you can see 
 ### Example 2 - Image conversion and resize
 ```scala
 val convertImage = { ffmpeg.openFile("image.bmp")
-+ filters.scale(700, 800)
-+ ffmpeg.setOutput("biggerimage", "png")
++ ffscala.scale(700, 800)
++ ffscala.setOutput("biggerimage", "png")
 }
 ffmpeg.execute("image", convertImage)
 ```
