@@ -48,7 +48,7 @@ private def isAlright_Audio(args: String): Boolean = {
     true
 }
 
-def execute(args: String): Int = { //remove mediatype, do check automatically
+def execute(args: String): Int = {
     var i = args.length()-1
     var done = false
     var foundfmt = ""
@@ -59,7 +59,7 @@ def execute(args: String): Int = { //remove mediatype, do check automatically
             foundfmt += args(i)
         i -= 1
     }
-    val imageFormats = List("png", "apng", "avif", "jpeg", "jpg", "tiff", "tif", "bmp", "gif", "webp")
+    val imageFormats = List("png", "apng", "avif", "jpeg", "jpg", "tiff", "tif", "bmp", "gif", "webp", "tga")
     //val videoFormats = List("mp4", "mov", "m4v", "avi", "mkv", "webm")
     val audioFormats = List("flac", "wav", "ogg", "opus", "m4a", "mp3", "aiff")
     var isAlright = false
@@ -79,7 +79,7 @@ def execute(args: String): Int = { //remove mediatype, do check automatically
         output
 }
 
-def executeSilent(args: String): Int = { //remove mediatype, do check automatically
+def executeSilent(args: String): Int = {
     var i = args.length()-1
     var done = false
     var foundfmt = ""
@@ -90,7 +90,7 @@ def executeSilent(args: String): Int = { //remove mediatype, do check automatica
             foundfmt += args(i)
         i -= 1
     }
-    val imageFormats = List("png", "apng", "avif", "jpeg", "jpg", "tiff", "tif", "bmp", "gif", "webp")
+    val imageFormats = List("png", "apng", "avif", "jpeg", "jpg", "tiff", "tif", "bmp", "gif", "webp", "tga")
     //val videoFormats = List("mp4", "mov", "m4v", "avi", "mkv", "webm")
     val audioFormats = List("flac", "wav", "ogg", "opus", "m4a", "mp3", "aiff")
     var isAlright = false
@@ -118,8 +118,8 @@ def openFile(path: String): String = { //add support for multiple inputs and det
 }
 
 def setVideoEncoder(encoder: String): String = {
-    val supportedFormats = List("copy", "x264", "x265", "nvenc", "nvenc265", "utvideo", "png", "dnxhd", "tiff", "cfhd", "vp9")
-    val ffmpegEquivalents = List("copy", "libx264", "libx265", "h264_nvenc", "h265_nvenc", "utvideo", "png", "dnxhd", "tiff", "cfhd", "libvpx-vp9")
+    val supportedFormats = List("copy", "x264", "x264rgb", "x265", "nvenc", "nvenc265", "utvideo", "png", "dnxhd", "tiff", "cfhd", "vp9")
+    val ffmpegEquivalents = List("copy", "libx264", "lib264rgb", "libx265", "h264_nvenc", "hevc_nvenc", "utvideo", "png", "dnxhd", "tiff", "cfhd", "libvpx-vp9")
     val i = indexFromList(encoder, supportedFormats)
 
     if i == -1 then
@@ -210,7 +210,7 @@ def removeElement(element: String): String = {
 }
 
 def setOutput(name: String, format: String): String = { //replace wrong format instead of returning empty
-    val supportedFormats = List("png", "apng", "avif", "jpeg", "jpg", "tiff", "tif", "bmp", "gif", "webp", "mp4", "mov",
+    val supportedFormats = List("png", "apng", "avif", "jpeg", "jpg", "tiff", "tif", "bmp", "gif", "webp", "tga", "mp4", "mov",
     "m4v", "avi", "mkv", "webm", "flac", "wav", "ogg", "opus", "m4a", "mp3", "aiff")
     val isSupported = belongsToList(format, supportedFormats)
 

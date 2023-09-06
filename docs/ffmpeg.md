@@ -23,6 +23,7 @@ This must be the last function to be called before calling ```execute```, as the
 * bmp
 * gif
 * webp
+* tga
 * mp4
 * mov
 * m4v
@@ -54,6 +55,7 @@ Sets the video encoder
 #### Supported video encoders:
 * copy
 * x264
+* x264rgb
 * x265
 * nvenc
 * nvenc265

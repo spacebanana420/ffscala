@@ -45,3 +45,10 @@ Crops the video/image, with starting points X and Y
 def cropCenter(width: Int, height: Int): String
 ```
 Applies a centered crop to the video/image
+
+```scala
+def cropToAspect(width: Byte, height: Byte): String
+```
+Applies a centered crop based on the aspect ratio.
+
+Example: ```cropToAspect(2, 1)``` will crop with 2:1 aspect ratio

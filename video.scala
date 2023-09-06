@@ -52,6 +52,14 @@ def cfhd_setQuality(value: Int): String = {
         "-quality " + value + " "
 }
 
+def png_setPred(mode: String): String = {
+    val modes = List("none", "sub", "up", "avg", "paeth", "mixed")
+    if belongsToList(mode, modes) == true then
+        "-pred " + mode + " "
+    else
+        ""
+}
+
 def tiff_setCompression(compression: String): String = {
     val formats = List("packbits", "raw", "lzw", "deflate")
     if belongsToList(compression, formats) == true then

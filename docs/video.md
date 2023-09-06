@@ -83,6 +83,19 @@ It must be a value between 0 and 12.
 Higher value = lower bitrate and quality.
 
 ```scala
+def png_setPred(mode: String): String
+```
+Sets the prediction method.
+
+#### Supported methods:
+* none
+* sub
+* up
+* avg
+* paeth
+* mixed
+
+```scala
 def tiff_setCompression(compression: String): String
 ```
 Sets the compression algorithm for the tiff encoder.
