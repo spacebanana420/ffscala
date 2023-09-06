@@ -44,7 +44,8 @@ Your path names can have spaces between them, as the command execution is shell-
 # Requirements
 
 * You need to have [FFmpeg](https://ffmpeg.org/) installed (tested in version 6, but most versions should work)
-* Library only tested with Scala 3
+* Scala 3
+* Your program needs to compile to JVM, since FFscala uses java.io.File
 
 # How to use
 
