@@ -2,14 +2,14 @@ package ffscala
 
 import misc.*
 
-def setScale(width: Int, height: Int): String = {
+def scale(width: Int, height: Int): String = {
     if width <= 0 || height <= 0 then
         ""
     else
         "-filter:v scale=" + width + ":" + height  + " "
 }
 
-def setScaleFactor(width: Float, height: Float): String = {
+def scaleFactor(width: Float, height: Float): String = {
     if width <= 0 || height <= 0 then
         ""
     else

@@ -35,7 +35,7 @@ def vp9_setDeadline(preset: String): String = {
 }
 
 def vp9_setcpu_used(value: Byte): String = {
-    if value >= -8 && value < 8
+    if value >= -8 && value < 8 then
         "-cpu-used " + value + " "
     else
         ""
