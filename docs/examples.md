@@ -124,3 +124,18 @@ import ffscala.*
 This is a real-world example of a simple FFscala implementation.
 
 This code is functional and would compile if /path/to/video.mov was the path to a real video file.
+
+
+### Example 8 - Encode with 16:10 crop
+```scala
+val transcodeVideo = { ffscala.openFile("/home/banana/Videos/video.mov")
++ ffscala.setVideoEncoder("x264")
++ ffscala.x264_setPreset("veryfast")
++ ffscala.setVideoBitrate("crf", 15)
++ ffscala.setAudioEncoder("copy")
++ ffscala.cropToAspect(16, 10)
++ ffscala.setOutput("/home/banana/Videos/video_new", "mp4")
+}
+ffscala.execute(transcodeVideo)
+```
+The video will be cropped to 16:10 and centered, alongside the usual encoding parameters specified.

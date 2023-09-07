@@ -88,7 +88,11 @@ Sets the video/image's pixel format
 #### Supported pixel formats:
 * rgb24
 * rgb48
+* rgb48le
+* rgba
+* rgba64le
 * gray
+* gray16le
 * yuv420p
 * yuv422p
 * yuv444p

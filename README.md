@@ -1,5 +1,4 @@
 # FFscala
-### This library is unfinished and is not meant to be used in serious cases yet until a release is published on this repo
 
 FFscala is a simple wrapper library for the FFmpeg command line, written in Scala 3.
 
@@ -43,9 +42,11 @@ Your path names can have spaces between them, as the command execution is shell-
 
 # Requirements
 
-* You need to have [FFmpeg](https://ffmpeg.org/) installed (tested in version 6, but most versions should work)
+* You need to have [FFmpeg](https://ffmpeg.org/) installed
 * Scala 3
 * Your program needs to compile to JVM, since FFscala uses java.io.File
+
+FFmpeg tested with version 6, but you won't have problems using other versions.
 
 # Download
 
@@ -53,11 +54,12 @@ You can find releases of FFscala [here](https://github.com/spacebanana420/ffscal
 
 # How to use
 
-Import the .scala files of this repository into yours
+FFscala is packaged as ```ffscala```, so that's the package you want to import in your project.
 
-In the code files where you want to use the library, import ```ffscala```
+(See [example 7](https://github.com/spacebanana420/ffscala/blob/main/docs/examples.md))
 
 # Documentation
+
 Most functions return an empty string or int of value -1 when there is an error in the arguments you passed to them
 
 The order of the function calls is not important for most cases, as long as the first function called is ```openFile``` and the last one is ```setOutput```
