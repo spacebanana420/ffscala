@@ -47,6 +47,10 @@ Your path names can have spaces between them, as the command execution is shell-
 * Scala 3
 * Your program needs to compile to JVM, since FFscala uses java.io.File
 
+# Download
+
+You can find releases of FFscala [here](https://github.com/spacebanana420/ffscala/releases)
+
 # How to use
 
 Import the .scala files of this repository into yours
