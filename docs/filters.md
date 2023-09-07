@@ -51,4 +51,6 @@ def cropToAspect(width: Byte, height: Byte): String
 ```
 Applies a centered crop based on the aspect ratio.
 
+For now, the function does not support square aspect (1:1, 5:5, 45:45, etc).
+
 Example: ```cropToAspect(2, 1)``` will crop with 2:1 aspect ratio

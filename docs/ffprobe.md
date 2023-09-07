@@ -35,3 +35,9 @@ The order of the list is as follows:
 * Number of channels
 * Channel layout
 * Bitrate (in bits)
+
+```scala
+def getFullInfo(path: String): String
+```
+Returns the ffprobe output, unparsed.
+

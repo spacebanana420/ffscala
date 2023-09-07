@@ -209,6 +209,21 @@ def removeElement(element: String): String = {
             ""
 }
 
+def mapChannel(media: String, input: Byte, channel: Byte): String = { //test maybe
+    if input < 0 || channel < -1 || (media != "video" && media != "audio" && media != "subtitle") then
+        ""
+    else
+        var mediashort = ""
+        media match
+            case "video" => mediashort = "v"
+            case "audio" => mediashort = "a"
+            case "subtitle" => mediashort = "s"
+        if channel == -1 then
+            "-map " + input + ":" + mediashort + " "
+        else
+            "-map " + input + ":" + mediashort + ":" + channel + " "
+}
+
 def setOutput(name: String, format: String): String = { //replace wrong format instead of returning empty
     val supportedFormats = List("png", "apng", "avif", "jpeg", "jpg", "tiff", "tif", "bmp", "gif", "webp", "tga", "mp4", "mov",
     "m4v", "avi", "mkv", "webm", "flac", "wav", "ogg", "opus", "m4a", "mp3", "aiff")

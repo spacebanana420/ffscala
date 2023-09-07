@@ -74,6 +74,13 @@ def cfhd_setQuality(value: Int): String = {
         "-quality " + value + " "
 }
 
+def utvideo_setPred(pred: String): String = {
+    if pred == "none" || pred == "left" || pred == "gradient" || pred == "median" then
+        "-pred " + pred + " "
+    else
+        ""
+}
+
 def png_setPred(mode: String): String = {
     val modes = List("none", "sub", "up", "avg", "paeth", "mixed")
     if belongsToList(mode, modes) == true then

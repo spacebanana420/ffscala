@@ -138,6 +138,7 @@ Sets the audio's sample format
 * s16
 * s32
 
+
 ```scala
 def removeElement(element: String): String
 ```
@@ -146,6 +147,24 @@ Removes a whole type of element of the input media, such as the video channels, 
 * "video" - removes video
 * "audio" - removes audio
 * "subtitle" - removes subtitles
+
+```scala
+def mapChannel(media: String, input: Byte, channel: Byte): String
+```
+Maps the channels of the inputs.
+
+Media is the channel type you want to map.
+
+Input can be a value of 0 or higher.
+
+Channel can be a value of -1 or higher. -1 means all channels of the input.
+
+#### Media types:
+* "video" - maps video
+* "audio" - maps audio
+* "subtitle" - maps subtitles
+
+Example: ```mapChannel("video", 0, 0)``` grabs the first video channel of the first file input. ```mapChannel("audio", 0, -1)``` grabs all audio channels of the first file input.
 
 ```scala
 def getScreenshot(input: String, output: String, time: String): String

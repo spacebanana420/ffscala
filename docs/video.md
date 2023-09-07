@@ -111,6 +111,17 @@ It must be a value between 0 and 12.
 Higher value = lower bitrate and quality.
 
 ```scala
+def utvideo_setPred(pred: String): String
+```
+Sets the prediction method for Utvideo.
+
+#### Supported methods:
+* none
+* left
+* gradient
+* median
+
+```scala
 def png_setPred(mode: String): String
 ```
 Sets the prediction method.

@@ -64,6 +64,11 @@ def getAudioInfo(path: String): List[String] = {
     List(format, bitDepth, sampleRate, channelNum, channelLayout, bitrate)
 }
 
+def getFullInfo(path: String): String = {
+    val cmd = List("ffprobe", "-loglevel", "0", "-show_streams", path)
+    cmd.!!
+}
+
 private def getStreamContent(stream: String, seek: String): String = {
     var done = false
     var line = ""

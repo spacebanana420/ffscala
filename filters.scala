@@ -54,7 +54,7 @@ def cropCenter(width: Int, height: Int): String = {
 }
 
 def cropToAspect(width: Byte, height: Byte): String = {
-    if width <= 0 || height <= 0 then
+    if width <= 0 || height <= 0 || width == height then
         ""
     else if width > height then
         val ih: String = height + "*iw/" + width
