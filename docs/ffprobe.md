@@ -41,3 +41,5 @@ def getFullInfo(path: String): String
 ```
 Returns the ffprobe output, unparsed.
 
+Use this if you want to parse the media information yourself.
+
