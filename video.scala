@@ -10,12 +10,34 @@ def x264_setPreset(preset: String): String = {
         ""
 }
 
+def x264_setCoder(coder: String): String = {
+    val coders = List("default", "cavlc", "cabac", "vlc", "ac")
+    if belongsToList(coder, coders) == true then
+        "-coder " + coder + " "
+    else
+        ""
+}
+
 def nvenc_setPreset(preset: String): String = {
     val presets = List("lossless", "default", "slow", "medium", "fast", "hq")
     if belongsToList(preset, presets) == true then
         "-preset:v " + preset + " "
     else
         ""
+}
+
+def nvenc_setqp(value: Byte): String = {
+    if value < 1 || value > 51 then
+        ""
+    else
+        "-rc constqp -qp " + value + " "
+}
+
+def nvenc_setcrf(value: Byte): String = {
+    if value < 0 || value > 51 then
+        ""
+    else
+        "-rc vbr_hq -qmin 0 -cq " + value + " "
 }
 
 def dnxhd_setPreset(preset: String): String = {

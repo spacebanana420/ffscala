@@ -19,6 +19,18 @@ Veryfast and superfast are recommended for most use cases
 * placebo
 
 ```scala
+def x264_setCoder(coder: String): String
+```
+Sets the x264 coder.
+
+#### Supported coders:
+* default
+* cavlc
+* cabac
+* vlc
+* ac
+
+```scala
 def nvenc_setPreset(preset: String): String
 ```
 Sets the NVENC encoding preset.
@@ -30,6 +42,22 @@ Sets the NVENC encoding preset.
 * medium
 * fast
 * hq
+
+```scala
+def nvenc_setqp(value: Byte): String
+```
+Sets constant quantization bitrate control and its value for NVENC.
+
+Values between 1 and 51 are supported. Lower means more information/quality and file size.
+
+```scala
+def nvenc_setcrf(value: Byte): String
+```
+Sets CRF encoding for NVENC.
+
+Values between 0 and 51 are supported. Lower means more information/quality and file size.
+
+For CRF, 0 means lossless, but I'm unsure if that's true for NVENC. If you want lossless compression on NVENC, use ```nvenc_setPreset("lossless")```
 
 ```scala
 def dnxhd_setPreset(preset: String): String
