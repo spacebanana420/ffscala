@@ -48,15 +48,16 @@ Your path names can have spaces between them, as the command execution is shell-
 
 FFmpeg tested with version 6, but you won't have problems using other versions.
 
-# Download
+# Download & how to use
 
 You can find releases of FFscala [here](https://github.com/spacebanana420/ffscala/releases)
 
-# How to use
+Choose the version of your choice (although the latest is recommended) and download the source code from that release.
 
-FFscala is packaged as ```ffscala```, so that's the package you want to import in your project.
+Add the library code into your project and import ```ffscala```
 
 (See [example 7](https://github.com/spacebanana420/ffscala/blob/main/docs/examples.md))
+
 
 # Documentation
 
