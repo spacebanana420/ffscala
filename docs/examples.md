@@ -114,7 +114,7 @@ This is a real-world example of a simple FFscala implementation.
 
 This code is functional and would compile if /path/to/video.mov was the path to a real video file.
 
-```execute``` has a last optional argument ```quiet```. By default it is set to true, but for this example it is explicitly set to false. Wh
+```execute``` has a last optional argument ```quiet```. By default it is set to true, but for this example it is explicitly set to false, which will make FFmpeg output the usual information it does.
 
 
 ### Example 8 - Encode with 16:10 crop
