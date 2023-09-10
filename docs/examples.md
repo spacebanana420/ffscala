@@ -13,7 +13,7 @@ execute("/home/banana/Videos/gameplay.mov", encodeParams, "/home/banana/Videos/g
 
 The equivalent command should be
 ```
-ffmpeg -y -i /home/banana/Videos/gameplay.mov -c:v libx264 -b:v 4000k -filter:v scale=1920:1080 -pix_fmt yuv420p -c:a libopus -b:a 320k /home/banana/Videos/gameplay_new.mp4
+ffmpeg -loglevel quiet -y -i /home/banana/Videos/gameplay.mov -c:v libx264 -b:v 4000k -filter:v scale=1920:1080 -pix_fmt yuv420p -c:a libopus -b:a 320k /home/banana/Videos/gameplay_new.mp4
 ```
 Like when you use FFmpeg directly, most parameters are optional, as you can see in the second example.
 
@@ -24,7 +24,7 @@ execute("image.bmp", scaleimg, "biggerimage.png")
 ```
 The equivalent command should be
 ```
-ffmpeg -y -i image.bmp -filter:v scale=700:800 biggerimage.png
+ffmpeg -loglevel quiet -y -i image.bmp -filter:v scale=700:800 biggerimage.png
 ```
 Here, the relative paths for the images are used. Many less parameters are used here, you don't have to use all functions of this library.
 
