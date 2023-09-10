@@ -39,14 +39,12 @@ This must be the last function to be called before calling ```execute```, as the
 * aiff
 
 ```scala
-def execute(args: String): Int
+def execute(args: String, quiet: Boolean = true): Int
 ```
 Executes the final command ```args``` and checks for errors in the command.
 
-```scala
-def executeSilent(args: String): Int
-```
-Executes the final command ```args``` silently and checks for errors in the command.
+By default, quiet is true, and FFmpeg will only output warnings and errors.
+
 
 ```scala
 def setVideoEncoder(encoder: String): String

@@ -1,5 +1,8 @@
 package misc
 
+def supportedExtensions(): List[String] = List("png", "apng", "avif", "jpeg", "jpg", "tiff", "tif", "bmp", "gif", "webp", "tga", "mp4", "mov", "m4v", "avi", "mkv", "webm", "flac", "wav", "ogg", "opus", "m4a", "mp3", "aiff")
+
+
 def belongsToList(text: String, group: List[String]): Boolean = {
     for i <- group do {
         if text == i then
@@ -29,4 +32,16 @@ def stringToList(text: String): List[String] = {
     if arg != "" then
         stringArray :+= arg
     stringArray.toList
+}
+
+def removeExtension(path: String): String = {
+    var finalpath = ""
+    var startcopying = false
+    for i <- path.length-1 to 0 do {
+        if startcopying == true then
+            finalpath += path(i)
+        else if path(i) == '.' then
+            startcopying = true
+    }
+    finalpath
 }

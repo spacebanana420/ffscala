@@ -4,32 +4,6 @@ import scala.sys.process._
 import java.io.File
 import misc.*
 
-// private def isAlright_Image(cmd: List[String]): Boolean = {
-//     var cmdstring: String = ""
-//     val badArguments = List("-c:a", "-b:a", "-b:v", "-g", "-bf", "-crf")
-//     for i <- cmd do {
-//         cmdstring += i
-//     }
-//     for i <- badArguments do {
-//         if cmdstring.contains(i) == true then
-//             return false
-//     }
-//     true
-// }
-//
-// private def isAlright_Audio(cmd: List[String]): Boolean = {
-//     var cmdstring: String = ""
-//     val badArguments = List("-c:v", "-b:v", "-g", "-bf", "-crf", "-pix_fmt", "-filter:v", "-preset:v")
-//     for i <- cmd do {
-//         cmdstring += i
-//     }
-//     for i <- badArguments do {
-//         if cmdstring.contains(i) == true then
-//             return false
-//     }
-//     true
-// }
-
 private def isAlright_Image(args: String): Boolean = {
     val badArguments = List("-c:a", "-b:a", "-b:v", "-g", "-bf", "-crf")
     for i <- badArguments do {
@@ -48,7 +22,7 @@ private def isAlright_Audio(args: String): Boolean = {
     true
 }
 
-def execute(args: String): Int = {
+def execute(args: String, quiet: Boolean = true): Int = {
     var i = args.length()-1
     var done = false
     var foundfmt = ""
@@ -74,40 +48,12 @@ def execute(args: String): Int = {
     if isAlright == false then
         -1
     else
-        val cmd: List[String] = "ffmpeg" +: "-y" +: stringToList(args)
-        val output = cmd.!
-        output
-}
-
-def executeSilent(args: String): Int = {
-    var i = args.length()-1
-    var done = false
-    var foundfmt = ""
-    while done == false && i > 0 do {
-        if args(i) == '.' then
-            done = true
+        if quiet == true then
+            val cmd: List[String] = "ffmpeg" +: "-y" +: "-loglevel" +: "quiet" +: stringToList(args)
+            cmd.!
         else
-            foundfmt += args(i)
-        i -= 1
-    }
-    val imageFormats = List("png", "apng", "avif", "jpeg", "jpg", "tiff", "tif", "bmp", "gif", "webp", "tga")
-    //val videoFormats = List("mp4", "mov", "m4v", "avi", "mkv", "webm")
-    val audioFormats = List("flac", "wav", "ogg", "opus", "m4a", "mp3", "aiff")
-    var isAlright = false
-
-    if belongsToList(foundfmt, imageFormats) == true then
-        isAlright = isAlright_Image(args)
-    else if belongsToList(foundfmt, audioFormats) == true then
-        isAlright = isAlright_Audio(args)
-    else
-        isAlright = true
-
-    if isAlright == false then
-        -1
-    else
-        val cmd: List[String] = "ffmpeg" +: "-y" +: "-loglevel" +: "quiet" +: stringToList(args)
-        val output = cmd.!
-        output
+            val cmd: List[String] = "ffmpeg" +: "-y" +: stringToList(args)
+            cmd.!
 }
 
 def openFile(path: String): String = { //add support for multiple inputs and detection
@@ -225,8 +171,7 @@ def mapChannel(media: String, input: Byte, channel: Byte): String = { //test may
 }
 
 def setOutput(name: String, format: String): String = { //replace wrong format instead of returning empty
-    val supportedFormats = List("png", "apng", "avif", "jpeg", "jpg", "tiff", "tif", "bmp", "gif", "webp", "tga", "mp4", "mov",
-    "m4v", "avi", "mkv", "webm", "flac", "wav", "ogg", "opus", "m4a", "mp3", "aiff")
+    val supportedFormats = supportedExtensions()
     val isSupported = belongsToList(format, supportedFormats)
 
     if isSupported == false || name == "" || format == "" then

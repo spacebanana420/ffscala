@@ -100,7 +100,7 @@ def tiff_setCompression(compression: String): String = {
 def webp_setLossless(): String = "-lossless 1 "
 
 
-def webp_setQuality(value: Int): String = {
+def webp_setQuality(value: Byte): String = {
     if value < 0 || value > 100 then
         ""
     else

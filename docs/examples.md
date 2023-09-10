@@ -139,3 +139,20 @@ val transcodeVideo = { ffscala.openFile("/home/banana/Videos/video.mov")
 ffscala.execute(transcodeVideo)
 ```
 The video will be cropped to 16:10 and centered, alongside the usual encoding parameters specified.
+
+
+### Example 9 - multiple media encoding
+```scala
+val filesToEncode: List[String] = List("/path/to/video1" , "/path/to/video2", "/path/to/video3")
+val encodeSettings = {
+ffscala.setVideoEncoder("x264")
++ ffscala.x264_setPreset("veryfast")
++ ffscala.setVideoBitrate("crf", 15)
++ ffscala.setAudioEncoder("copy")
++ ffscala.cropToAspect(16, 10)
+}
+ffscala.batchExecute(filesToEncode, encodeSettings, "mov", true)
+```
+In this example, you create a string of encoding arguments without file input and output. You use batchExecute and batchExecuteSilent to then pass a list of path strings as well as your encoding parameters and output file format. Each path, if it directs to a file, will be encoded given the encoding settings you gave, and the output format will be used for the resulting media.
+
+Assuming video1 is named "video1.mp4", the result will be "video1_new.mov".
