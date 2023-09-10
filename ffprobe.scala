@@ -4,24 +4,7 @@ import java.io.File
 import scala.sys.process._
 //import misc.*
 
-// private def checkForFile(path: String): Boolean = {
-//     if File(path).isFile() == true then
-//         true
-//     else
-//         false
-// }
-
-
 //def is webfriendly
-
-// private def executeFFprobe(path: String): String = {
-//     val cmd = List("ffprobe", path)
-//     var stdout = new StringBuilder
-//     var stderr = new StringBuilder
-//     val process = ProcessLogger(out => stdout.append(out), err => stderr.append(err))
-//     cmd.!(process)
-//     stderr.result()
-// }
 
 def getVideoInfo(path: String): List[String] = {
     val cmd = List("ffprobe", "-loglevel", "0", "-show_streams", path)

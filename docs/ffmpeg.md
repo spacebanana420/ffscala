@@ -77,7 +77,6 @@ CQP is not implemented yet
 #### Supported methods:
 * cbr
 * crf
-* cqp (to be added)
 
 ```scala
 def setPixFmt(newfmt: String): String

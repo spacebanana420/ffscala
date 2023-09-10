@@ -20,3 +20,5 @@ def batchExecute(paths: List[String], args: String, format: String, quiet: Boole
 }
 
 //add async encoding, 1 thread per encode
+
+//detect if its a dir, to automatically read all files there instead
