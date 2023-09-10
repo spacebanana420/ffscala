@@ -151,7 +151,7 @@ def webp_setLossless(): String
 Sets lossless compression for webp.
 
 ```scala
-def webp_setQuality(value: Int): String
+def webp_setQuality(value: Byte): String
 ```
 Sets the quality value for webp encoding.
 
