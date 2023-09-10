@@ -33,9 +33,8 @@ def execute(input: String, args: String, output: String, quiet: Boolean = true):
             foundfmt += args(i)
         i -= 1
     }
-    val imageFormats = List("png", "apng", "avif", "jpeg", "jpg", "tiff", "tif", "bmp", "gif", "webp", "tga")
-    //val videoFormats = List("mp4", "mov", "m4v", "avi", "mkv", "webm")
-    val audioFormats = List("flac", "wav", "ogg", "opus", "m4a", "mp3", "aiff")
+    val imageFormats = supportedExtensions("image")
+    val audioFormats = supportedExtensions("audio")
     var isAlright = false
 
     if belongsToList(foundfmt, imageFormats) == true then

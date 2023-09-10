@@ -16,6 +16,33 @@ def batchExecute(paths: List[String], args: String, format: String, quiet: Boole
     }
 }
 
-//add async encoding, 1 thread per encode
+def batchDir(dir: String, args: String, format: String, quiet: Boolean = true) = {
+    if File(dir).isDirectory() == true then
+        val paths = File(dir).list()
+        val supportedFormats_i = supportedExtensions("image")
+        val supportedFormats_v = supportedExtensions("video")
+        val supportedFormats_a = supportedExtensions("audio")
+        var formatsToSeek: List[String] = List()
 
-//detect if its a dir, to automatically read all files there instead
+        if belongsToList(format, supportedFormats_i) == true then
+            formatsToSeek = supportedFormats_i
+        else if  belongsToList(format, supportedFormats_v) == true then
+            formatsToSeek = supportedFormats_v
+        else if  belongsToList(format, supportedFormats_a) == true then
+            formatsToSeek = supportedFormats_a
+        else
+            formatsToSeek = supportedFormats_i ++ supportedFormats_v ++ supportedFormats_a
+
+        for path <- paths do {
+            val pathfmt = getExtension(path)
+            //println("path: " + path + "\nformat: " + pathfmt)
+            if belongsToList(pathfmt, formatsToSeek) == true && File(path).isFile == true then
+                val output = removeExtension(path) + "_new." + format
+                //println("Encoding " + path)
+                execute(path, args, output, quiet)
+        }
+}
+
+
+
+//add async encoding, 1 thread per encode
