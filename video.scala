@@ -48,6 +48,22 @@ def dnxhd_setPreset(preset: String): String = {
         ""
 }
 
+def prores_setProfile(preset: String): String = {
+    val profiles = List("proxy", "lt", "standard", "hq", "4444", "4444xq")
+    if belongsToList(preset, profiles) == true then
+        "-profile:v " + preset + " "
+    else
+        ""
+}
+
+def prores_setAlphaDepth(depth: Byte): String = {
+    if depth < 0 || depth > 16 then
+        ""
+    else
+        "-alpha_bits " + depth + " "
+
+}
+
 def vp9_setDeadline(preset: String): String = {
     val presets = List("best", "good", "realtime")
     if belongsToList(preset, presets) == true then

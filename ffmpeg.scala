@@ -64,8 +64,8 @@ def execute(input: String, args: String, output: String, quiet: Boolean = true):
 // }
 
 def setVideoEncoder(encoder: String): String = {
-    val supportedFormats = List("copy", "x264", "x264rgb", "x265", "nvenc", "nvenc265", "utvideo", "png", "dnxhd", "tiff", "cfhd", "vp9")
-    val ffmpegEquivalents = List("copy", "libx264", "lib264rgb", "libx265", "h264_nvenc", "hevc_nvenc", "utvideo", "png", "dnxhd", "tiff", "cfhd", "libvpx-vp9")
+    val supportedFormats = List("copy", "x264", "x264rgb", "x265", "nvenc", "nvenc265", "utvideo", "png", "dnxhd", "prores", "tiff", "cfhd", "vp9")
+    val ffmpegEquivalents = List("copy", "libx264", "lib264rgb", "libx265", "h264_nvenc", "hevc_nvenc", "utvideo", "png", "dnxhd", "prores_ks", "tiff", "cfhd", "libvpx-vp9")
     val i = indexFromList(encoder, supportedFormats)
 
     if i == -1 then

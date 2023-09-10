@@ -62,7 +62,7 @@ For CRF, 0 means lossless, but I'm unsure if that's true for NVENC. If you want 
 ```scala
 def dnxhd_setPreset(preset: String): String
 ```
-Sets the DNxHD/DNxHR preset.
+Sets the DNxHD/DNxHR encoding preset.
 
 dnxhr_hq is recommended for most cases.
 
@@ -73,6 +73,28 @@ dnxhr_hq is recommended for most cases.
 * dnxhr_hq
 * dnxhr_hqx
 * dnxhr_444
+
+```scala
+def prores_setProfile(preset: String): String
+```
+Sets the ProRes encoding profile.
+
+hq is recommended for most cases.
+
+#### Supported presets:
+* proxy
+* lt
+* standard
+* hq
+* 4444
+* 4444qx
+
+```scala
+def prores_setAlphaDepth(depth: Byte): String
+```
+Sets the bit depth for the alpha channel when encoding using ProRes.
+
+Values between 0 and 16 are supported. Use 0 to disable the alpha channel.
 
 ```scala
 def vp9_setDeadline(preset: String): String

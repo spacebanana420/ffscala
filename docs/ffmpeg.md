@@ -25,6 +25,7 @@ Sets the video encoder
 * utvideo
 * png
 * dnxhd
+* prores
 * tiff
 * cfhd
 * vp9
