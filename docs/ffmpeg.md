@@ -1,50 +1,15 @@
 ```scala
-def openFile(path: String): String
+def execute(input: String, args: String, output: String, quiet: Boolean = true): Int
 ```
-Sets the input media for FFmpeg to read.
-
-This must be the first function to be called, as the returned string should be at the start of your FFmpeg command's arguments.
-
-```scala
-def setOutput(name: String, format: String): String
-```
-Returns the output path, a combination of the name and format. Use relative paths only for the paths in starting working directory of your program.
-
-This must be the last function to be called before calling ```execute```, as the returned string should be at the end of your FFmpeg command's arguments.
-
-#### Supported formats:
-* png
-* apng
-* avif
-* jpeg
-* jpg
-* tiff
-* tif
-* bmp
-* gif
-* webp
-* tga
-* mp4
-* mov
-* m4v
-* avi
-* mkv
-* webm
-* flac
-* wav
-* ogg
-* opus
-* m4a
-* mp3
-* aiff
-
-```scala
-def execute(args: String, quiet: Boolean = true): Int
-```
-Executes the final command ```args``` and checks for errors in the command.
+Executes FFmpeg with the input file, the arguments and output destination.
 
 By default, quiet is true, and FFmpeg will only output warnings and errors.
 
+```input``` should be the absolute or relative path to the file you want to process.
+
+```args``` should be the string that was created from using the other functions.
+
+```output``` should be the destination path for the final file, including filename and extension.
 
 ```scala
 def setVideoEncoder(encoder: String): String

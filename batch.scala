@@ -11,10 +11,7 @@ def batchExecute(paths: List[String], args: String, format: String, quiet: Boole
         for path <- paths do {
             if File(path).isFile() == true then
                 val output = removeExtension(path) + "_new." + format
-                if quiet == true then
-                    execute("-i " + path + " " + args + " " + output)
-                else
-                    execute("-i " + path + " " + args + " " + output, false)
+                execute(path, args, output, quiet)
         }
     }
 }

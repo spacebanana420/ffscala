@@ -22,7 +22,7 @@ private def isAlright_Audio(args: String): Boolean = {
     true
 }
 
-def execute(args: String, quiet: Boolean = true): Int = {
+def execute(input: String, args: String, output: String, quiet: Boolean = true): Int = {
     var i = args.length()-1
     var done = false
     var foundfmt = ""
@@ -48,20 +48,21 @@ def execute(args: String, quiet: Boolean = true): Int = {
     if isAlright == false then
         -1
     else
+        val fullArgs: List[String] = List("-i", input) ++ stringToList(args) :+ output
         if quiet == true then
-            val cmd: List[String] = "ffmpeg" +: "-y" +: "-loglevel" +: "quiet" +: stringToList(args)
+            val cmd: List[String] = "ffmpeg" +: "-y" +: "-loglevel" +: "quiet" +: fullArgs
             cmd.!
         else
-            val cmd: List[String] = "ffmpeg" +: "-y" +: stringToList(args)
+            val cmd: List[String] = "ffmpeg" +: "-y" +: fullArgs
             cmd.!
 }
 
-def openFile(path: String): String = { //add support for multiple inputs and detection
-    if File(path).exists() == false || File(path).isFile == false then
-        ""
-    else
-        "-i " + path + " "
-}
+// def openFile(path: String): String = { //add support for multiple inputs and detection
+//     if File(path).exists() == false || File(path).isFile == false then
+//         ""
+//     else
+//         "-i " + path + " "
+// }
 
 def setVideoEncoder(encoder: String): String = {
     val supportedFormats = List("copy", "x264", "x264rgb", "x265", "nvenc", "nvenc265", "utvideo", "png", "dnxhd", "tiff", "cfhd", "vp9")
@@ -169,16 +170,23 @@ def mapChannel(media: String, input: Byte, channel: Byte): String = { //test may
             "-map " + input + ":" + mediashort + ":" + channel + " "
 }
 
-def setOutput(name: String, format: String): String = { //replace wrong format instead of returning empty
-    val supportedFormats = supportedExtensions()
-    val isSupported = belongsToList(format, supportedFormats)
+// def setOutput(name: String, format: String): String = { //replace wrong format instead of returning empty
+//     val supportedFormats = supportedExtensions()
+//     val isSupported = belongsToList(format, supportedFormats)
+//
+//     if isSupported == false || name == "" || format == "" then
+//         ""
+//     else
+//         name + "." + format  + " "
+// }
 
-    if isSupported == false || name == "" || format == "" then
-        ""
+def getScreenshot(input: String, output: String, time: String, quiet: Boolean = true) = {
+    val fullArgs: List[String] = List("-ss", time, "-i", input, "-frames:v", "1", output)
+    if quiet == true then
+        val cmd: List[String] = "ffmpeg" +: "-y" +: "-loglevel" +: "quiet" +: fullArgs
+        cmd.!
     else
-        name + "." + format  + " "
-}
-
-def getScreenshot(input: String, output: String, time: String) = {
-    execute("-y -loglevel quiet -ss " + time + " -i " + input + " -frames:v 1 " + output)
+        val cmd: List[String] = "ffmpeg" +: "-y" +: fullArgs
+        cmd.!
+    //execute("-y -loglevel quiet -ss " + time + " -i " + input + " -frames:v 1 " + output)
 }
