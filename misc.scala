@@ -1,7 +1,7 @@
 package misc
 
 def supportedExtensions(mode: String = "all"): List[String] = {
-    val imageFormats: List[String] = List("png", "apng", "avif", "jpeg", "jpg", "tiff", "tif", "bmp", "gif", "webp", "tga")
+    val imageFormats: List[String] = List("png", "apng", "avif", "jpeg", "jpg", "tiff", "tif", "bmp", "gif", "webp", "tga", "avif")
     val audioFormats: List[String] = List("flac", "wav", "ogg", "opus", "m4a", "mp3", "aiff")
     val videoFormats: List[String] = List("mp4", "mov", "m4v", "avi", "mkv", "webm")
 
