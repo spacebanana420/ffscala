@@ -29,6 +29,7 @@ Sets the video encoder
 * tiff
 * cfhd
 * vp9
+* av1
 
 ```scala
 def setVideoBitrate(method: String, bitrate: Int): String

@@ -124,6 +124,33 @@ def vp9_setLossless(): String
 Sets lossless encoding for VP9.
 
 ```scala
+def av1_setRowMT(): String
+```
+Enables row-based multi-threading for AV1.
+
+```scala
+def av1_stillPicture(): String
+```
+Enables single-frame mode for AV1. Useful for encoding AVIF images.
+
+```scala
+def av1_setDeadline(preset: String): String
+```
+Sets the deadline for AV1, which will define the compression efficiency as well as its speed.
+
+#### Supported presets:
+* good
+* realtime
+* allintra
+
+```scala
+def av1_setcpu_used(value: Byte): String
+```
+Sets the cpu-used value for AV1, which will fine-tune the compression efficiency further.
+
+Values between 0 and 8 are accepted.
+
+```scala
 def cfhd_setQuality(value: Int): String
 ```
 Sets the encoding quality for Cineform. This affects the bitrate used.

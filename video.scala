@@ -73,7 +73,7 @@ def vp9_setDeadline(preset: String): String = {
 }
 
 def vp9_setcpu_used(value: Byte): String = {
-    if value >= -8 && value < 8 then
+    if value >= -8 && value <= 8 then
         "-cpu-used " + value + " "
     else
         ""
@@ -82,6 +82,25 @@ def vp9_setcpu_used(value: Byte): String = {
 def vp9_setRowMT(): String = "-row-mt true "
 
 def vp9_setLossless(): String = "-lossless "
+
+def av1_setRowMT(): String = "-row-mt true "
+
+def av1_stillPicture(): String = "-still-picture true "
+
+def av1_setcpu_used(value: Byte): String = {
+    if value >= 0 && value <= 8 then
+        "-cpu-used " + value + " "
+    else
+        ""
+}
+
+def av1_setDeadline(preset: String): String = {
+    val presets = List("good", "realtime", "allintra")
+    if belongsToList(preset, presets) == true then
+        "-usage " + preset + " "
+    else
+        ""
+}
 
 def cfhd_setQuality(value: Int): String = {
     if value < 0 || value > 12 then
