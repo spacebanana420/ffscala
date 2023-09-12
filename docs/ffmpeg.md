@@ -12,6 +12,11 @@ By default, quiet is true, and FFmpeg will only output warnings and errors.
 ```output``` should be the destination path for the final file, including filename and extension.
 
 ```scala
+def setThreads(threads: Short): String
+```
+Sets the amount of CPU threads to use. 0 is automatic/optimal, 1 is 1 thread, 2 is 2 threads, etc.
+
+```scala
 def setVideoEncoder(encoder: String): String
 ```
 Sets the video encoder

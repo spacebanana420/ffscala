@@ -56,6 +56,13 @@ def execute(input: String, args: String, output: String, quiet: Boolean = true):
             cmd.!
 }
 
+def setThreads(threads: Short): String = {
+    if threads >= 0 then
+        "-threads " + threads + " "
+    else
+        ""
+}
+
 // def openFile(path: String): String = { //add support for multiple inputs and detection
 //     if File(path).exists() == false || File(path).isFile == false then
 //         ""
