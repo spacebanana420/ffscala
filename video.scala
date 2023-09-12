@@ -141,3 +141,11 @@ def webp_setQuality(value: Byte): String = {
     else
         "-quality " + value + " "
 }
+
+def webp_setPreset(preset: String): String = {
+    val presets = List("none", "default", "picture", "photo", "drawing", "icon", "text")
+    if belongsToList(preset, presets) == true then
+        "-preset:v " + preset + " "
+    else
+        ""
+}
