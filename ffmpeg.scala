@@ -22,7 +22,7 @@ private def isAlright_Audio(args: String): Boolean = {
     true
 }
 
-def execute(input: String, args: String, output: String, quiet: Boolean = true): Int = {
+def execute(input: String, args: String, output: String, quiet: Boolean = true, exec: String = "ffmpeg"): Int = {
     var i = args.length()-1
     var done = false
     var foundfmt = ""
@@ -41,6 +41,8 @@ def execute(input: String, args: String, output: String, quiet: Boolean = true):
         isAlright = isAlright_Image(args)
     else if belongsToList(foundfmt, audioFormats) == true then
         isAlright = isAlright_Audio(args)
+    else if exec != "ffmpeg" && File(exec).exists() == false then
+        isAlright = false
     else
         isAlright = true
 
@@ -49,10 +51,10 @@ def execute(input: String, args: String, output: String, quiet: Boolean = true):
     else
         val fullArgs: List[String] = List("-i", input) ++ stringToList(args) :+ output
         if quiet == true then
-            val cmd: List[String] = "ffmpeg" +: "-y" +: "-loglevel" +: "quiet" +: fullArgs
+            val cmd: List[String] = exec +: "-y" +: "-loglevel" +: "quiet" +: fullArgs
             cmd.!
         else
-            val cmd: List[String] = "ffmpeg" +: "-y" +: fullArgs
+            val cmd: List[String] = exec +: "-y" +: fullArgs
             cmd.!
 }
 
