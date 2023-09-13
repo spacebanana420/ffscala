@@ -38,11 +38,15 @@ Your path names can have spaces between them, as the command execution is shell-
 
 # Requirements
 
-* You need to have [FFmpeg](https://ffmpeg.org/) installed
+* [FFmpeg](https://ffmpeg.org/)
 * Scala 3
 * Your program needs to compile to JVM, since FFscala uses java.io.File
 
 FFmpeg tested with version 6, but you won't have problems using other versions.
+
+By default, you need FFmpeg to be in your PATH, but execute() lets you optionally specify the path to the executable if you prefer that way.
+
+(See [example 11](https://github.com/spacebanana420/ffscala/blob/main/docs/examples.md))
 
 # Download & how to use
 

@@ -1,3 +1,5 @@
+This page contains a few code examples for some use cases with FFscala.
+
 ### Example 1 - Video transcoding
 ```scala
 val encodeParams = {
@@ -165,3 +167,24 @@ You can create a list, array, whatever, and loop through all elements in it your
 To use removeExtension, you need to import ```misc```.
 
 Assuming video1 is named "video1.mp4", the result will be "video1_new.mov".
+
+
+### Example 11 - Custom FFmpeg path
+
+Keeping quiet's default value:
+
+```scala
+val params = scale(1920, 1080) + setPixFmt("rgb24")
+execute("image.png", params, "newimage.png", exec = "./bin/ffmpeg")
+```
+
+Or
+
+Explicitly setting quiet to true:
+
+```scala
+val params = scale(1920, 1080) + setPixFmt("rgb24")
+execute("image.png", params, "newimage.png", true, "./bin/ffmpeg")
+```
+
+By default, ```exec``` is set to "ffmpeg". This means that FFmpeg needs to be in your system's PATH. If you instead do not have FFmpeg installed on your PATH, or you want to set a custom path or even distribute your program with FFmpeg included, you can specify a custom path. In this example, it will look for the executable "ffmpeg" from the directory "bin" in the program's current working directory. You can also specify an absolute path, like "/path/to/yourprogram/bin/ffmpeg".
