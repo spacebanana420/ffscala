@@ -11,7 +11,7 @@ By default, quiet is true, and FFmpeg will only output warnings and errors.
 
 ```output``` should be the destination path for the final file, including filename and extension.
 
-```exec``` is the path to your FFmpeg executable. By default, it is set to "ffmpeg", assuming you have FFmpeg in your PATH. If you do not, or if you want to package your software with the binary, you can specify the path yourself.
+```exec``` is the path to your FFmpeg executable. By default, it is set to "ffmpeg", assuming you have FFmpeg in your PATH. If you do not have it in your PATH, or if you want to package your software with the binary or just use a custom path, you can specify the path yourself.
 
 ```scala
 def setThreads(threads: Short): String
