@@ -24,27 +24,22 @@ private def isAlright_Audio(args: String): Boolean = {
 
 def execute(input: String, args: String, output: String, quiet: Boolean = true, exec: String = "ffmpeg"): Int = {
     var i = args.length()-1
-    var done = false
     var foundfmt = ""
-    while done == false && i > 0 do {
-        if args(i) == '.' then
-            done = true
-        else
-            foundfmt += args(i)
+    while args(i) != '.' && i > 0 do {
+        foundfmt += args(i)
         i -= 1
     }
     val imageFormats = supportedExtensions("image")
     val audioFormats = supportedExtensions("audio")
-    var isAlright = false
-
-    if belongsToList(foundfmt, imageFormats) == true then
-        isAlright = isAlright_Image(args)
-    else if belongsToList(foundfmt, audioFormats) == true then
-        isAlright = isAlright_Audio(args)
-    else if exec != "ffmpeg" && File(exec).exists() == false then
-        isAlright = false
-    else
-        isAlright = true
+    val isAlright =
+        if belongsToList(foundfmt, imageFormats) == true then
+            isAlright_Image(args)
+        else if belongsToList(foundfmt, audioFormats) == true then
+            isAlright_Audio(args)
+        else if exec != "ffmpeg" && File(exec).exists() == false then
+            false
+        else
+            true
 
     if isAlright == false then
         -1

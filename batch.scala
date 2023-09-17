@@ -22,16 +22,15 @@ def batchDir(dir: String, args: String, format: String, quiet: Boolean = true) =
         val supportedFormats_i = supportedExtensions("image")
         val supportedFormats_v = supportedExtensions("video")
         val supportedFormats_a = supportedExtensions("audio")
-        var formatsToSeek: List[String] = List()
-
-        if belongsToList(format, supportedFormats_i) == true then
-            formatsToSeek = supportedFormats_i
-        else if  belongsToList(format, supportedFormats_v) == true then
-            formatsToSeek = supportedFormats_v
-        else if  belongsToList(format, supportedFormats_a) == true then
-            formatsToSeek = supportedFormats_a
-        else
-            formatsToSeek = supportedFormats_i ++ supportedFormats_v ++ supportedFormats_a
+        val formatsToSeek: List[String] =
+            if belongsToList(format, supportedFormats_i) == true then
+                supportedFormats_i
+            else if  belongsToList(format, supportedFormats_v) == true then
+                supportedFormats_v
+            else if  belongsToList(format, supportedFormats_a) == true then
+                supportedFormats_a
+            else
+                supportedFormats_i ++ supportedFormats_v ++ supportedFormats_a
 
         for path <- paths do {
             val pathfmt = getExtension(path)
