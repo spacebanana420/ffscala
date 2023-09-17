@@ -57,9 +57,9 @@ def cropToAspect(width: Byte, height: Byte): String = {
     if width <= 0 || height <= 0 || width == height then
         ""
     else if width > height then
-        val ih: String = height + "*iw/" + width
+        val ih: String = s"$height*iw/$width"
         "-filter:v crop=iw:" + ih + " "
     else
-        val iw: String = width + "*ih/" + height
+        val iw: String = s"$width*ih/$height"
         "-filter:v crop=" + iw + ":ih "
 }

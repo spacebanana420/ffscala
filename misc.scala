@@ -15,25 +15,28 @@ def supportedExtensions(mode: String = "all"): List[String] = {
 
 
 def belongsToList(text: String, group: List[String]): Boolean = {
+    var belongs = false
     for i <- group do {
         if text == i then
-            return true
+            belongs = true
     }
-    false
+    belongs
 }
 
 def indexFromList(text: String, group: List[String]): Int = {
+    var index = -1
     for i <- 0 to group.length - 1 do {
         if text == group(i) then
-            return i
+            index = i
     }
-    -1
+    index
 }
 
 def containsList(text: String, group: List[String]): Boolean = {
+    var contains = false
     for i <- group do {
         if text.contains(i) then
-            return true
+            contains = true
     }
     false
 }

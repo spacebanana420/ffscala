@@ -6,20 +6,22 @@ import misc.*
 
 private def isAlright_Image(args: String): Boolean = {
     val badArguments = List("-c:a", "-b:a", "-b:v", "-g", "-bf", "-crf")
+    var isalright = true
     for i <- badArguments do {
         if args.contains(i) == true then
-            return false
+            isalright = false
     }
-    true
+    isalright
 }
 
 private def isAlright_Audio(args: String): Boolean = {
     val badArguments = List("-c:v", "-b:v", "-g", "-bf", "-crf", "-pix_fmt", "-filter:v", "-preset:v")
+    var isalright = true
     for i <- badArguments do {
         if args.contains(i) == true then
-            return false
+            isalright = false
     }
-    true
+    isalright
 }
 
 def execute(input: String, args: String, output: String, quiet: Boolean = true, exec: String = "ffmpeg"): Int = {
