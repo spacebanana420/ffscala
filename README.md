@@ -65,20 +65,10 @@ Most functions return an empty string or int of value -1 when there is an error 
 
 The documentation is separated into multiple pages, each being respective to a component of the library.
 
-#### [FFmpeg doc](https://github.com/spacebanana420/ffscala/blob/main/docs/ffmpeg.md)
-#### [Video doc](https://github.com/spacebanana420/ffscala/blob/main/docs/video.md)
-#### [Filters doc](https://github.com/spacebanana420/ffscala/blob/main/docs/filters.md)
-#### [FFprobe doc](https://github.com/spacebanana420/ffscala/blob/main/docs/ffprobe.md)
-#### [Batch doc](https://github.com/spacebanana420/ffscala/blob/main/docs/batch.md)
-
-FFmpeg doc contains the documentation for the main functions of this library.
-
-Video doc contains the documentation for the functions related to encoder-specific parameters and presets.
-
-Filters doc contains the documentation for FFmpeg filters.
-
-FFprobe doc contains the documentation for parsing media information.
-
-Batch doc contains the documentation for encoding multiple files.
+* [FFmpeg](https://github.com/spacebanana420/ffscala/blob/main/docs/ffmpeg.md): Main library functionality
+* [Video](https://github.com/spacebanana420/ffscala/blob/main/docs/video.md): Encoder-specific parameters
+* [Filters](https://github.com/spacebanana420/ffscala/blob/main/docs/filters.md): Filter parameters
+* [FFprobe](https://github.com/spacebanana420/ffscala/blob/main/docs/ffprobe.md): Media parsing/probing functions
+* [Batch](https://github.com/spacebanana420/ffscala/blob/main/docs/batch.md): Batch processing and multiple file encoding functions
 
 #### [List of examples](https://github.com/spacebanana420/ffscala/blob/main/docs/examples.md)
