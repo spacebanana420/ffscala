@@ -69,6 +69,7 @@ The documentation is separated into multiple pages, each being respective to a c
 * [Video](https://github.com/spacebanana420/ffscala/blob/main/docs/video.md): Encoder-specific parameters
 * [Filters](https://github.com/spacebanana420/ffscala/blob/main/docs/filters.md): Filter parameters
 * [FFprobe](https://github.com/spacebanana420/ffscala/blob/main/docs/ffprobe.md): Media parsing/probing functions
+* [FFplay](https://github.com/spacebanana420/ffscala/blob/main/docs/ffplay.md): Media playback with FFplay
 * [Batch](https://github.com/spacebanana420/ffscala/blob/main/docs/batch.md): Batch processing and multiple file encoding functions
 
 #### [List of examples](https://github.com/spacebanana420/ffscala/blob/main/docs/examples.md)
