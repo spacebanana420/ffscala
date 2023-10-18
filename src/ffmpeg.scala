@@ -25,13 +25,11 @@ private def isAlright_Audio(args: String): Boolean = {
 }
 
 def checkFFmpeg(path: String = "ffmpeg"): Boolean = {
-    try {
+    try
       List(path, "-loglevel", "quiet", "-version").!
       true
-    }
-    catch {
+    catch
       case e: Exception => false
-    }
 }
 
 def execute(input: String, args: String, output: String, quiet: Boolean = true, exec: String = "ffmpeg"): Int = {
