@@ -7,15 +7,29 @@ import misc.*
 def execplay(input: String, args: List[String], quiet: Boolean = true, exec: String = "ffplay"): Int = {
   if File(input).isFile == true then
 //     val fullArgs: List[String] = stringToList(args)
-    if quiet == true then
-        val cmd: List[String] = exec +: "-y" +: "-loglevel" +: "quiet" +: args
-        cmd.!
-    else
-        val cmd: List[String] = exec +: "-y" +: args
-        cmd.!
+    try
+      if quiet == true then
+          val cmd: List[String] = exec +: "-y" +: "-loglevel" +: "quiet" +: args
+          cmd.!
+      else
+          val cmd: List[String] = exec +: "-y" +: args //remove stderr at least
+          cmd.!
+    catch
+      case e: Exception => -1
   else
     -1
 }
+
+def setLoop(times: Int): List[String] = {
+  val filteredTimes =
+    if times < 0 then
+      0
+    else
+      times
+  List("-loop", times.toString)
+}
+
+def setAutoExit(): List[String] = List("-autoexit")
 
 def setPlayVolume(volume: Byte): List[String] = {
   val filteredvolume: Byte =

@@ -1,7 +1,17 @@
 ```scala
 def execplay(input: String, args: List[String], quiet: Boolean = true, exec: String = "ffplay"): Int
 ```
-Executes ffplay, similarly to ```execute``` command for ffmpeg, but without the unnecessasry restrictions.
+Executes FFplay, similarly to ```execute``` command for ffmpeg, but without the unnecessasry restrictions.
+
+```scala
+def setLoop(times: Int): List[String]
+```
+Sets how many times ffplay loops the media. 0 means forever.
+
+```scala
+def setAutoExit(): List[String]
+```
+FFplay will exit after reaching the end of the media playback. This isn't recommended for image files (except animated GIFs), because FFplay will exit instantly.
 
 ```scala
 def setPlayVolume(volume: Byte): List[String]

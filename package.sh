@@ -1,1 +1,1 @@
-7z a ffscala.7z src/* -r
+7z a ffscala.zip src/* -r
