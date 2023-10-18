@@ -4,16 +4,6 @@ def execplay(input: String, args: List[String], quiet: Boolean = true, exec: Str
 Executes FFplay, similarly to ```execute``` command for ffmpeg, but without the unnecessasry restrictions.
 
 ```scala
-def setLoop(times: Int): List[String]
-```
-Sets how many times ffplay loops the media. 0 means forever.
-
-```scala
-def setAutoExit(): List[String]
-```
-FFplay will exit after reaching the end of the media playback. This isn't recommended for image files (except animated GIFs), because FFplay will exit instantly.
-
-```scala
 def setPlayVolume(volume: Byte): List[String]
 ```
 Sets the volume ffplay will start at. The supported volume range goes from 0 to 100.
@@ -37,3 +27,23 @@ Sets the window size.
 def setFrameDrop(): List[String]
 ```
 Enables frame dropping to avoid desyncing the audio with the video.
+
+```scala
+def setLoop(times: Int): List[String]
+```
+Sets how many times ffplay loops the media. 0 means forever.
+
+```scala
+def setAutoExit(): List[String]
+```
+FFplay will exit after reaching the end of the media playback. This isn't recommended for image files (except animated GIFs), because FFplay will exit instantly.
+
+```scala
+def setExitOnMouse(): List[String]
+```
+FFscala stops media playback on any mouse press.
+
+```scala
+def setExitOnKey(): List[String]
+```
+FFscala stops media playback on any key press.

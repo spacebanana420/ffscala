@@ -40,11 +40,10 @@ Your path names can have spaces between them, as the command execution is shell-
 
 * [FFmpeg](https://ffmpeg.org/)
 * Scala 3
-* Your program needs to compile to JVM, since FFscala uses java.io.File
 
 FFmpeg tested with version 6, but you won't have problems using other versions.
 
-By default, you need FFmpeg to be in your PATH, but execute() lets you optionally specify the path to the executable if you prefer that way.
+By default, you need FFmpeg to be in your PATH, but ```execute``` and similar functions let you optionally specify the path to the executable or the program name if you prefer that way.
 
 (See [example 11](https://github.com/spacebanana420/ffscala/blob/main/docs/examples.md))
 
@@ -54,6 +53,8 @@ You can find releases of FFscala [here](https://github.com/spacebanana420/ffscal
 
 Choose the version of your choice (although the latest is recommended) and download the source code from that release.
 
+You can download the included archive if you just want the library files, or you can download the whole project.
+
 Add the library code into your project and import ```ffscala```
 
 (See [example 7](https://github.com/spacebanana420/ffscala/blob/main/docs/examples.md))
@@ -61,7 +62,7 @@ Add the library code into your project and import ```ffscala```
 
 # Documentation
 
-Most functions return an empty string or int of value -1 when there is an error in the arguments you passed to them
+Most functions return an empty list or int of value -1 when there is an error in the arguments you passed to them and there is no default choice or error handling in that function.
 
 The documentation is separated into multiple pages, each being respective to a component of the library.
 

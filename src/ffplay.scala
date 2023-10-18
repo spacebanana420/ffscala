@@ -20,17 +20,6 @@ def execplay(input: String, args: List[String], quiet: Boolean = true, exec: Str
     -1
 }
 
-def setLoop(times: Int): List[String] = {
-  val filteredTimes =
-    if times < 0 then
-      0
-    else
-      times
-  List("-loop", times.toString)
-}
-
-def setAutoExit(): List[String] = List("-autoexit")
-
 def setPlayVolume(volume: Byte): List[String] = {
   val filteredvolume: Byte =
     if volume < 0 then
@@ -54,3 +43,18 @@ def setDimensions(x: Int, y: Int): List[String] = {
 }
 
 def setFrameDrop(): List[String] = List("-framedrop")
+
+def setLoop(times: Int): List[String] = {
+  val filteredTimes =
+    if times < 0 then
+      0
+    else
+      times
+  List("-loop", times.toString)
+}
+
+def setAutoExit(): List[String] = List("-autoexit")
+
+def setExitOnMouse(): List[String] = List("-exitonmousedown")
+
+def setExitOnKey(): List[String] = List("-exitonkeydown")
