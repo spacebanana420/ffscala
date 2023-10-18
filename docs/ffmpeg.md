@@ -14,12 +14,12 @@ By default, quiet is true, and FFmpeg will only output warnings and errors.
 ```exec``` is the path to your FFmpeg executable. By default, it is set to "ffmpeg", assuming you have FFmpeg in your PATH. If you do not have it in your PATH, or if you want to package your software with the binary or just use a custom path, you can specify the path yourself.
 
 ```scala
-def setThreads(threads: Short): String
+def setThreads(threads: Short): List[String]
 ```
 Sets the amount of CPU threads to use. 0 is automatic/optimal, 1 is 1 thread, 2 is 2 threads, etc.
 
 ```scala
-def setVideoEncoder(encoder: String): String
+def setVideoEncoder(encoder: String): List[String]
 ```
 Sets the video encoder
 #### Supported video encoders:
@@ -39,7 +39,7 @@ Sets the video encoder
 * av1
 
 ```scala
-def setVideoBitrate(method: String, bitrate: Int): String
+def setVideoBitrate(method: String, bitrate: Int): List[String]
 ```
 Sets the video bitrate control method and value.
 
@@ -53,7 +53,7 @@ CQP is not implemented yet
 * crf
 
 ```scala
-def setPixFmt(newfmt: String): String
+def setPixFmt(newfmt: String): List[String]
 ```
 Sets the video/image's pixel format
 #### Supported pixel formats:
@@ -71,17 +71,17 @@ Sets the video/image's pixel format
 * yuv444p10le
 
 ```scala
-def setKeyframeInterval(interval: Short): String
+def setKeyframeInterval(interval: Short): List[String]
 ```
 Sets the video's keyframe interval in frames (0 or higher).
 
 ```scala
-def setBFrames(interval: Byte): String
+def setBFrames(interval: Byte): List[String]
 ```
 Sets the video's bframes (between 0 and 16).
 
 ```scala
-def setAudioEncoder(encoder: String): String
+def setAudioEncoder(encoder: String): List[String]
 ```
 Sets the audio encoder
 #### Supported encoders:
@@ -97,12 +97,12 @@ Sets the audio encoder
 * pcm32
 
 ```scala
-def setAudioBitrate(bitrate: Int): String
+def setAudioBitrate(bitrate: Int): List[String]
 ```
 Sets the audio bitrate in kilobits.
 
 ```scala
-def setSampleFormat(fmt: String): String
+def setSampleFormat(fmt: String): List[String]
 ```
 Sets the audio's sample format
 #### Supported sample formats:
@@ -111,7 +111,7 @@ Sets the audio's sample format
 
 
 ```scala
-def removeElement(element: String): String
+def removeElement(element: String): List[String]
 ```
 Removes a whole type of element of the input media, such as the video channels, audio channels or subtitle channels.
 #### Values:
@@ -120,7 +120,7 @@ Removes a whole type of element of the input media, such as the video channels, 
 * "subtitle" - removes subtitles
 
 ```scala
-def mapChannel(media: String, input: Byte, channel: Byte): String
+def mapChannel(media: String, input: Byte, channel: Byte): List[String]
 ```
 Maps the channels of the inputs.
 
@@ -138,7 +138,7 @@ Channel can be a value of -1 or higher. -1 means all channels of the input.
 Example: ```mapChannel("video", 0, 0)``` grabs the first video channel of the first file input. ```mapChannel("audio", 0, -1)``` grabs all audio channels of the first file input.
 
 ```scala
-def getScreenshot(input: String, output: String, time: String): String
+def getScreenshot(input: String, output: String, time: String)
 ```
 Captures a frame from a video or image sequence.
 

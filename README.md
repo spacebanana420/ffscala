@@ -2,18 +2,18 @@
 
 FFscala is a simple wrapper library for the FFmpeg command line, written in Scala 3.
 
-FFscala works by using functions to transform your video encoding parameters into a string composed of FFmpeg arguments. Before executing the command, the string is converted into a list of arguments so the command execution is independent of shell and OS, which makes it more portable.
+FFscala works by using functions to transform your video encoding parameters into string lists composed of FFmpeg arguments. Before executing the command, the arguments list is combined additional arguments. The command execution is independent of shell and OS, which makes it more portable.
 
 ### Example 1 - Video transcoding
 ```scala
-val encodeParams = {
-setVideoEncoder("x264")
-+ setVideoBitrate("cbr", 4000)
-+ scale(1920, 1080)
-+ setPixFmt("yuv420p")
-+ setAudioEncoder("opus")
-+ setAudioBitrate(320)
-}
+val encodeParams =
+  setVideoEncoder("x264")
+  ++ setVideoBitrate("cbr", 4000)
+  ++ scale(1920, 1080)
+  ++ setPixFmt("yuv420p")
+  ++ setAudioEncoder("opus")
+  ++ setAudioBitrate(320)
+
 execute("/home/banana/Videos/gameplay.mov", encodeParams, "/home/banana/Videos/gameplay.mp4")
 ```
 

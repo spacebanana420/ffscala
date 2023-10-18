@@ -2,14 +2,14 @@ This page contains a few code examples for some use cases with FFscala.
 
 ### Example 1 - Video transcoding
 ```scala
-val encodeParams = {
-setVideoEncoder("x264")
-+ setVideoBitrate("cbr", 4000)
-+ scale(1920, 1080)
-+ setPixFmt("yuv420p")
-+ setAudioEncoder("opus")
-+ setAudioBitrate(320)
-}
+val encodeParams =
+  setVideoEncoder("x264")
+  ++ setVideoBitrate("cbr", 4000)
+  ++ scale(1920, 1080)
+  ++ setPixFmt("yuv420p")
+  ++ setAudioEncoder("opus")
+  ++ setAudioBitrate(320)
+
 execute("/home/banana/Videos/gameplay.mov", encodeParams, "/home/banana/Videos/gameplay.mp4")
 ```
 
@@ -36,7 +36,7 @@ Your path names can have spaces between them, as the command execution is shell-
 (Assuming the audio is encoded in opus)
 
 ```scala
-val getAudio = removeElement("video") + setAudioEncoder("copy")
+val getAudio = removeElement("video") ++ setAudioEncoder("copy")
 execute("/path/to/video.mp4", getAudio, "/path/to/audio.ogg")
 ```
 
@@ -66,12 +66,12 @@ Here. the time argument will tell FFmpeg to get the frame at 320.5 seconds
 
 ### Example 5 - CRF video encoding, with audio intact
 ```scala
-val transcodeVideo = {
-setVideoEncoder("x264")
-+ setVideoBitrate("crf", 12)
-+ x264_setPreset("veryfast")
-+ setAudioEncoder("copy")
-}
+val transcodeVideo =
+    setVideoEncoder("x264")
+    ++ setVideoBitrate("crf", 12)
+    ++ x264_setPreset("veryfast")
+    ++ setAudioEncoder("copy")
+
 execute("/home/banana/Videos/gameplay.mov", transcodeVideo, "/home/banana/Videos/gameplay_new.mp4")
 ```
 
@@ -79,12 +79,12 @@ This will transcode the input video into a video encoded in x264 with the preset
 
 ### Example 6 - Unusual function order
 ```scala
-val transcodeVideo = {
-setVideoBitrate("crf", 12)
-+ setAudioEncoder("copy")
-+ setVideoEncoder("x264")
-+ x264_setPreset("veryfast")
-}
+val transcodeVideo =
+    setVideoBitrate("crf", 12)
+    ++ setAudioEncoder("copy")
+    ++ setVideoEncoder("x264")
+    ++ x264_setPreset("veryfast")
+
 execute("/home/banana/Videos/gameplay.mov", transcodeVideo, "/home/banana/Videos/gameplay_new.mp4")
 ```
 
@@ -97,15 +97,15 @@ This is the same example as above, but with the order of the function calls alte
 import ffscala.*
 
 @main def main() = {
-    val encodeVideo = {
-    setVideoEncoder("x265")
-    + x264_setPreset("veryfast")
-    + setVideoBitrate("crf", 18)
-    + setAudioEncoder("opus")
-    + setAudioBitrate(320)
-    + scale(1280, 720)
-    + scaleFilter("bilinear")
-    }
+    val encodeVideo =
+        setVideoEncoder("x265")
+        ++ x264_setPreset("veryfast")
+        ++ setVideoBitrate("crf", 18)
+        ++ setAudioEncoder("opus")
+        ++ setAudioBitrate(320)
+        ++ scale(1280, 720)
+        ++ scaleFilter("bilinear")
+
     println("The command arguments are " + encodeVideo + "\n")
     execute("/path/to/video.mov", encodeVideo, "/path/to/newvideo.mp4", false)
 }
@@ -121,13 +121,13 @@ This code is functional and would compile if /path/to/video.mov was the path to 
 
 ### Example 8 - Encode with 16:10 crop
 ```scala
-val transcodeVideo = {
-setVideoEncoder("x264")
-+ x264_setPreset("veryfast")
-+ setVideoBitrate("crf", 15)
-+ setAudioEncoder("copy")
-+ cropToAspect(16, 10)
-}
+val transcodeVideo =
+    setVideoEncoder("x264")
+    ++ x264_setPreset("veryfast")
+    ++ setVideoBitrate("crf", 15)
+    ++ setAudioEncoder("copy")
+    ++ cropToAspect(16, 10)
+
 execute("/home/banana/Videos/video.mov", transcodeVideo, "/home/banana/Videos/video_new.mp4")
 ```
 The video will be cropped to 16:10 and centered, alongside the usual encoding parameters specified.
@@ -135,13 +135,13 @@ The video will be cropped to 16:10 and centered, alongside the usual encoding pa
 ### Example 9 - Batch encoding
 ```scala
 val filesToEncode: List[String] = List("/path/to/video1" , "/path/to/video2", "/path/to/video3")
-val encodeSettings = {
-setVideoEncoder("x264")
-+ x264_setPreset("veryfast")
-+ setVideoBitrate("crf", 15)
-+ setAudioEncoder("copy")
-+ cropToAspect(16, 10)
-}
+val encodeSettings =
+    setVideoEncoder("x264")
+    ++ x264_setPreset("veryfast")
+    ++ setVideoBitrate("crf", 15)
+    ++ setAudioEncoder("copy")
+    ++ cropToAspect(16, 10)
+
 
 batchExecute(filesToEncode, encodeSettings, "mov")
 ```
@@ -150,13 +150,13 @@ batchExecute(filesToEncode, encodeSettings, "mov")
 ### Example 10 - Manual batch encoding
 ```scala
 val filesToEncode: List[String] = List("/path/to/video1" , "/path/to/video2", "/path/to/video3")
-val encodeSettings = {
-setVideoEncoder("x264")
-+ x264_setPreset("veryfast")
-+ setVideoBitrate("crf", 15)
-+ setAudioEncoder("copy")
-+ cropToAspect(16, 10)
-}
+val encodeSettings =
+    setVideoEncoder("x264")
+    ++ x264_setPreset("veryfast")
+    ++ setVideoBitrate("crf", 15)
+    ++ setAudioEncoder("copy")
+    ++ cropToAspect(16, 10)
+
 
 for file <- filesToEncode do {
     execute(file, encodeSettings, removeExtension(file) + "_new.mov")
@@ -174,7 +174,7 @@ Assuming video1 is named "video1.mp4", the result will be "video1_new.mov".
 Keeping quiet's default value:
 
 ```scala
-val params = scale(1920, 1080) + setPixFmt("rgb24")
+val params = scale(1920, 1080) ++ setPixFmt("rgb24")
 execute("image.png", params, "newimage.png", exec = "./bin/ffmpeg")
 ```
 
@@ -183,7 +183,7 @@ Or
 Explicitly setting quiet to true:
 
 ```scala
-val params = scale(1920, 1080) + setPixFmt("rgb24")
+val params = scale(1920, 1080) ++ setPixFmt("rgb24")
 execute("image.png", params, "newimage.png", true, "./bin/ffmpeg")
 ```
 

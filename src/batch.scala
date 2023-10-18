@@ -3,7 +3,7 @@ package ffscala
 import java.io.File
 import misc.*
 
-def batchExecute(paths: List[String], args: String, format: String, quiet: Boolean = true) = {
+def batchExecute(paths: List[String], args: List[String], format: String, quiet: Boolean = true) = {
     val supportedFormats = supportedExtensions()
     val isSupported = belongsToList(format, supportedFormats)
 
@@ -16,7 +16,7 @@ def batchExecute(paths: List[String], args: String, format: String, quiet: Boole
     }
 }
 
-def batchDir(dir: String, args: String, format: String, quiet: Boolean = true) = {
+def batchDir(dir: String, args: List[String], format: String, quiet: Boolean = true) = {
     if File(dir).isDirectory() == true then
         val paths = File(dir).list()
         val supportedFormats_i = supportedExtensions("image")
