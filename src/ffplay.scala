@@ -9,10 +9,10 @@ def execplay(input: String, args: List[String], quiet: Boolean = true, exec: Str
 //     val fullArgs: List[String] = stringToList(args)
     try
       if quiet == true then
-          val cmd: List[String] = exec +: "-y" +: "-loglevel" +: "quiet" +: args
+          val cmd: List[String] = List(exec, "-y", "-loglevel", "quiet") ++ args
           cmd.!
       else
-          val cmd: List[String] = exec +: "-y" +: args //remove stderr at least
+          val cmd: List[String] = List(exec, "-y") ++ args //remove stderr at least
           cmd.!
     catch
       case e: Exception => -1
@@ -32,6 +32,8 @@ def setPlayVolume(volume: Byte): List[String] = {
 }
 
 def disableBorder(): List[String] = List("-noborder")
+
+def disableDisplay(): List[String] = List("-nodisp")
 
 def setFullscreen(): List[String] = List("-fs")
 
@@ -58,3 +60,24 @@ def setAutoExit(): List[String] = List("-autoexit")
 def setExitOnMouse(): List[String] = List("-exitonmousedown")
 
 def setExitOnKey(): List[String] = List("-exitonkeydown")
+
+def setWindowTitle(title: String): List[String] = {
+  if title == "" then
+    List()
+  else
+    List("-window_title", title)
+}
+
+def setShowMode(mode: String): List[String] = {
+  mode match
+    case "waves" => List("-showmode", "1")
+    case "rdft" => List("-showmode", "2")
+    case _ => List("-showmode", "0")
+}
+
+def setSeekInterval(interval: Float): List[String] = {
+  if interval < 0 then
+    List()
+  else
+    List("-seek_interval", interval.toFloat)
+}

@@ -14,6 +14,11 @@ def disableBorder(): List[String]
 Disables window border.
 
 ```scala
+def disableDisplay(): List[String]
+```
+Disables the graphical FFplay display.
+
+```scala
 def setFullscreen(): List[String]
 ```
 Sets fullscreen mode.
@@ -47,3 +52,23 @@ FFscala stops media playback on any mouse press.
 def setExitOnKey(): List[String]
 ```
 FFscala stops media playback on any key press.
+
+```scala
+def setWindowTitle(title: String): List[String]
+```
+Sets the title of the window FFplay opens, in case it opens one.
+
+```scala
+def setShowMode(mode: String): List[String]
+```
+Sets what the FFplay graphical window displays.
+
+Supported modes:
+* video (default)
+* waves
+* rdft
+
+```scala
+def setSeekInterval(interval: Float): List[String]
+```
+Sets the seek interval for when you seek using the left and right arrow keys.

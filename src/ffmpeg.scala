@@ -37,12 +37,6 @@ def checkFFmpeg(path: String = "ffmpeg"): Boolean = {
 }
 
 def execute(input: String, args: List[String], output: String, quiet: Boolean = true, exec: String = "ffmpeg"): Int = {
-//   var i = args.length()-1
-//   var foundfmt = ""
-//   while args(i) != '.' && i > 0 do {
-//     foundfmt += args(i)
-//     i -= 1
-//   }
   val imageFormats = supportedExtensions("image")
   val audioFormats = supportedExtensions("audio")
   val isAlright =
@@ -56,8 +50,6 @@ def execute(input: String, args: List[String], output: String, quiet: Boolean = 
   if isAlright == false then
     -1
   else
-  //val fullArgs: List[String] = List("-i", input) ++ stringToList(args) :+ output
-  //val fullArgs: List[String] = List("-i", input) ++ args :+ output
     try
       if quiet == true then
         val cmd: List[String] = List(exec, "-y", "-loglevel", "quiet", "-i", input) ++ args :+ output
@@ -75,13 +67,6 @@ def setThreads(threads: Short): List[String] = {
   else
     List()
 }
-
-// def openFile(path: String): String = { //add support for multiple inputs and detection
-//   if File(path).exists() == false || File(path).isFile == false then
-//     ""
-//   else
-//     "-i " + path + " "
-// }
 
 def setVideoEncoder(encoder: String): List[String] = {
   val supportedFormats = List("copy", "x264", "x264rgb", "x265", "nvenc", "nvenc265",
@@ -200,6 +185,20 @@ def mapChannel(media: String, input: Byte, channel: Byte): List[String] = { //te
 //   else
 //     name + "." + format  + " "
 // }
+
+// def setStart(seconds: Float): List[String] = {
+//   if seconds < 0 then
+//     List()
+//   else
+//     List("-ss", seconds.toString)
+// }
+
+def setDuration(seconds: Float): List[String] = {
+  if seconds < 0 then
+    List()
+  else
+    List("-t", seconds.toString)
+}
 
 def getScreenshot(input: String, output: String, time: String, quiet: Boolean = true) = {
   val fullArgs: List[String] = List("-ss", time, "-i", input, "-frames:v", "1", output)

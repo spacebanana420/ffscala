@@ -138,6 +138,11 @@ Channel can be a value of -1 or higher. -1 means all channels of the input.
 Example: ```mapChannel("video", 0, 0)``` grabs the first video channel of the first file input. ```mapChannel("audio", 0, -1)``` grabs all audio channels of the first file input.
 
 ```scala
+def setDuration(seconds: Float): List[String]
+```
+Sets the duration of the media encode/playback. This is compatible with both FFmpeg and FFplay. The float value represents the point in time in seconds.
+
+```scala
 def getScreenshot(input: String, output: String, time: String)
 ```
 Captures a frame from a video or image sequence.
