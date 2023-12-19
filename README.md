@@ -8,7 +8,7 @@ FFscala works by using functions to transform your video encoding parameters int
 ```scala
 val encodeParams =
   setVideoEncoder("x264")
-  ++ setVideoBitrate("cbr", 4000)
+  ++ setVideoBitrate(4000)
   ++ scale(1920, 1080)
   ++ setPixFmt("yuv420p")
   ++ setAudioEncoder("opus")
@@ -71,6 +71,7 @@ The documentation is separated into multiple pages, each being respective to a c
 * [Filters](https://github.com/spacebanana420/ffscala/blob/main/docs/filters.md): Filter parameters
 * [FFprobe](https://github.com/spacebanana420/ffscala/blob/main/docs/ffprobe.md): Media parsing/probing functions
 * [FFplay](https://github.com/spacebanana420/ffscala/blob/main/docs/ffplay.md): Media playback with FFplay
+* [Capture](https://github.com/spacebanana420/ffscala/blob/main/docs/capture.md): Screen and audio capture and recording functionality
 * [Batch](https://github.com/spacebanana420/ffscala/blob/main/docs/batch.md): Batch processing and multiple file encoding functions
 
 #### [List of examples](https://github.com/spacebanana420/ffscala/blob/main/docs/examples.md)

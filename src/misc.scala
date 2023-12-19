@@ -1,45 +1,50 @@
 package misc
 
-def supportedExtensions(mode: String = "all"): List[String] = {
-  val imageFormats: List[String] = List("png", "apng", "avif", "jpeg", "jpg", "tiff", "tif", "bmp", "gif", "webp", "tga", "avif")
-  val audioFormats: List[String] = List("flac", "wav", "ogg", "opus", "m4a", "mp3", "aiff")
-  val videoFormats: List[String] = List("mp4", "mov", "m4v", "avi", "mkv", "webm")
+//These functions are used by ffscala
+
+def supportedExtensions(mode: String = ""): List[String] =
+  val imageFormats = List("png", "apng", "avif", "jpeg", "jpg", "tiff", "tif", "bmp", "gif", "webp", "tga", "avif")
+  val audioFormats = List("flac", "wav", "ogg", "opus", "m4a", "mp3", "aiff")
+  val videoFormats = List("mp4", "mov", "m4v", "avi", "mkv", "webm")
 
   mode match
     case "image" => imageFormats
     case "video" => videoFormats
     case "audio" => audioFormats
-    case "all" => imageFormats ++ videoFormats ++ audioFormats
     case _ => imageFormats ++ videoFormats ++ audioFormats
-}
+
+// def addIntArg(a: Int, s: String): List[String] = List(s, a.toString)
+//
+// def addFloatArg(a: Float, s: String): List[String] = List(s, a.toString)
+//
+// def appendIntArg(a: Int, l: List[String]): List[String] = l :+ a.toString
+//
+// def appendFloatArg(a: Float, l: List[String]): List[String] = l :+ a.toString
+
+def belongsToList(text: String, group: List[String], i: Int = 0): Boolean =
+  if i >= group.length then
+    false
+  else if group(i) == text then
+    true
+  else
+    belongsToList(text, group, i+1)
+
+def indexFromList(text: String, group: List[String], i: Int = 0): Int =
+  if i >= group.length then
+    -1
+  else if group(i) == text then
+    i
+  else
+    indexFromList(text, group, i+1)
 
 
-def belongsToList(text: String, group: List[String]): Boolean = {
-  var belongs = false
-  for i <- group do {
-    if text == i then
-      belongs = true
-  }
-  belongs
-}
-
-def indexFromList(text: String, group: List[String]): Int = {
-  var index = -1
-  for i <- 0 to group.length - 1 do {
-    if text == group(i) then
-      index = i
-  }
-  index
-}
-
-def containsList(text: String, group: List[String]): Boolean = {
-  var contains = false
-  for i <- group do {
-    if text.contains(i) then
-      contains = true
-  }
-  false
-}
+def containsList(text: String, group: List[String], i: Int = 0): Boolean =
+  if i >= group.length then
+    false
+  else if text.contains(group(i)) then
+    true
+  else
+    containsList(text, group, i+1)
 
 // def stringToList(text: String): List[String] = { //use recursion
 //   var stringArray: Array[String] = Array()
@@ -56,7 +61,7 @@ def containsList(text: String, group: List[String]): Boolean = {
 //   stringArray.toList
 // }
 
-def stringToList(str: String, arg: String = "", strlist: List[String] = List[String](), i: Int = 0): List[String] = {
+def stringToList(str: String, arg: String = "", strlist: List[String] = List[String](), i: Int = 0): List[String] =
   if i == str.length then
     if arg == "" then
       strlist
@@ -66,9 +71,8 @@ def stringToList(str: String, arg: String = "", strlist: List[String] = List[Str
     stringToList(str, "", strlist :+ arg, i + 1)
   else
     stringToList(str, arg + str(i), strlist, i + 1)
-}
 
-def removeExtension(path: String): String = {
+def removeExtension(path: String): String =
   var finalpath = ""
   var finalpath_fixed = ""
   var startcopying = false
@@ -86,9 +90,8 @@ def removeExtension(path: String): String = {
       finalpath_fixed += finalpath(i)
     }
     finalpath_fixed
-}
 
-def getExtension(path: String): String = {
+def getExtension(path: String): String =
   var finalpath = ""
   var finalpath_fixed = ""
   var startcopying = true
@@ -106,4 +109,3 @@ def getExtension(path: String): String = {
       finalpath_fixed += finalpath(i)
     }
     finalpath_fixed
-}

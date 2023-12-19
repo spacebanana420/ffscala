@@ -1,9 +1,11 @@
 import ffscala.*
+import ffscala.capture.*
 
 @main def main() = {
   //batch()
   //encodedir()
   testoptional()
+  testcapture()
 }
 
 // def batch() = {
@@ -51,7 +53,7 @@ def ohyeah() = {
   val doremy =
     setVideoEncoder("x265")
     ++ x264_setPreset("veryfast")
-    ++ setVideoBitrate("crf", 18)
+    ++ setCRF(18)
     ++ setAudioEncoder("opus")
     ++ setAudioBitrate(320)
     ++ scale(1280, 720)
@@ -65,10 +67,27 @@ def croptest() = {
   val doremy =
     setVideoEncoder("x264")
     ++ x264_setPreset("veryfast")
-    ++ setVideoBitrate("crf", 18)
+    ++ setCRF(18)
     ++ setAudioEncoder("opus")
     ++ setAudioBitrate(320)
     ++ cropToAspect(2, 1)
   println(doremy)
   execute("CHARGE.mov", doremy, "CHARGE.mp4", false)
 }
+
+
+def testcapture() =
+  val capture =
+    captureVideo("x11grab", "0.0", 30, false)
+    ++ captureAudio("pulse", "alsa_output.pci-0000_00_1f.3.analog-stereo.monitor")
+    ++ captureAudio("pulse", "alsa_input.pci-0000_00_1f.3.analog-stereo")
+    ++ addTracks(3)
+    ++ setDuration(20)
+
+  val args =
+    setVideoEncoder("x264")
+    ++ x264_setPreset("superfast")
+    ++ setCRF(9)
+    ++ setAudioEncoder("pcm24")
+  println(capture ++ args)
+  record("test.mov", ".", capture ++ args)

@@ -1,3 +1,5 @@
+These functions handle batch processing of multiple files.
+
 ```scala
 def batchExecute(paths: List[String], args: String, format: String, quiet: Boolean = true)
 ```

@@ -4,7 +4,7 @@ import java.io.File
 import scala.sys.process._
 //import misc.*
 
-//def is webfriendly
+//Functions for getting and parsing media file information
 
 def getVideoInfo(path: String): List[String] = {
   val cmd = List("ffprobe", "-loglevel", "0", "-show_streams", path)

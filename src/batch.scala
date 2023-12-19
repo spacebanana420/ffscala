@@ -3,6 +3,8 @@ package ffscala
 import java.io.File
 import misc.*
 
+//Functions for batch processing with FFmpeg
+
 def batchExecute(paths: List[String], args: List[String], format: String, quiet: Boolean = true) = {
   val supportedFormats = supportedExtensions()
   val isSupported = belongsToList(format, supportedFormats)

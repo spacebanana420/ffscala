@@ -4,6 +4,8 @@ import java.io.File
 import scala.sys.process.*
 import misc.*
 
+//FFplay functionality to play media
+
 def execplay(input: String, args: List[String], quiet: Boolean = true, exec: String = "ffplay"): Int = {
   if File(input).isFile == true then
 //     val fullArgs: List[String] = stringToList(args)
@@ -79,5 +81,5 @@ def setSeekInterval(interval: Float): List[String] = {
   if interval < 0 then
     List()
   else
-    List("-seek_interval", interval.toFloat)
+    List("-seek_interval", interval.toString)
 }

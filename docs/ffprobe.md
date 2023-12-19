@@ -1,3 +1,5 @@
+You can collect and parse information about media files with these functions.
+
 ```scala
 def getVideoInfo(path: String): List[String]
 ```

@@ -1,3 +1,5 @@
+These are the main functions of FFscala. This doc file contains the most commonly-used and important functions, as well as general functionality.
+
 ```scala
 def execute(input: String, args: String, output: String, quiet: Boolean = true, exec: String = "ffmpeg"): Int
 ```
@@ -37,20 +39,17 @@ Sets the video encoder
 * cfhd
 * vp9
 * av1
+* mjpeg
 
 ```scala
-def setVideoBitrate(method: String, bitrate: Int): List[String]
+def setVideoBitrate(bitrate: Int): List[String]
 ```
-Sets the video bitrate control method and value.
+Sets the video bitrate, measured in kilobits per second.
 
-For CBR, the bitrate is measured in kilobits
-
-For CRF, the "bitrate" value is just the CRF value.
-
-CQP is not implemented yet
-#### Supported methods:
-* cbr
-* crf
+```scala
+def setCRF(value: Byte): List[String]
+```
+Sets the value for control rate factor. Minimum value is 0 which represents lossless compression.
 
 ```scala
 def setPixFmt(newfmt: String): List[String]
@@ -114,6 +113,7 @@ Sets the audio's sample format
 def removeElement(element: String): List[String]
 ```
 Removes a whole type of element of the input media, such as the video channels, audio channels or subtitle channels.
+
 #### Values:
 * "video" - removes video
 * "audio" - removes audio

@@ -4,7 +4,7 @@ This page contains a few code examples for some use cases with FFscala.
 ```scala
 val encodeParams =
   setVideoEncoder("x264")
-  ++ setVideoBitrate("cbr", 4000)
+  ++ setVideoBitrate(4000)
   ++ scale(1920, 1080)
   ++ setPixFmt("yuv420p")
   ++ setAudioEncoder("opus")
@@ -68,7 +68,7 @@ Here. the time argument will tell FFmpeg to get the frame at 320.5 seconds
 ```scala
 val transcodeVideo =
     setVideoEncoder("x264")
-    ++ setVideoBitrate("crf", 12)
+    ++ setCRF(12)
     ++ x264_setPreset("veryfast")
     ++ setAudioEncoder("copy")
 
@@ -80,7 +80,7 @@ This will transcode the input video into a video encoded in x264 with the preset
 ### Example 6 - Unusual function order
 ```scala
 val transcodeVideo =
-    setVideoBitrate("crf", 12)
+    setCRF(12)
     ++ setAudioEncoder("copy")
     ++ setVideoEncoder("x264")
     ++ x264_setPreset("veryfast")
@@ -100,7 +100,7 @@ import ffscala.*
     val encodeVideo =
         setVideoEncoder("x265")
         ++ x264_setPreset("veryfast")
-        ++ setVideoBitrate("crf", 18)
+        ++ setCRF(18)
         ++ setAudioEncoder("opus")
         ++ setAudioBitrate(320)
         ++ scale(1280, 720)
@@ -124,7 +124,7 @@ This code is functional and would compile if /path/to/video.mov was the path to 
 val transcodeVideo =
     setVideoEncoder("x264")
     ++ x264_setPreset("veryfast")
-    ++ setVideoBitrate("crf", 15)
+    ++ setCRF(15)
     ++ setAudioEncoder("copy")
     ++ cropToAspect(16, 10)
 
@@ -138,7 +138,7 @@ val filesToEncode: List[String] = List("/path/to/video1" , "/path/to/video2", "/
 val encodeSettings =
     setVideoEncoder("x264")
     ++ x264_setPreset("veryfast")
-    ++ setVideoBitrate("crf", 15)
+    ++ setCRF(15)
     ++ setAudioEncoder("copy")
     ++ cropToAspect(16, 10)
 
@@ -153,7 +153,7 @@ val filesToEncode: List[String] = List("/path/to/video1" , "/path/to/video2", "/
 val encodeSettings =
     setVideoEncoder("x264")
     ++ x264_setPreset("veryfast")
-    ++ setVideoBitrate("crf", 15)
+    ++ setCRF(15)
     ++ setAudioEncoder("copy")
     ++ cropToAspect(16, 10)
 

@@ -1,3 +1,5 @@
+This file contains the documentation for the functions related to filtering and processing media. You can use these alongside other encoding parameter arguments whenever encoding media.
+
 ```scala
 def scale(width: Int, height: Int): List[String]
 ```
