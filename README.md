@@ -4,6 +4,8 @@ FFscala is a simple wrapper library for the FFmpeg command line, written in Scal
 
 FFscala works by using functions to transform your video encoding parameters into string lists composed of FFmpeg arguments. The command execution is independent of shell and OS, which makes it more portable.
 
+FFscala is still in an early phase and so a new version update might bring big changes to the design and structure of the library.
+
 ### Example 1 - Video transcoding
 ```scala
 val encodeParams =
@@ -55,14 +57,14 @@ Choose the version of your choice (although the latest is recommended) and downl
 
 You can download the archive on the releases page, if you just want the library files, or you can download the whole project from the repository.
 
-Add all code in ```src``` into your project and import ```ffscala```. For screen and audio capture support, you need to import ```ffscala.capture```
+Add all code in ```src``` into your project and import ```ffscala```. For screen and audio capture support, you need to import ```ffscala.capture```.
 
 (See [example 7](docs/examples.md))
 
 
 # Documentation
 
-Most functions return an empty list or int of value -1 when there is an error in the arguments you passed to them and there is no default choice or error handling in that function.
+Most functions return an empty list or int of value "-1" when there is an error in the arguments you passed to them and there is no default choice or error handling in that function.
 
 The documentation is separated into multiple pages, each being respective to a component of the library.
 

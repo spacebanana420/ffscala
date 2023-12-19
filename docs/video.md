@@ -212,9 +212,7 @@ Values between 0 and 100 are accepted
 ```scala
 def webp_setPreset(preset: String): List[String]
 ```
-Sets the x264/x265 encoding preset.
-
-Veryfast and superfast are recommended for most use cases
+Sets the webp encoding preset.
 
 #### Supported presets:
 * none
