@@ -16,7 +16,7 @@ def record(name: String, dir: String, args: List[String], quiet: Boolean = false
       if quiet == true then
         List(exec, "-y", "-loglevel", "quiet") ++ args :+ arg_dir
       else
-        List(exec, "-y") ++ args :+ arg_dir
+        List(exec, "-y", "-loglevel", "8") ++ args :+ arg_dir
     cmd.!
   catch
     case e: Exception => -1

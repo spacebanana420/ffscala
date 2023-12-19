@@ -2,7 +2,7 @@
 
 FFscala is a simple wrapper library for the FFmpeg command line, written in Scala 3.
 
-FFscala works by using functions to transform your video encoding parameters into string lists composed of FFmpeg arguments. Before executing the command, the arguments list is combined additional arguments. The command execution is independent of shell and OS, which makes it more portable.
+FFscala works by using functions to transform your video encoding parameters into string lists composed of FFmpeg arguments. The command execution is independent of shell and OS, which makes it more portable.
 
 ### Example 1 - Video transcoding
 ```scala
@@ -39,7 +39,7 @@ Your path names can have spaces between them, as the command execution is shell-
 # Requirements
 
 * [FFmpeg](https://ffmpeg.org/)
-* [Scala 3](la-lang.org/)
+* [Scala 3](scala-lang.org/)
 
 FFmpeg tested with version 6, but you won't have problems using other versions.
 
