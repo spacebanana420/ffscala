@@ -1,5 +1,7 @@
 These functions handle encoder-specific settings and parameters.
 
+---
+
 ```scala
 def x264_setPreset(preset: String): List[String]
 ```

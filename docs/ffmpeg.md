@@ -1,5 +1,7 @@
 These are the main functions of FFscala. This doc file contains the most commonly-used and important functions, as well as general functionality.
 
+---
+
 ```scala
 def execute(input: String, args: String, output: String, quiet: Boolean = true, exec: String = "ffmpeg"): Int
 ```

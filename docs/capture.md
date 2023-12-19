@@ -1,5 +1,7 @@
 These functions handle screen and audio capture. Currently only Linux is supported and tested, with x11grab for screen capture and pulse/alsa for audio capture.
 
+---
+
 ```scala
 def record(name: String, dir: String, args: List[String], quiet: Boolean = true, exec: String = "ffmpeg"): Int
 ```

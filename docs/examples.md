@@ -1,5 +1,7 @@
 This page contains a few code examples for some use cases with FFscala.
 
+---
+
 ### Example 1 - Video transcoding
 ```scala
 val encodeParams =

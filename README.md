@@ -39,11 +39,11 @@ Your path names can have spaces between them, as the command execution is shell-
 # Requirements
 
 * [FFmpeg](https://ffmpeg.org/)
-* Scala 3
+* [Scala 3](la-lang.org/)
 
 FFmpeg tested with version 6, but you won't have problems using other versions.
 
-By default, you need FFmpeg to be in your PATH, but ```execute``` and similar functions let you optionally specify the path to the executable or the program name if you prefer that way.
+By default, you need FFmpeg to be in your PATH, but ```execute``` and similar functions let you optionally specify the path to the executable or the program name if you prefer that way. Any function that has the optional argument ```exec``` lets you set a custom executable path or name.
 
 (See [example 11](https://github.com/spacebanana420/ffscala/blob/main/docs/examples.md))
 
@@ -53,9 +53,9 @@ You can find releases of FFscala [here](https://github.com/spacebanana420/ffscal
 
 Choose the version of your choice (although the latest is recommended) and download the source code from that release.
 
-You can download the included archive if you just want the library files, or you can download the whole project.
+You can download the archive on the releases page, if you just want the library files, or you can download the whole project from the repository.
 
-Add the library code into your project and import ```ffscala```
+Add all code in ```src``` into your project and import ```ffscala```. For screen and audio capture support, you need to import ```ffscala.capture```
 
 (See [example 7](https://github.com/spacebanana420/ffscala/blob/main/docs/examples.md))
 
@@ -66,12 +66,19 @@ Most functions return an empty list or int of value -1 when there is an error in
 
 The documentation is separated into multiple pages, each being respective to a component of the library.
 
-* [FFmpeg](https://github.com/spacebanana420/ffscala/blob/main/docs/ffmpeg.md): Main library functionality
-* [Video](https://github.com/spacebanana420/ffscala/blob/main/docs/video.md): Encoder-specific parameters
-* [Filters](https://github.com/spacebanana420/ffscala/blob/main/docs/filters.md): Filter parameters
-* [FFprobe](https://github.com/spacebanana420/ffscala/blob/main/docs/ffprobe.md): Media parsing/probing functions
-* [FFplay](https://github.com/spacebanana420/ffscala/blob/main/docs/ffplay.md): Media playback with FFplay
-* [Capture](https://github.com/spacebanana420/ffscala/blob/main/docs/capture.md): Screen and audio capture and recording functionality
-* [Batch](https://github.com/spacebanana420/ffscala/blob/main/docs/batch.md): Batch processing and multiple file encoding functions
+* [FFmpeg](https://github.com/spacebanana420/ffscala/blob/main/docs/ffmpeg.md)
+  * Main library functionality
+* [Video](https://github.com/spacebanana420/ffscala/blob/main/docs/video.md)
+  * Encoder-specific parameters
+* [Filters](https://github.com/spacebanana420/ffscala/blob/main/docs/filters.md)
+  * Filter parameters
+* [FFprobe](https://github.com/spacebanana420/ffscala/blob/main/docs/ffprobe.md)
+  * Media parsing/probing functions
+* [FFplay](https://github.com/spacebanana420/ffscala/blob/main/docs/ffplay.md)
+  * Media playback with FFplay
+* [Capture](https://github.com/spacebanana420/ffscala/blob/main/docs/capture.md)
+  * Screen and audio capture and recording functionality
+* [Batch](https://github.com/spacebanana420/ffscala/blob/main/docs/batch.md)
+  * Batch processing and multiple file encoding functions
 
 #### [List of examples](https://github.com/spacebanana420/ffscala/blob/main/docs/examples.md)

@@ -1,3 +1,7 @@
+You can play any supported media with FFplay. These functions allow you to open and playback videos, images and audio and customize how it works.
+
+---
+
 ```scala
 def execplay(input: String, args: List[String], quiet: Boolean = true, exec: String = "ffplay"): Int
 ```
