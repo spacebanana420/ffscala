@@ -35,6 +35,7 @@ def checkFFmpeg(path: String = "ffmpeg"): Boolean =
   catch
     case e: Exception => false
 
+//maybe the input should be a processed list with path, start time, output, etc
 def execute(input: String, args: List[String], output: String, quiet: Boolean = true, exec: String = "ffmpeg"): Int = {
   val imageFormats = supportedExtensions("image")
   val audioFormats = supportedExtensions("audio")

@@ -57,7 +57,12 @@ Choose the version of your choice (although the latest is recommended) and downl
 
 You can download the archive on the releases page, if you just want the library files, or you can download the whole project from the repository.
 
-Add all code in ```src``` into your project and import ```ffscala```. For screen and audio capture support, you need to import ```ffscala.capture```.
+Add all code in ```src``` into your project and import ```ffscala```. For screen and audio capture support, you need to import ```ffscala.capture```:
+
+```scala
+  import ffscala.* //Most functionality
+  import ffscala.capture.* //Screen and audio capture functionality
+```
 
 (See [example 7](docs/examples.md))
 

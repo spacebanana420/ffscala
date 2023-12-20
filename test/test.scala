@@ -6,6 +6,7 @@ import ffscala.capture.*
   //encodedir()
   testoptional()
   testcapture()
+  getres()
 }
 
 // def batch() = {
@@ -91,3 +92,8 @@ def testcapture() =
     ++ setAudioEncoder("pcm24")
   println(capture ++ args)
   record("test.mov", capture ++ args)
+
+
+def getres() =
+  val res = getResolution("Awesome Wooper.png")
+  println(res)
