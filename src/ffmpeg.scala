@@ -54,7 +54,7 @@ def execute(input: String, args: List[String], output: String, quiet: Boolean = 
         if quiet == true then
           List(exec, "-y", "-loglevel", "quiet", "-i", input) ++ args :+ output
         else
-          List(exec, "-y", "-i", input) ++ args :+ output
+          List(exec, "-y", "-hide_banner", "-i", input) ++ args :+ output
       cmd.!
     catch
       case e: Exception => -1

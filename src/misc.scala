@@ -13,6 +13,12 @@ def supportedExtensions(mode: String = ""): List[String] =
     case "audio" => audioFormats
     case _ => imageFormats ++ videoFormats ++ audioFormats
 
+//unused for now
+def getBaseArgs(exec: String, quiet: Boolean): List[String] =
+  if quiet == true then
+    List(exec, "-y", "-loglevel", "quiet")
+  else
+    List(exec, "-y", "-hide_banner")
 // def addIntArg(a: Int, s: String): List[String] = List(s, a.toString)
 //
 // def addFloatArg(a: Float, s: String): List[String] = List(s, a.toString)

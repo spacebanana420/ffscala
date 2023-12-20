@@ -7,20 +7,22 @@ Remember to import ```ffscala.capture``` to use these functions.
 ```scala
 def record(outputs: String, args: List[String], quiet: Boolean = true, exec: String = "ffmpeg"): Int
 ```
-This executes FFmpeg and begins the desktop recording. "output" is for the output file's path.
+This executes FFmpeg and begins the desktop recording. ```output``` is for the output file's path.
 
-Args can be a mix of the argument functions seen here and encoder/filter argument functions.
+```args``` can be a mix of the argument functions seen here and encoder/filter argument functions.
+
+To stop the recording, press ctrl + C. You can alternatively add a recording duration with ```setDuration()``` ([See FFmpeg doc](docs/ffmpeg.md)).
 
 ```scala
 def captureVideo(mode: String, i: String, fps: Int, showmouse: Boolean = true, x: Int = 0, y: Int = 0): List[String]
 ```
 Returns the configuration to capture your screen.
-"fps" sets the frame rate for the video capture
+```fps``` sets the frame rate for the video capture
 
-"showmouse" tells to either include the mouse in the screen capture or not
+```showmouse``` tells to either include the mouse in the screen capture or not
 Mode is the screen capture method. Right now only x11 is supported.
 
-The "i" is input screen. This varies between capture modes.
+The ```i``` is input screen. This varies between capture modes.
 
 You can specify a positive offset for the screen's position with x and y
 
@@ -34,10 +36,10 @@ Returns the configuration to capture audio.
 
 Mode is the screen capture method. Right now only alsa or pulse are supported.
 
-The "input" is input audio device. This varies between capture modes.
+The ```input``` is input audio device. This varies between capture modes.
 
-"ch" is the channel count. By default, the capture is set to stereo with 2 channels, you can change this if you want.
-"rate" Is the audio sample rate, defaults to 48000.
+```ch``` is the channel count. By default, the capture is set to stereo with 2 channels, you can change this if you want.
+```rate``` is the audio sample rate, defaults to 48000.
 
 Supported:
 * alsa
@@ -53,6 +55,6 @@ Let's imagine you want to record your desktop screen, your desktop audio and you
 ```scala
 def listAudioSources(mode: String, full: Boolean = false, exec: String = "ffmpeg"): List[String]
 ```
-This function calls FFmpeg to retrieve the currently available audio sources from the "mode" audio server.
+This function calls FFmpeg to retrieve the currently available audio sources from the ```mode``` audio server.
 
-"full" is set to false by default, which means the retrieved audio source strings are the source IDs that can be used directly on ```captureAudio```. If it's set to true, the full name of the source is displayed.
+```full``` is set to false by default, which means the retrieved audio source strings are the source IDs that can be used directly on ```captureAudio```. If it's set to true, the full name of the source is displayed.
