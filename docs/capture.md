@@ -11,7 +11,7 @@ This executes FFmpeg and begins the desktop recording. ```output``` is for the o
 
 ```args``` can be a mix of the argument functions seen here and encoder/filter argument functions.
 
-To stop the recording, press ctrl + C. You can alternatively add a recording duration with ```setDuration()``` ([See FFmpeg doc](docs/ffmpeg.md)).
+To stop the recording, press ctrl + C. You can alternatively add a recording duration with ```setDuration()``` (see [FFmpeg doc](../docs/ffmpeg.md)).
 
 ```scala
 def captureVideo(mode: String, i: String, fps: Int, showmouse: Boolean = true, x: Int = 0, y: Int = 0): List[String]
