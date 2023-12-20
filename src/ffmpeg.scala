@@ -2,7 +2,7 @@ package ffscala
 
 import scala.sys.process._
 import java.io.File
-import misc.*
+import ffscala.misc.*
 
 //This is the main file of ffscala, containing the base and most common FFmpeg functionality
 

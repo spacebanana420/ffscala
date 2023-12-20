@@ -1,11 +1,13 @@
 These functions handle screen and audio capture. Currently only Linux is supported and tested, with x11grab for screen capture and pulse/alsa for audio capture.
 
+Remember to import ```ffscala.capture``` to use these functions.
+
 ---
 
 ```scala
-def record(name: String, dir: String, args: List[String], quiet: Boolean = true, exec: String = "ffmpeg"): Int
+def record(outputs: String, args: List[String], quiet: Boolean = true, exec: String = "ffmpeg"): Int
 ```
-This executes FFmpeg and begins the desktop recording. The name is for the output file, dir is for where to save the file.
+This executes FFmpeg and begins the desktop recording. "output" is for the output file's path.
 
 Args can be a mix of the argument functions seen here and encoder/filter argument functions.
 

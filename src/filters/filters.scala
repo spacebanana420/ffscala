@@ -1,6 +1,6 @@
 package ffscala
 
-import misc.*
+import ffscala.misc.*
 
 //Image and audio processing and manipulation filters
 

@@ -1,6 +1,6 @@
 package ffscala
 
-import misc.*
+import ffscala.misc.*
 
 //Encoder-specific parameters and configuration
 

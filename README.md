@@ -71,7 +71,9 @@ The documentation is separated into multiple pages, each being respective to a c
 * [FFmpeg](docs/ffmpeg.md)
   * Main library functionality
 * [Video](docs/video.md)
-  * Encoder-specific parameters
+  * Encoder-specific parameters for video and image.
+* [Audio](docs/audio.md)
+  * Encoder-specific parameters for audio.
 * [Filters](docs/filters.md)
   * Filter parameters
 * [FFprobe](docs/ffprobe.md)

@@ -90,4 +90,4 @@ def testcapture() =
     ++ setCRF(9)
     ++ setAudioEncoder("pcm24")
   println(capture ++ args)
-  record("test.mov", ".", capture ++ args)
+  record("test.mov", capture ++ args)

@@ -1,4 +1,4 @@
-package misc
+package ffscala.misc
 
 //These functions are used by ffscala
 

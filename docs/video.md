@@ -1,4 +1,4 @@
-These functions handle encoder-specific settings and parameters.
+These functions handle encoder-specific settings and parameters for video and image encoders.
 
 ---
 

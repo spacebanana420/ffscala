@@ -2,7 +2,7 @@ package ffscala
 
 import java.io.File
 import scala.sys.process.*
-import misc.*
+import ffscala.misc.*
 
 //FFplay functionality to play media
 

@@ -1,7 +1,7 @@
 package ffscala
 
 import java.io.File
-import misc.*
+import ffscala.misc.*
 
 //Functions for batch processing with FFmpeg
 
