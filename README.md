@@ -61,6 +61,7 @@ Add all code in ```src``` into your project and import ```ffscala```. For screen
 
 ```scala
   import ffscala.* //Most functionality
+
   import ffscala.capture.* //Screen and audio capture functionality
 ```
 

@@ -2,23 +2,13 @@ package ffscala.misc
 
 //These functions are used by ffscala
 
-def supportedExtensions(mode: String = ""): List[String] =
-  val imageFormats = List("png", "apng", "avif", "jpeg", "jpg", "tiff", "tif", "bmp", "gif", "webp", "tga", "avif")
-  val audioFormats = List("flac", "wav", "ogg", "opus", "m4a", "mp3", "aiff")
-  val videoFormats = List("mp4", "mov", "m4v", "avi", "mkv", "webm")
-
-  mode match
-    case "image" => imageFormats
-    case "video" => videoFormats
-    case "audio" => audioFormats
-    case _ => imageFormats ++ videoFormats ++ audioFormats
-
-//unused for now
+//barely for now
 def getBaseArgs(exec: String, quiet: Boolean): List[String] =
   if quiet == true then
     List(exec, "-y", "-loglevel", "quiet")
   else
     List(exec, "-y", "-hide_banner")
+
 // def addIntArg(a: Int, s: String): List[String] = List(s, a.toString)
 //
 // def addFloatArg(a: Float, s: String): List[String] = List(s, a.toString)

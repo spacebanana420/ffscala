@@ -117,19 +117,14 @@ Sets the cpu-used value for VP9, which will fine-tune the compression efficiency
 Values between -8 and 8 are accepted.
 
 ```scala
-def vp9_setRowMT(): List[String]
-```
-Enables row-based multi-threading for VP9.
-
-```scala
 def vp9_setLossless(): List[String]
 ```
 Sets lossless encoding for VP9.
 
 ```scala
-def av1_setRowMT(): List[String]
+def setRowMT(): List[String]
 ```
-Enables row-based multi-threading for AV1.
+Enables row-based multi-threading for encoders that support it, such as the encoders for VP9 and AV1.
 
 ```scala
 def av1_stillPicture(): List[String]

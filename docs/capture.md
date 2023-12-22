@@ -58,3 +58,24 @@ def listAudioSources(mode: String, full: Boolean = false, exec: String = "ffmpeg
 This function calls FFmpeg to retrieve the currently available audio sources from the ```mode``` audio server.
 
 ```full``` is set to false by default, which means the retrieved audio source strings are the source IDs that can be used directly on ```captureAudio```. If it's set to true, the full name of the source is displayed.
+
+```scala
+def takeScreenshot(mode: String, i: String, output: String, showmouse: Boolean = false, args: List[String] = List(), x: Int = 0, y: Int = 0, quiet: Boolean = true, exec: String = "ffmpeg"): Int
+```
+Takes a screenshot of your screen and saves it as a png file. ```output``` is the path to the screenshot, it can just be the file name if you want to save the image in the current directory.
+
+The image file format is assumed by the extension. If an unsupported or unknown extension is used, FFscala will default to PNG.
+
+```showmouse``` tells to either include the mouse in the screen capture or not
+Mode is the screen capture method.
+
+All the encoding parameter arguments can be added through ```args```. This is very useful for most image formats that are not PNG and require some manual encoding configuration to suit well your necessities.
+
+Right now only x11 is supported.
+
+The ```i``` is input screen. This varies between capture modes.
+
+You can specify a positive offset for the screen's position with x and y
+
+Currently, there is only 1 supported backend mode:
+* x11grab

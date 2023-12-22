@@ -7,11 +7,6 @@ import ffscala.misc.*
 
 def record(output: String, args: List[String], quiet: Boolean = false, exec: String = "ffmpeg"): Int =
   try
-//     val arg_dir =
-//       if dir != "" && dir != "." && dir != "./" && File(dir).isDirectory() then
-//         s"$dir/$name"
-//       else
-//         name
     val cmd: List[String] =
       if quiet == true then
         List(exec, "-y", "-loglevel", "quiet") ++ args :+ output
@@ -72,3 +67,33 @@ def addTracks(amt: Int): List[String] =
       recurse(i+1, s :+ "-map" :+ i.toString)
 
   recurse()
+
+def takeScreenshot(mode: String, i: String, output: String, showmouse: Boolean = false, args: List[String] = List(), x: Int = 0, y: Int = 0, quiet: Boolean = true, exec: String = "ffmpeg"): Int =
+  val path =
+    if isFormatSupported(output, "image") then
+      output
+    else
+      s"${removeExtension(output)}.png"
+  val supported = List("x11grab") //x11 only for now
+  val arg_mode =
+    if belongsToList(mode, supported) then
+      List("-f", mode)
+    else
+      List("-f","x11grab")
+  //List("-framerate", "0.1")
+  val arg_mouse =
+    if showmouse then
+      List("-draw_mouse", "1")
+    else
+      List("-draw_mouse", "0")
+  val input = List("-i", s":$i+$x,$y")
+  val arg_base = getBaseArgs(exec, quiet)
+  val cmd: List[String] =
+    if args != List() then
+      arg_base ++ arg_mode ++ arg_mouse ++ input ++ List("-frames:v", "1", path)
+    else
+      arg_base ++ arg_mode ++ arg_mouse ++ input ++ List("-frames:v", "1") ++ args :+ path
+  try
+    cmd.!
+  catch
+    case e: Exception => -1

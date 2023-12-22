@@ -4,9 +4,10 @@ import ffscala.capture.*
 @main def main() = {
   //batch()
   //encodedir()
-  testoptional()
-  testcapture()
+  //testoptional()
+  //testcapture()
   getres()
+  testscreenshot()
 }
 
 // def batch() = {
@@ -97,3 +98,6 @@ def testcapture() =
 def getres() =
   val res = getResolution("Awesome Wooper.png")
   println(res)
+
+def testscreenshot() =
+  takeScreenshot("x11grab", "0.0", "screenshot.png", quiet=false)

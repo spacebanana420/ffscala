@@ -42,6 +42,7 @@ Sets the video encoder
 * vp9
 * av1
 * mjpeg
+* targa
 
 ```scala
 def setVideoBitrate(bitrate: Int): List[String]

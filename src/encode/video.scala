@@ -70,11 +70,9 @@ def vp9_setcpu_used(value: Byte): List[String] =
   else
     List()
 
-def vp9_setRowMT(): List[String] = List("-row-mt", "true")
-
 def vp9_setLossless(): List[String] = List("-lossless")
 
-def av1_setRowMT(): List[String] = List("-row-mt", "true")
+def setRowMT(): List[String] = List("-row-mt", "true")
 
 def av1_stillPicture(): List[String] = List("-still-picture", "true")
 
@@ -118,7 +116,6 @@ def tiff_setCompression(compression: String): List[String] =
     List()
 
 def webp_setLossless(): List[String] = List("-lossless", "1")
-
 
 def webp_setQuality(value: Byte): List[String] =
   if value < 0 || value > 100 then
