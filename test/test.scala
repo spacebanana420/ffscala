@@ -5,7 +5,7 @@ import ffscala.capture.*
   //batch()
   //encodedir()
   //testoptional()
-  //testcapture()
+  testcapture()
   getres()
   testscreenshot()
 }
@@ -80,7 +80,7 @@ def croptest() = {
 
 def testcapture() =
   val capture =
-    captureVideo("x11grab", "0.0", 30, false)
+    captureVideo("x11grab", "0.0", 30)
     ++ captureAudio("pulse", "alsa_output.pci-0000_00_1f.3.analog-stereo.monitor")
     ++ captureAudio("pulse", "alsa_input.pci-0000_00_1f.3.analog-stereo")
     ++ addTracks(3)
@@ -94,6 +94,19 @@ def testcapture() =
   println(capture ++ args)
   record("test.mov", capture ++ args)
 
+//this function is unfinished
+def capturewindows() =
+  val capture =
+    captureVideo("dshow", "0.0", 30) //change inputs
+    ++ captureAudio("dshow", "alsa_output.pci-0000_00_1f.3.analog-stereo.monitor")
+    ++ setDuration(20)
+
+  val args =
+    setVideoEncoder("mjpeg")
+    ++ setQuality(10)
+    ++ setAudioEncoder("pcm24")
+  println(capture ++ args)
+  record("test.mov", capture ++ args)
 
 def getres() =
   val res = getResolution("Awesome Wooper.png")

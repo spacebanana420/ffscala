@@ -30,16 +30,30 @@ private def filterSources(s: List[String], f: List[String] = List(), i: Int = 0)
   else
     filterSources(s, f :+ filter(s(i)), i+1)
 
-def listAudioSources(mode: String, full: Boolean = false, exec: String = "ffmpeg"): List[String] =
-  val supported = List("alsa", "pulse")
-  if belongsToList(mode, supported) then
-    val sources = parse(List(exec, "-loglevel", "8", "-sources", mode).!!)
-    if full == false then
+def listSources(mode: String, full: Boolean = false, exec: String = "ffmpeg"): List[String] =
+  val supported = supportedCaptureModes("audio")
+
+  if mode == "all" then
+    val cmd = List(exec, "-loglevel", "quiet", "-sources")
+    parse(cmd.!!)
+  else if belongsToList(mode, supported) then
+    val cmd = List(exec, "-loglevel", "quiet") ++ getSourcesArgs(mode)
+    val sources = parse(cmd.!!)
+    if full == false || (mode == "dshow" || mode == "avfoundation") then
       sources
     else
       filterSources(sources)
   else
     List()
+
+private def getSourcesArgs(mode: String): List[String] =
+  mode match
+    case "dshow" =>
+      List("-list_devices", "true", "-f", "dshow", "-i", "dummy")
+    case "avfoundation" =>
+      List("-f", "avfoundation", "-list_devices", "true", "-i", "\"\"")
+    case _ =>
+      List("-sources", mode)
 
 // def listDirectSources(exec: String = "ffmpeg"): List[String] =
 //   List(exec, "-list_devices", "true", "-f", "dshow", "-i", "dummy").!!

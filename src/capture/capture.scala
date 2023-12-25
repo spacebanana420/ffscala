@@ -16,8 +16,8 @@ def record(output: String, args: List[String], quiet: Boolean = false, exec: Str
   catch
     case e: Exception => -1
 
-def captureVideo(mode: String, i: String, fps: Int, showmouse: Boolean = true, x: Int = 0, y: Int = 0): List[String] =
-  val supported = List("x11grab") //x11 only for now
+def captureVideo(mode: String, i: String, fps: Int): List[String] =
+  val supported = supportedCaptureModes("video")
 
   val arg_mode =
     if belongsToList(mode, supported) then
@@ -29,23 +29,23 @@ def captureVideo(mode: String, i: String, fps: Int, showmouse: Boolean = true, x
       List("-framerate", "30")
     else
       List("-framerate", fps.toString)
-  val arg_mouse =
-    if showmouse == true then
-      List("-draw_mouse", "1")
-    else
-      List("-draw_mouse", "0")
+//implement later
+//   val arg_mouse =
+//     if showmouse == true then
+//       List("-draw_mouse", "1")
+//     else
+//       List("-draw_mouse", "0")
 
-  val input = List("-i", s":$i+$x,$y")
-  List("-f", arg_mode) ++ arg_fps ++ arg_mouse ++ input
+  List("-f", arg_mode) ++ arg_fps ++ processDesktopInput(i, mode)
 
 def captureAudio(mode: String, input: String, ch: Byte = 2, rate: Int = 48000): List[String] =
-  val supported = List("alsa", "pulse")
+  val supported = supportedCaptureModes("audio")
 
   val arg_ch =
     if ch <= 0 then
-      List("-ac", "2")
+      processAudioChannels(2, mode)
     else
-      List("-ac", ch.toString)
+      processAudioChannels(ch, mode)
   val arg_rate =
     if rate > 0 then
       List("-sample_rate", rate.toString)
@@ -57,7 +57,7 @@ def captureAudio(mode: String, input: String, ch: Byte = 2, rate: Int = 48000): 
     else
       "pulse"
 
-  List("-f", arg_mode) ++ arg_ch ++ arg_rate ++ List("-i", input)
+  List("-f", arg_mode) ++ arg_ch ++ arg_rate ++ processAudioInput(input, mode)
 
 def addTracks(amt: Int): List[String] =
   def recurse(i: Int = 0, s: List[String] = List()): List[String] =
@@ -68,31 +68,30 @@ def addTracks(amt: Int): List[String] =
 
   recurse()
 
-def takeScreenshot(mode: String, i: String, output: String, showmouse: Boolean = false, args: List[String] = List(), x: Int = 0, y: Int = 0, quiet: Boolean = true, exec: String = "ffmpeg"): Int =
+def takeScreenshot(mode: String, i: String, output: String, showmouse: Boolean = false, args: List[String] = List(), quiet: Boolean = true, exec: String = "ffmpeg"): Int =
   val path =
     if isFormatSupported(output, "image") then
       output
     else
       s"${removeExtension(output)}.png"
-  val supported = List("x11grab") //x11 only for now
+  val supported = supportedCaptureModes("video")
   val arg_mode =
     if belongsToList(mode, supported) then
       List("-f", mode)
     else
       List("-f","x11grab")
-  //List("-framerate", "0.1")
   val arg_mouse =
     if showmouse then
       List("-draw_mouse", "1")
     else
       List("-draw_mouse", "0")
-  val input = List("-i", s":$i+$x,$y")
+
   val arg_base = getBaseArgs(exec, quiet)
   val cmd: List[String] =
     if args != List() then
-      arg_base ++ arg_mode ++ arg_mouse ++ input ++ List("-frames:v", "1", path)
+      arg_base ++ arg_mode ++ arg_mouse ++ processDesktopInput(i, mode) ++ List("-frames:v", "1", path)
     else
-      arg_base ++ arg_mode ++ arg_mouse ++ input ++ List("-frames:v", "1") ++ args :+ path
+      arg_base ++ arg_mode ++ arg_mouse ++ processDesktopInput(i, mode) ++ List("-frames:v", "1") ++ args :+ path
   try
     cmd.!
   catch
