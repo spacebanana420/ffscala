@@ -41,6 +41,7 @@ def checkFFmpeg(path: String = "ffmpeg"): Boolean =
     case e: Exception => false
 
 //maybe the input should be a processed list with path, start time, output, etc
+//make variant for muxing, demuxing, etc
 def execute(input: String, args: List[String], output: String, quiet: Boolean = true, exec: String = "ffmpeg"): Int = {
   val imageFormats = supportedExtensions("image")
   val audioFormats = supportedExtensions("audio")
@@ -159,7 +160,7 @@ def removeElement(element: String): List[String] =
       List("-sn")
     case _ =>
       List()
-
+//this doesnt work for combining multiple sources
 def mapChannel(media: String, input: Byte, channel: Byte): List[String] = //test maybe
   if input < 0 || channel < -1 || (media != "video" && media != "audio" && media != "subtitle") then
     List()

@@ -15,7 +15,7 @@ def scaleFactor(width: Float, height: Float): List[String] =
         List()
     else
         List("-filter:v", s"scale=iw*$width:ih*$height")
-
+//combine this with scale and scale factor instead
 def setScaleFilter(filter: String): List[String] =
     val supportedFilters = List("bicubic", "bilinear", "neighbor", "lanczos")
     val foundFilter = belongsToList(filter, supportedFilters)

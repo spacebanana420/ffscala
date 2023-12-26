@@ -1,5 +1,7 @@
 # Getting started
 
+**This documentation file is unfinished, it's slowly being built.**
+
 FFscala is a wrapper library for the FFmpeg command line. Most functions return command line arguments for FFmpeg, and by composing them you can make use of FFmpeg in your software. Some functionality requires more function composition than others.
 
 Some functions execute FFmpeg for specific functionality, like ```execute()``` for encoding media files, or ```record()``` for capturing your desktop or audio devices.
@@ -61,4 +63,37 @@ execute("video.mov", args, "newvideo.mov")
 
 Now we are passing FFmpeg arguments so we can set the encoders we want, video properties and encoding parameters. In this case, the input video will be transcoded into an H.264 video with x264. x264 has encoding presets, and so ```veryfast``` was chosen here. For the bitrate target, CRF with a value of 12 was used. The audio is untouched, using the ```copy``` encoder, which will pass the audio data to the new video file without changing it.
 
-**This documentation file is unfinished so I didn't make a link to it yet.**
+Here's another example for encoding:
+
+```scala
+val args =
+  setVideoEncoder("webp")
+  ++ webp_setLossless()
+  ++ webp_setQuality(100)
+  ++ scaleFactor(2, 2)
+  ++ setScaleFilter("bilinear")
+execute("image.png", args, "image.webp")
+```
+With these arguments, FFmpeg will convert "image.png" into a lossless webp with high compression efficiency with double the resolution, upscaled with the bilinear filter.
+
+
+# Media probing
+
+FFmpeg has probing capabilities to read all technical information about media files you need. You can use this functionality with [these functions](ffprobe.md).
+
+# Media playback
+
+FFmpeg also has its own FFplay, a simple and barebones media player. With FFscala, you can call FFplay to play back media files and you can even develop your own simple media player that uses FFplay in the backend. The functionality for FFplay is [here](ffplay.md).
+
+Like FFmpeg encoding, FFplay takes arguments. Here's a quick example:
+
+```scala
+val args =
+  setFullscreen()
+  ++ setPlayVolume(12)
+  ++ setAutoExit()
+  ++ setWindowTitle("Homemade Cinema")
+execplay("movie.mkv", args)
+```
+
+This will call FFplay to open and play back the video "movie.mkv" in fullscreen with the volume at 12%. FFplay will close once the video ends and the display window will be titled "Homemade Cinema".

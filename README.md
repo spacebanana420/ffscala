@@ -6,6 +6,8 @@ FFscala works by using functions to transform your video encoding parameters int
 
 FFscala is still in an early phase and so a new version update might bring big changes to the design and structure of the library.
 
+To get started with using FFscala, I recommend reading [this page](docs/gettingstarted.md)
+
 ### Example 1 - Video transcoding
 ```scala
 val encodeParams =
@@ -74,6 +76,8 @@ Most functions return an empty list or int of value "-1" when there is an error 
 
 The documentation is separated into multiple pages, each being respective to a component of the library.
 
+* [Getting Started](docs/gettingstarted.md)
+  * An introductory guide to FFscala, what it can do and how to use the library.
 * [FFmpeg](docs/ffmpeg.md)
   * Main library functionality
 * [Video](docs/video.md)
