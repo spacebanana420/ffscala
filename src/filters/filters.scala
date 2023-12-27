@@ -58,7 +58,7 @@ def cropToAspect(width: Byte, height: Byte): List[String] =
     val iw: String = s"$width*ih/$height"
     List("-filter:v", "crop=$iw:ih")
 //test
-def setCurves(x: List[Float], y: List[Float]): List[String] =
+def setCurves(x: List[Float], y: List[Float], channel: String = "all"): List[String] =
   def recurse(points: String = "", i: Int = 0): String =
     if i >= x.length then
       points
@@ -74,8 +74,17 @@ def setCurves(x: List[Float], y: List[Float]): List[String] =
       false
     else
       isListOk(l, i+1)
-
+  val channel_filtered =
+    channel match
+      case "red" | "r" =>
+        "r"
+      case "green" | "g" =>
+        "g"
+      case "blue" | "b" =>
+        "b"
+      case _ =>
+        "all"
   if x.length == y.length && x.length > 0 && isListOk(x) then
-    List("-filter:v", s"curves=all='${recurse()}'")
+    List("-filter:v", s"curves=$channel_filtered='${recurse()}'")
   else
     List()

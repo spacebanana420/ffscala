@@ -78,9 +78,9 @@ Example: ```cropToAspect(2, 1)``` will crop with 2:1 aspect ratio
 ---
 
 ```scala
-def setCurves(x: List[Float], y: List[Float]): List[String]
+def setCurves(x: List[Float], y: List[Float], channel: String = "all"): List[String]
 ```
-Uses the curves filter for manipulating color, brightness and contrast smoothly for all channels. The argument lists must have the same length and the list "x"  s values must be in ascending order, for example,```x[0]``` can have a value of 0 or 0.3 or any value, but then ```x[1]``` must have a higher value.
+Uses the curves filter for manipulating color, brightness and contrast smoothly for all channels or individually red, green or blue. The argument lists must have the same length and the list "x"  s values must be in ascending order, for example,```x[0]``` can have a value of 0 or 0.3 or any value, but then ```x[1]``` must have a higher value.
 
 The elements in "x" represent the brightness values of the input image, while the elements in y represent the brightness values of the output image. If ```x[0]``` is ```0.2``` and ```y[0]``` is ```0.3```, then the output image's pixels of brightness 20% will have the brightness raised to 30%.
 
@@ -96,3 +96,11 @@ execute("image.png", args, "image_contrast.png")
 ```
 
 In this example, shadows are darkened, the middle gray point is kept intact, and highlights are brightened.
+
+Instead of modifying all color channels, you can instead modify just the red, green or blue channel.
+
+#### Supported channels:
+* all
+* red (or r)
+* green (or g)
+* blue (or b)
