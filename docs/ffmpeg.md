@@ -17,10 +17,14 @@ By default, quiet is true, and FFmpeg will only output warnings and errors.
 
 ```exec``` is the path to your FFmpeg executable. By default, it is set to "ffmpeg", assuming you have FFmpeg in your PATH. If you do not have it in your PATH, or if you want to package your software with the binary or just use a custom path, you can specify the path yourself.
 
+---
+
 ```scala
 def setThreads(threads: Short): List[String]
 ```
 Sets the amount of CPU threads to use. 0 is automatic/optimal, 1 is 1 thread, 2 is 2 threads, etc.
+
+---
 
 ```scala
 def setVideoEncoder(encoder: String): List[String]
@@ -44,15 +48,21 @@ Sets the video encoder
 * mjpeg
 * targa
 
+---
+
 ```scala
 def setVideoBitrate(bitrate: Int): List[String]
 ```
 Sets the video bitrate, measured in kilobits per second.
 
+---
+
 ```scala
 def setCRF(value: Byte): List[String]
 ```
 Sets the value for control rate factor. Minimum value is 0 which represents lossless compression.
+
+---
 
 ```scala
 def setPixFmt(newfmt: String): List[String]
@@ -72,15 +82,21 @@ Sets the video/image's pixel format
 * yuv422p10le
 * yuv444p10le
 
+---
+
 ```scala
 def setKeyframeInterval(interval: Short): List[String]
 ```
 Sets the video's keyframe interval in frames (0 or higher).
 
+---
+
 ```scala
 def setBFrames(interval: Byte): List[String]
 ```
 Sets the video's bframes (between 0 and 16).
+
+---
 
 ```scala
 def setAudioEncoder(encoder: String): List[String]
@@ -98,10 +114,14 @@ Sets the audio encoder
 * pcm24
 * pcm32
 
+---
+
 ```scala
 def setAudioBitrate(bitrate: Int): List[String]
 ```
 Sets the audio bitrate in kilobits.
+
+---
 
 ```scala
 def setSampleFormat(fmt: String): List[String]
@@ -111,6 +131,7 @@ Sets the audio's sample format
 * s16
 * s32
 
+---
 
 ```scala
 def removeElement(element: String): List[String]
@@ -121,6 +142,8 @@ Removes a whole type of element of the input media, such as the video channels, 
 * "video" - removes video
 * "audio" - removes audio
 * "subtitle" - removes subtitles
+
+---
 
 ```scala
 def mapChannel(media: String, input: Byte, channel: Byte): List[String]
@@ -140,10 +163,14 @@ Channel can be a value of -1 or higher. -1 means all channels of the input.
 
 Example: ```mapChannel("video", 0, 0)``` grabs the first video channel of the first file input. ```mapChannel("audio", 0, -1)``` grabs all audio channels of the first file input.
 
+---
+
 ```scala
 def setDuration(seconds: Float): List[String]
 ```
 Sets the duration of the media encode/playback. This is compatible with both FFmpeg and FFplay. The float value represents the point in time in seconds.
+
+---
 
 ```scala
 def getScreenshot(input: String, output: String, time: String)

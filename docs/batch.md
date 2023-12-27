@@ -12,6 +12,8 @@ The output file format will be the format argument. For each file, the output fi
 
 Quiet is true by default, FFmpeg will only output warnings and errors.
 
+---
+
 ```scala
 def batchDir(dir: String, args: String, format: String, quiet: Boolean = true)
 ```

@@ -19,6 +19,8 @@ This executes FFmpeg and begins the desktop recording. ```output``` is for the o
 
 To stop the recording, press ctrl + C. You can alternatively add a recording duration with ```setDuration()``` (see [FFmpeg doc](../docs/ffmpeg.md)).
 
+---
+
 ```scala
 def captureVideo(mode: String, i: String, fps: Int): List[String]
 ```
@@ -34,6 +36,8 @@ Supported desktop capture modes:
 * dshow
 
 For x11grab, the default input is "0.0", which will capture the whole main screen.
+
+---
 
 ```scala
 def captureAudio(mode: String, input: String, ch: Byte = 2, rate: Int = 48000): List[String]
@@ -55,12 +59,16 @@ Supported:
 
 For Linux, it's recommended to use ```pulse```.
 
+---
+
 ```scala
 def addTracks(amt: Int): List[String]
 ```
 This maps multiple tracks to be included in the final file. If you capture multiple tracks of the same type (video, audio), you need to use this function so the tracks are properly set up.
 
 Let's imagine you want to record your desktop screen, your desktop audio and your microphone audio. Since you are capturing 2 audio sources, being of the same type, you need to add 3 tracks with ```addTracks(3)```.
+
+---
 
 ```scala
 def listSources(mode: String, full: Boolean = false, exec: String = "ffmpeg"): List[String]
@@ -79,6 +87,8 @@ Supported:
 * all
 
 For ```all```, all sources that can be listed with ```ffmpeg -sources``` will be listed and not parsed or processed.
+
+---
 
 ```scala
 def takeScreenshot(mode: String, i: String, output: String, showmouse: Boolean = false, args: List[String] = List(), quiet: Boolean = true, exec: String = "ffmpeg"): Int

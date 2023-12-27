@@ -18,6 +18,8 @@ The order of the list is as follows:
 * Bitrate (in bits)
 * Profile
 
+---
+
 ```scala
 def getImageInfo(path: String): List[String]
 ```
@@ -28,6 +30,8 @@ The order of the list is as follows:
 * Width
 * Height
 * Pixel format
+
+---
 
 ```scala
 def getAudioInfo(path: String): List[String]
@@ -42,20 +46,28 @@ The order of the list is as follows:
 * Channel layout
 * Bitrate (in bits)
 
+---
+
 ```scala
 def getResolution(path: String): List[Int]
 ```
 Gets the resolution of each media channel, returning a list with the width and height. If an error occurs when retrieving the resolution, such as when attempting to get it from an audio file, the function returns the list ```List[Int](0, 0)```.
+
+---
 
 ```scala
 def getCodec(path: String): List[String]
 ```
 Gets the codec names of the file's media channels.
 
+---
+
 ```scala
 def getBitrate(path: String): List[Long]
 ```
 Gets the bitrate of each media channel, measured in bits/second. If an error occurs when retrieving the resolution, the function returns the list ```List[Long](0)```.
+
+---
 
 ```scala
 def getFullInfo(path: String): String

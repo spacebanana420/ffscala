@@ -12,6 +12,8 @@ Sets the coder for AAC.
 * twoloop
 * fast
 
+---
+
 ```scala
 def opus_setVBR(mode: String): List[String]
 ```
