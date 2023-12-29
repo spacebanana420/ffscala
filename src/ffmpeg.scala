@@ -7,7 +7,6 @@ import ffscala.misc.*
 //This is the main file of ffscala, containing the base and most common FFmpeg functionality
 
 
-
 private def isAlright_global(args: List[String], badargs: List[String], alright: Boolean = false, c: Int = 0): Boolean =
   def isSimilar(element: String, i: Int = 0): Boolean =
     if i >= badargs.length then
@@ -42,9 +41,38 @@ def checkFFmpeg(path: String = "ffmpeg"): Boolean =
 
 //maybe the input should be a processed list with path, start time, output, etc
 //make variant for muxing, demuxing, etc
-def execute(input: String, args: List[String], output: String, quiet: Boolean = true, exec: String = "ffmpeg"): Int = {
+//what if args and filters are mixed as one?
+def encode
+(
+input: String, output: String, args: List[String] = List(), filters: List[String] = List(),
+quiet: Boolean = true, exec: String = "ffmpeg"
+): Int =
+  def processFilters(vf: String = "", af: String = "", i: Int = 0): List[String] =
+    val comma =
+      if i >= filters.length-2 then
+        ""
+      else
+        ","
+    if i >= filters.length then
+      List(vf, af)
+    else if filters(i) == "v" && i < filters.length-1 then
+      processFilters(vf + filters(i+1) + comma, af, i+2)
+    else if filters(i) == "a" && i < filters.length-1 then
+      processFilters(vf, af + filters(i+1) + comma, i+2)
+    else
+      processFilters(vf, af, i+1)
+
+  def getNonFilters(nf: List[String] = List(), i: Int = 0): List[String] =
+    if i >= filters.length then
+      nf
+    else if filters(i) == "v" || filters(i) == "a" then
+      getNonFilters(nf, i+2)
+    else
+      getNonFilters(nf :+ filters(i), i+1)
+
   val imageFormats = supportedExtensions("image")
   val audioFormats = supportedExtensions("audio")
+  //maybe i should scrap this idea
   val isAlright =
     if belongsToList(output, imageFormats) == true then
       isAlright_Image(args)
@@ -52,20 +80,30 @@ def execute(input: String, args: List[String], output: String, quiet: Boolean = 
       isAlright_Audio(args)
     else
       true
-
+  val filterlist = processFilters()
+  val filters_v =
+    if filterlist(0).length > 0 then
+      List("-filter:v", filterlist(0))
+    else
+      List()
+  val filters_a =
+    if filterlist(1).length > 0 then
+      List("-filter:a", filterlist(1))
+    else
+      List()
+  val nonfilters = getNonFilters()
   if isAlright == false then
     -1
   else
     try
       val cmd: List[String] =
         if quiet == true then
-          List(exec, "-y", "-loglevel", "quiet", "-i", input) ++ args :+ output
+          List(exec, "-y", "-loglevel", "quiet", "-i", input) ++ args ++ filters_v ++ filters_a ++ nonfilters :+ output
         else
-          List(exec, "-y", "-hide_banner", "-i", input) ++ args :+ output
+          List(exec, "-y", "-hide_banner", "-i", input) ++ args ++ filters_v ++ filters_a ++ nonfilters :+ output
       cmd.!
     catch
       case e: Exception => -1
-}
 
 def setThreads(threads: Short): List[String] =
   if threads >= 0 then

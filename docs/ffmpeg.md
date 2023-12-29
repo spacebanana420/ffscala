@@ -3,17 +3,23 @@ These are the main functions of FFscala. This doc file contains the most commonl
 ---
 
 ```scala
-def execute(input: String, args: String, output: String, quiet: Boolean = true, exec: String = "ffmpeg"): Int
+def encode
+(
+input: String, output: String, args: List[String] = List(), filters: List[String] = List(),
+quiet: Boolean = true, exec: String = "ffmpeg"
+): Int
 ```
-Executes FFmpeg with the input file, the arguments and output destination.
-
-By default, quiet is true, and FFmpeg will only output warnings and errors.
+Executes FFmpeg to encode the input file.
 
 ```input``` should be the absolute or relative path to the file you want to process.
 
-```args``` should be the string that was created from using the other functions.
-
 ```output``` should be the destination path for the final file, including filename and extension.
+
+```args``` are the FFmpeg encoding arguments you get through most functions, except for filter functions.
+
+```filters``` is the argument where you pass filters to. They cannot be passed to ```args``` because they are handled differently.
+
+```quiet``` tells FFmpeg whether or not it should print information to stdout. By default, quiet is true, and FFmpeg won't output anything.
 
 ```exec``` is the path to your FFmpeg executable. By default, it is set to "ffmpeg", assuming you have FFmpeg in your PATH. If you do not have it in your PATH, or if you want to package your software with the binary or just use a custom path, you can specify the path yourself.
 

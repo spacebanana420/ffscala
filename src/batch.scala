@@ -5,7 +5,7 @@ import ffscala.misc.*
 
 //Functions for batch processing with FFmpeg
 
-def batchExecute(paths: List[String], args: List[String], format: String, quiet: Boolean = true) = {
+def batchExecute(paths: List[String], format: String, args: List[String] = List(), filters: List[String] = List()  quiet: Boolean = true, exec = "ffmpeg") = {
   val supportedFormats = supportedExtensions()
   val isSupported = belongsToList(format, supportedFormats)
 
@@ -13,12 +13,12 @@ def batchExecute(paths: List[String], args: List[String], format: String, quiet:
     for path <- paths do {
       if File(path).isFile() == true then
         val output = removeExtension(path) + "_new." + format
-        execute(path, args, output, quiet)
+        encode(path, output, args, filters, quiet, exec)
     }
   }
 }
 
-def batchDir(dir: String, args: List[String], format: String, quiet: Boolean = true) = {
+def batchDir(dir: List[String], format: String, args: List[String] = List(), filters: List[String] = List()  quiet: Boolean = true, exec = "ffmpeg") = {
   if File(dir).isDirectory() == true then
     val paths = File(dir).list()
     val supportedFormats_i = supportedExtensions("image")
@@ -40,7 +40,7 @@ def batchDir(dir: String, args: List[String], format: String, quiet: Boolean = t
       if belongsToList(pathfmt, formatsToSeek) == true && File(path).isFile == true then
         val output = removeExtension(path) + "_new." + format
         //println("Encoding " + path)
-        execute(path, args, output, quiet)
+        encode(path, output, args, filtrs, quiet, exec)
     }
 }
 

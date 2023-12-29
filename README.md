@@ -18,7 +18,7 @@ val encodeParams =
   ++ setAudioEncoder("opus")
   ++ setAudioBitrate(320)
 
-execute("/home/banana/Videos/gameplay.mov", encodeParams, "/home/banana/Videos/gameplay.mp4")
+encode("/home/banana/Videos/gameplay.mov", "/home/banana/Videos/gameplay.mp4", encodeParams)
 ```
 
 The equivalent command should be
@@ -30,7 +30,7 @@ Like when you use FFmpeg directly, most parameters are optional, as you can see 
 ### Example 2 - Image conversion and resize
 ```scala
 val scaleimg = scale(700, 800)
-execute("image.bmp", scaleimg, "biggerimage.png")
+encode("image.bmp", "biggerimage.png", scaleimg)
 ```
 The equivalent command should be
 ```

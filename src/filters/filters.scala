@@ -6,16 +6,16 @@ import ffscala.misc.*
 
 def scale(width: Int, height: Int): List[String] =
   if width <= 0 || height <= 0 then
-    List("")
+    List()
   else
-    List("-filter:v", s"scale=$width:$height")
+    List("v", s"scale=$width:$height")
 
 def scaleFactor(width: Float, height: Float): List[String] =
   if width <= 0 || height <= 0 then
     List()
   else
-    List("-filter:v", s"scale=iw*$width:ih*$height")
-//combine this with scale and scale factor instead
+    List("v", s"scale=iw*$width:ih*$height")
+
 def setScaleFilter(filter: String): List[String] =
   val supportedFilters = List("bicubic", "bilinear", "neighbor", "lanczos")
   val foundFilter = belongsToList(filter, supportedFilters)
@@ -24,39 +24,39 @@ def setScaleFilter(filter: String): List[String] =
   else
     List("-sws_flags", filter)
 
-def normalizeAudio(): List[String] = List("-filter:a", "loudnorm")
+def normalizeAudio(): List[String] = List("a", "loudnorm")
 
 // def compressAudio(threshold: Float): String = {
 //   if threshold < 0.000976563 || threshold > 1
 //     ""
 //   else
-//     "-filter:a acompressor " + threshold + " "
+//     "a acompressor " + threshold + " "
 // }
 
 def changeVolume(volume: String): List[String] = //1.0  1.8  10dB -5dB
-  List("-filter:a", s"volume=$volume")
+  List("a", s"volume=$volume")
 
 def crop(x: Int, y: Int, width: Int, height: Int): List[String] =
   if x < 0 || y < 0 || width <= 0 || height <= 0 then
     List()
   else
-    List("-filter:v", s"crop=$width:$height:$x:$y")
+    List("v", s"crop=$width:$height:$x:$y")
 
 def cropCenter(width: Int, height: Int): List[String] =
   if width <= 0 || height <= 0 then
     List()
   else
-    List("-filter:v", s"crop=$width:$height")
+    List("v", s"crop=$width:$height")
 
 def cropToAspect(width: Byte, height: Byte): List[String] =
   if width <= 0 || height <= 0 || width == height then
     List()
   else if width > height then
     val ih: String = s"$height*iw/$width"
-    List("-filter:v", s"crop=iw:$ih")
+    List("v", s"crop=iw:$ih")
   else
     val iw: String = s"$width*ih/$height"
-    List("-filter:v", "crop=$iw:ih")
+    List("v", "crop=$iw:ih")
 //test
 def setCurves(x: List[Float], y: List[Float], channel: String = "all"): List[String] =
   def recurse(points: String = "", i: Int = 0): String =
@@ -85,6 +85,48 @@ def setCurves(x: List[Float], y: List[Float], channel: String = "all"): List[Str
       case _ =>
         "all"
   if x.length == y.length && x.length > 0 && isListOk(x) then
-    List("-filter:v", s"curves=$channel_filtered='${recurse()}'")
+    List("v", s"curves=$channel_filtered='${recurse()}'")
   else
     List()
+
+def setHSV(h: Float, s: Float, v: Float): List[String] =
+  val val_h =
+    if h < -360 then
+      -360.0f
+    else if h > 360 then
+      360.0f
+    else
+      h
+  val val_s =
+    if s < -10 then
+      -10.0f
+    else if s > 10 then
+      10.0f
+    else
+      s
+  val val_v =
+    if v < -10 then
+      -10.0f
+    else if v > 10 then
+      10.0f
+    else
+      v
+  List("v", s"hue=h=$val_h:s=$val_s:b=$val_v")
+
+def setFade(mode: String = "in", start: Long, duration: Long): List[String] =
+  val arg_mode =
+    if mode == "in" || mode == "out" then
+      mode
+    else
+      "in"
+  val arg_start =
+    if start >= 0 then
+      start
+    else
+      0
+  val arg_duration =
+    if duration > 0 then
+      duration
+    else
+      30
+  List("v", s"fade=t=$arg_mode:s=$arg_start:n=$arg_duration")

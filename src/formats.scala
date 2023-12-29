@@ -26,7 +26,7 @@ def supportedVideoCodecs(): List[String] =
     "utvideo", "png", "dnxhd", "prores", "tiff", "cfhd", "vp9", "av1", "mjpeg", "targa")
 
 def equivalentVideoCodecs(): List[String] =
-  List("copy", "libx264", "lib264rgb", "libx265", "h264_nvenc", "hevc_nvenc",
+  List("copy", "libx264", "libx264rgb", "libx265", "h264_nvenc", "hevc_nvenc",
     "utvideo", "png", "dnxhd", "prores_ks", "tiff", "cfhd", "libvpx-vp9", "libaom-av1", "mjpeg", "targa")
 
 

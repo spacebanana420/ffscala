@@ -92,7 +92,7 @@ val y = List(0.1f, 0.5f, 0.9f)
 
 val args = setCurves(x, y)
 
-execute("image.png", args, "image_contrast.png")
+encode("image.png", "image_contrast.png", filters = args)
 ```
 
 In this example, shadows are darkened, the middle gray point is kept intact, and highlights are brightened.
