@@ -1,5 +1,7 @@
 This file contains the documentation for the functions related to filtering and processing media. You can use these alongside other encoding parameter arguments whenever encoding media.
 
+Unlike all other encoding and video arguments, filter arguments must be passed to a different argument in the ```encode()``` function.
+
 For more information on FFmpeg filters, see [here](https://ffmpeg.org/ffmpeg-filters.html)
 
 ---
@@ -104,3 +106,17 @@ Instead of modifying all color channels, you can instead modify just the red, gr
 * red (or r)
 * green (or g)
 * blue (or b)
+
+---
+
+```scala
+def setFade(mode: String = "in", start: Long, duration: Long): List[String]
+```
+
+Sets a fade into or from black to the video.
+
+```mode``` tells whether it's a fade-in or a fade-out. The supported modes are ```in``` and ```out```.
+
+```start``` is the position in frames of where the fade starts.
+
+```duration``` is the duration in frames of the fade.
