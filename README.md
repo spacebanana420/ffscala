@@ -47,7 +47,7 @@ Your path names can have spaces between them, as the command execution is shell-
 
 FFmpeg tested with version 6, but you won't have problems using other versions.
 
-By default, you need FFmpeg to be in your PATH, but ```execute``` and similar functions let you optionally specify the path to the executable or the program name if you prefer that way. Any function that has the optional argument ```exec``` lets you set a custom executable path or name.
+By default, you need FFmpeg to be in your PATH, but ```encode()``` and similar functions let you optionally specify the path to the executable or the program name if you prefer that way. Any function that has the optional argument ```exec``` lets you set a custom executable path or name.
 
 (See [example 11](docs/examples.md))
 
@@ -72,9 +72,7 @@ Add all code in ```src``` into your project and import ```ffscala```. For screen
 
 # Documentation
 
-Most functions return an empty list or int of value "-1" when there is an error in the arguments you passed to them and there is no default choice or error handling in that function.
-
-The documentation is separated into multiple pages, each being respective to a component of the library.
+FFscala has documentation separated into multiple pages, each being respective to a component of the library and a different type of FFmpeg functionality.
 
 * [Getting Started](docs/gettingstarted.md)
   * An introductory guide to FFscala, what it can do and how to use the library.

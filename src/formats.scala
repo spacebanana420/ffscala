@@ -3,7 +3,7 @@ package ffscala.misc
 //Functions related to format support
 
 def supportedExtensions(mode: String = ""): List[String] =
-  val imageFormats = List("png", "apng", "avif", "jpeg", "jpg", "tiff", "tif", "bmp", "gif", "webp", "tga", "avif")
+  val imageFormats = List("png", "ppm", "apng", "avif", "jpeg", "jpg", "tiff", "tif", "bmp", "gif", "webp", "tga", "avif")
   val audioFormats = List("flac", "wav", "ogg", "opus", "m4a", "mp3", "aiff")
   val videoFormats = List("mp4", "mov", "m4v", "avi", "mkv", "webm")
 
@@ -23,11 +23,11 @@ def isFormatSupported(path: String, mode: String): Boolean =
 
 def supportedVideoCodecs(): List[String] =
   List("copy", "x264", "x264rgb", "x265", "nvenc", "nvenc265",
-    "utvideo", "png", "dnxhd", "prores", "tiff", "cfhd", "vp9", "av1", "mjpeg", "targa")
+    "utvideo", "png", "dnxhd", "prores", "tiff", "cfhd", "vp9", "av1", "mjpeg", "targa", "bmp", "h263", "h263p", "ppm")
 
 def equivalentVideoCodecs(): List[String] =
   List("copy", "libx264", "libx264rgb", "libx265", "h264_nvenc", "hevc_nvenc",
-    "utvideo", "png", "dnxhd", "prores_ks", "tiff", "cfhd", "libvpx-vp9", "libaom-av1", "mjpeg", "targa")
+    "utvideo", "png", "dnxhd", "prores_ks", "tiff", "cfhd", "libvpx-vp9", "libaom-av1", "mjpeg", "targa", "bmp", "h263", "h263p", "ppm")
 
 
 def getVideoCodec(codec: String): String =

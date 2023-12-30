@@ -219,11 +219,11 @@ def setDuration(seconds: Float): List[String] =
   else
     List("-t", seconds.toString)
 
-def getScreenshot(input: String, output: String, time: String, quiet: Boolean = true) =
+def getScreenshot(input: String, output: String, time: String, quiet: Boolean = true, exec = "ffmpeg") =
   val fullArgs: List[String] = List("-ss", time, "-i", input, "-frames:v", "1", output)
   if quiet == true then
-    val cmd: List[String] = "ffmpeg" +: "-y" +: "-loglevel" +: "quiet" +: fullArgs
+    val cmd: List[String] = exec +: "-y" +: "-loglevel" +: "quiet" +: fullArgs
     cmd.!
   else
-    val cmd: List[String] = "ffmpeg" +: "-y" +: fullArgs
+    val cmd: List[String] = exec +: "-y" +: fullArgs
     cmd.!

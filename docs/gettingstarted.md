@@ -1,6 +1,6 @@
 # Getting started
 
-**This documentation file is unfinished, it's slowly being built.**
+#### This documentation file is unfinished, it's slowly being built.
 
 FFscala is a wrapper library for the FFmpeg command line. Most functions return command line arguments for FFmpeg, and by composing them you can make use of FFmpeg in your software. Some functionality requires more function composition than others. All command line arguments are organized into string lists of type ```List[String]```.
 

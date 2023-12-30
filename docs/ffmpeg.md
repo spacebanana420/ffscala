@@ -53,6 +53,10 @@ Sets the video encoder
 * av1
 * mjpeg
 * targa
+* bmp
+* h263
+* h263p
+* ppm
 
 ---
 
@@ -179,7 +183,7 @@ Sets the duration of the media encode/playback. This is compatible with both FFm
 ---
 
 ```scala
-def getScreenshot(input: String, output: String, time: String)
+def getScreenshot(input: String, output: String, time: String, quiet: Boolean = true, exec = "ffmpeg")
 ```
 Captures a frame from a video or image sequence.
 
