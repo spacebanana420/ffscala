@@ -140,3 +140,21 @@ def colorize(h: Short, s: Float = 0.5, l: Float = 0.5, mix: Float = 1): List[Str
   val arg_mix = filterFloat(mix)
 
   List("v", s"colorize=hue=$arg_h:saturation=$arg_s:lightness=$arg_l:mix=$arg_mix")
+
+def pixelize(w: Int, h: Int, mode: String): List[String] =
+  def filternum(in: Int): Int =
+    if in <= 0 then
+      16
+    else
+      in
+
+  val modes = List("avg", "min", "max")
+
+  val arg_w = filternum(w)
+  val arg_h = filternum(h)
+  val arg_m =
+    if belongsToList(mode, modes) then
+      mode
+    else
+      "avg"
+  List("v", s"pixelize=w=$arg_w:h=$arg_h:mode=$arg_m")

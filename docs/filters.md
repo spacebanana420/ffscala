@@ -151,3 +151,16 @@ Colorizes the video/image.
 "l" is the lightness of the chosen hue. Values range from 0 to 1.
 
 "mix" is the intensity of the filter. Values range from 0 to 1. 1 means it's fully colorized, 0 means the filter doesn't change anything.
+
+---
+
+```scala
+def pixelize(w: Int, h: Int, mode: String): List[String]
+```
+Pixelizes the video, with resolution "w" and "h". If "w" or "h" are equal or below to 0, they default to 16.
+
+Supported modes:
+* avg
+* min
+* max
+
