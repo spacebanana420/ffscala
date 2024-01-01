@@ -2,7 +2,6 @@ package ffscala.capture
 
 import ffscala.*
 import scala.sys.process._
-import java.io.File
 import ffscala.misc.*
 
 def record(output: String, args: List[String], quiet: Boolean = false, exec: String = "ffmpeg"): Int =

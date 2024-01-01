@@ -24,18 +24,6 @@ def setScaleFilter(filter: String): List[String] =
   else
     List("-sws_flags", filter)
 
-def normalizeAudio(): List[String] = List("a", "loudnorm")
-
-// def compressAudio(threshold: Float): String = {
-//   if threshold < 0.000976563 || threshold > 1
-//     ""
-//   else
-//     "a acompressor " + threshold + " "
-// }
-
-def changeVolume(volume: String): List[String] = //1.0  1.8  10dB -5dB
-  List("a", s"volume=$volume")
-
 def crop(x: Int, y: Int, width: Int, height: Int): List[String] =
   if x < 0 || y < 0 || width <= 0 || height <= 0 then
     List()
@@ -57,7 +45,7 @@ def cropToAspect(width: Byte, height: Byte): List[String] =
   else
     val iw: String = s"$width*ih/$height"
     List("v", "crop=$iw:ih")
-//test
+
 def setCurves(x: List[Float], y: List[Float], channel: String = "all"): List[String] =
   def recurse(points: String = "", i: Int = 0): String =
     if i >= x.length then
@@ -130,3 +118,25 @@ def setFade(mode: String = "in", start: Long, duration: Long): List[String] =
     else
       30
   List("v", s"fade=t=$arg_mode:s=$arg_start:n=$arg_duration")
+
+def colorize(h: Short, s: Float = 0.5, l: Float = 0.5, mix: Float = 1): List[String] =
+  def filterFloat(in: Float): Float =
+    if in < 0 then
+      0
+    else if in > 1 then
+      1
+    else
+      in
+
+  val arg_h: Short =
+    if h < 0 then
+      0
+    else if h > 360 then
+      360
+    else
+      h
+  val arg_s = filterFloat(s)
+  val arg_l = filterFloat(l)
+  val arg_mix = filterFloat(mix)
+
+  List("v", s"colorize=hue=$arg_h:saturation=$arg_s:lightness=$arg_l:mix=$arg_mix")

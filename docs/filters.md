@@ -6,6 +6,39 @@ For more information on FFmpeg filters, see [here](https://ffmpeg.org/ffmpeg-fil
 
 ---
 
+# Audio Filters
+
+```scala
+def normalizeAudio(): List[String]
+```
+Adds a filter to normalize the audio.
+
+---
+
+```scala
+def changeVolume(volume: String): List[String]
+```
+Adjusts the media's volume.
+
+You can set the volume percentage with "1.0", "0.5", "1.6", etc.
+You can also increase or lower the volume in decibels: "4dB", "-7dB"
+
+---
+
+```scala
+def audioContrast(contrast: Byte): List[String]
+```
+
+Sets the contrast of the audio's dynamic range.
+
+Default value is 33.
+
+Minimum and maximum values supported are 0 and 100.
+
+---
+
+# Video Filters
+
 ```scala
 def scale(width: Int, height: Int): List[String]
 ```
@@ -34,23 +67,6 @@ If unspecified, it will default to bicubic
 * bilinear
 * neighbor
 * lanczos
-
----
-
-```scala
-def normalizeAudio(): List[String]
-```
-Adds a filter to normalize the audio.
-
----
-
-```scala
-def changeVolume(volume: String): List[String]
-```
-Adjusts the media's volume.
-
-You can set the volume percentage with "1.0", "0.5", "1.6", etc.
-You can also increase or lower the volume in decibels: "4dB", "-7dB"
 
 ---
 
@@ -120,3 +136,18 @@ Sets a fade into or from black to the video.
 ```start``` is the position in frames of where the fade starts.
 
 ```duration``` is the duration in frames of the fade.
+
+---
+
+```scala
+def colorize(h: Short, s: Float = 0.5, l: Float = 0.5, mix: Float = 1): List[String]
+```
+Colorizes the video/image.
+
+"h" is the hue to use for colorizing. Values range from 0 to 360.
+
+"s" is the saturation of the chosen hue. Values range from 0 to 1.
+
+"l" is the lightness of the chosen hue. Values range from 0 to 1.
+
+"mix" is the intensity of the filter. Values range from 0 to 1. 1 means it's fully colorized, 0 means the filter doesn't change anything.

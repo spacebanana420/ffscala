@@ -29,6 +29,13 @@ def equivalentVideoCodecs(): List[String] =
   List("copy", "libx264", "libx264rgb", "libx265", "h264_nvenc", "hevc_nvenc",
     "utvideo", "png", "dnxhd", "prores_ks", "tiff", "cfhd", "libvpx-vp9", "libaom-av1", "mjpeg", "targa", "bmp", "h263", "h263p", "ppm")
 
+def supportedAudioCodecs(): List[String] =
+  List("copy", "aac", "opus", "vorbis", "mp3", "ac3", "flac", "pcm16", "pcm24", "pcm32", "pcm64", "pcm16be", "pcm24be", "pcm32be", "pcm64be")
+
+
+def equivalentAudioCodecs(): List[String] =
+  List("copy", "aac", "libopus", "libvorbis", "libmp3lame", "ac3", "flac", "pcm_s16le", "pcm_s24le", "pcm_s32le", "pcm_s64le", "pcm_s16be", "pcm_s24be", "pcm_s32be", "pcm_s64be")
+
 
 def getVideoCodec(codec: String): String =
   val fmts = supportedVideoCodecs()
@@ -43,5 +50,8 @@ def isVideoCodecSupported(codec: String): Boolean =
   belongsToList(codec, fmts)
 
 def supportedPixelFormats(): List[String] =
-  List("rgb24", "rgb8", "rgb48", "rgb48le", "rgba", "rgba64le","gray",
-  "gray16le", "yuv420p", "yuv422p", "yuv444p", "yuv422p10le", "yuv444p10le")
+  List(
+  "rgb24", "bgr24", "rgb8", "rgb48", "rgb48le", "rgba", "rgba64le","gray",
+  "gray16le", "yuv420p", "yuv422p", "yuv444p", "yuv422p10le", "yuv444p10le",
+  "yuvj420p", "yuvj422p", "yuvj444p"
+  )

@@ -135,7 +135,7 @@ def setCRF(value: Byte): List[String] =
 
 def setQuality(q: Int): List[String] =
   val qs = q.toString
-  if q >= 51 then
+  if q >= 30 then
     List("-qmax", qs, "-q", qs)
   if q >= 0 then
     List("-qmin", qs, "-q", qs)
@@ -165,8 +165,9 @@ def setPixFmt(fmt: String): List[String] = //use ffmpeg equivalents
     List("-pix_fmt", fmt)
 
 def setAudioEncoder(encoder: String): List[String] =
-  val supportedFormats = List("copy", "aac", "opus", "vorbis", "mp3", "ac3", "flac", "pcm16", "pcm24", "pcm32", "pcm64")
-  val ffmpegEquivalents = List("copy", "aac", "libopus", "libvorbis", "libmp3lame", "ac3", "flac", "pcm_s16le", "pcm_s24le", "pcm_s32le", "pcm64le")
+  val supportedFormats = supportedAudioCodecs()
+  val ffmpegEquivalents = equivalentAudioCodecs()
+
   val i = indexFromList(encoder, supportedFormats)
   if i == -1 then
     List()
@@ -219,7 +220,7 @@ def setDuration(seconds: Float): List[String] =
   else
     List("-t", seconds.toString)
 
-def getScreenshot(input: String, output: String, time: String, quiet: Boolean = true, exec = "ffmpeg") =
+def getScreenshot(input: String, output: String, time: String, quiet: Boolean = true, exec: String = "ffmpeg") =
   val fullArgs: List[String] = List("-ss", time, "-i", input, "-frames:v", "1", output)
   if quiet == true then
     val cmd: List[String] = exec +: "-y" +: "-loglevel" +: "quiet" +: fullArgs

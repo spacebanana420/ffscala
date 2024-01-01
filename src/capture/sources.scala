@@ -2,7 +2,6 @@ package ffscala.capture
 
 import ffscala.*
 import scala.sys.process._
-import java.io.File
 import ffscala.misc.*
 
 private def parse(sources: String, s: String = "", l: List[String] = List(), i: Int = 0): List[String] =

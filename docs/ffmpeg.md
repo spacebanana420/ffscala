@@ -80,6 +80,7 @@ def setPixFmt(newfmt: String): List[String]
 Sets the video/image's pixel format
 #### Supported pixel formats:
 * rgb24
+* bgr24
 * rgb48
 * rgb48le
 * rgba
@@ -91,6 +92,9 @@ Sets the video/image's pixel format
 * yuv444p
 * yuv422p10le
 * yuv444p10le
+* yuvj420p
+* yuvj422p
+* yuvj444p
 
 ---
 
@@ -123,6 +127,11 @@ Sets the audio encoder
 * pcm16
 * pcm24
 * pcm32
+* pcm64
+* pcm16be
+* pcm24be
+* pcm32be
+* pcm64be
 
 ---
 

@@ -1,8 +1,6 @@
 package ffscala.capture
 
 import ffscala.*
-import scala.sys.process._
-import java.io.File
 import ffscala.misc.*
 
 //Functions for custom arguments for desktop and audio capture
