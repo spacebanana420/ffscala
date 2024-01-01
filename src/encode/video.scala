@@ -6,21 +6,35 @@ import ffscala.misc.*
 
 def x264_setPreset(preset: String): List[String] =
   val presets = List("ultrafast", "superfast", "veryfast", "faster", "fast", "medium", "slow", "slower", "veryslow", "placebo")
-  if belongsToList(preset, presets) == true then
+  if belongsToList(preset, presets) then
     List("-preset:v", preset)
   else
     List("-preset:v", "veryfast")
 
 def x264_setCoder(coder: String): List[String] =
   val coders = List("default", "cavlc", "cabac", "vlc", "ac")
-  if belongsToList(coder, coders) == true then
+  if belongsToList(coder, coders) then
     List("-coder", coder)
   else
     List()
 
+def x264_motionEstimation(mode: String): List[String] =
+  val modes = List("dia", "hex", "umh", "esa", "tesa")
+  if belongsToList(mode, modes) then
+    List("-motion-est", mode)
+  else
+    List("-motion-est", "-1")
+
+def x264_directPrediction(mode: String): List[String] =
+  val modes = List("none", "spatial", "temporal", "auto")
+  if belongsToList(mode, modes) then
+    List("-motion-est", mode)
+  else
+    List("-motion-est", "-1")
+
 def nvenc_setPreset(preset: String): List[String] =
   val presets = List("lossless", "default", "slow", "medium", "fast", "hq")
-  if belongsToList(preset, presets) == true then
+  if belongsToList(preset, presets) then
     List("-preset:v", preset)
   else
     List()
@@ -39,14 +53,14 @@ def nvenc_setcrf(value: Byte): List[String] =
 
 def dnxhd_setPreset(preset: String): List[String] =
   val presets = List("dnxhd", "dnxhr_lb", "dnxhr_sq", "dnxhr_hq", "dnxhr_hqx", "dnxhr_444")
-  if belongsToList(preset, presets) == true then
+  if belongsToList(preset, presets) then
     List("-profile:v", preset)
   else
     List()
 
 def prores_setProfile(preset: String): List[String] =
   val profiles = List("proxy", "lt", "standard", "hq", "4444", "4444xq")
-  if belongsToList(preset, profiles) == true then
+  if belongsToList(preset, profiles) then
     List("-profile:v", preset)
   else
     List()
@@ -59,7 +73,7 @@ def prores_setAlphaDepth(depth: Byte): List[String] =
 
 def vp9_setDeadline(preset: String): List[String] =
   val presets = List("best", "good", "realtime")
-  if belongsToList(preset, presets) == true then
+  if belongsToList(preset, presets) then
     List("-deadline", preset)
   else
     List()
@@ -84,7 +98,7 @@ def av1_setcpu_used(value: Byte): List[String] =
 
 def av1_setDeadline(preset: String): List[String] =
   val presets = List("good", "realtime", "allintra")
-  if belongsToList(preset, presets) == true then
+  if belongsToList(preset, presets) then
     List("-usage", preset)
   else
     List()
@@ -103,14 +117,14 @@ def utvideo_setPred(pred: String): List[String] =
 
 def png_setPred(mode: String): List[String] =
   val modes = List("none", "sub", "up", "avg", "paeth", "mixed")
-  if belongsToList(mode, modes) == true then
+  if belongsToList(mode, modes) then
     List("-pred", mode)
   else
     List()
 
 def tiff_setCompression(compression: String): List[String] =
   val formats = List("packbits", "raw", "lzw", "deflate")
-  if belongsToList(compression, formats) == true then
+  if belongsToList(compression, formats) then
     List("-compression_algo", compression)
   else
     List()
@@ -125,7 +139,7 @@ def webp_setQuality(value: Byte): List[String] =
 
 def webp_setPreset(preset: String): List[String] =
   val presets = List("none", "default", "picture", "photo", "drawing", "icon", "text")
-  if belongsToList(preset, presets) == true then
+  if belongsToList(preset, presets) then
     List("-preset:v", preset)
   else
     List()

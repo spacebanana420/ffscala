@@ -38,6 +38,33 @@ Sets the x264 coder.
 ---
 
 ```scala
+def x264_motionEstimation(mode: String): List[String]
+```
+Sets the motion estimation for x264 encoding.
+
+#### Supported modes:
+* dia
+* hex
+* umh
+* esa
+* tesa
+
+---
+
+```scala
+x264_directPrediction(mode: String): List[String]
+```
+Sets the direct MV prediction mode for x264 encoding.
+
+#### Supported modes:
+* none
+* spatial
+* temporal
+* auto
+
+---
+
+```scala
 def nvenc_setPreset(preset: String): List[String]
 ```
 Sets the NVENC encoding preset.
