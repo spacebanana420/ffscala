@@ -103,6 +103,18 @@ def av1_setDeadline(preset: String): List[String] =
   else
     List()
 
+def av1_setTune(tune: String): List[String] =
+  if tune == "psnr" || tune == "ssim" then
+    List("-tune", tune)
+  else
+    List("-tune", "-1")
+
+def av1_setTiles(w: Int, h: Int): List[String] =
+  if w <= 0 || h <= 0 then
+    List("-tile-columns", "-1", "-tile-rows", "-1")
+  else
+    List("-tile-columns", w.toString, "-tile-rows", h.toString)
+
 def cfhd_setQuality(value: Int): List[String] =
   if value < 0 || value > 12 then
     List()

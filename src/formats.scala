@@ -51,7 +51,11 @@ def isVideoCodecSupported(codec: String): Boolean =
 
 def supportedPixelFormats(): List[String] =
   List(
-  "rgb24", "bgr24", "bgr0", "gbrp", "gbrap", "rgb8", "rgb48", "rgb48le", "rgba", "rgba64le", "gray", "gray10le",
-  "gray16le", "yuv420p", "yuv422p", "yuv444p", "yuv420p10le", "yuv422p10le", "yuv444p10le",
-  "yuvj420p", "yuvj422p", "yuvj444p", "nv12", "nv16", "nv21", "nv20le"
+  "rgb24", "bgr24", "bgr0", "gbrp", "gbrp10le", "gbrp12le", "gbrap", "rgb8", "rgb48", "rgb48le", "rgba", "rgba64le",
+  "gray", "gray10le", "gray12le", "gray16le",
+  "yuv420p", "yuv422p", "yuv444p",
+  "yuv420p10le", "yuv422p10le", "yuv444p10le",
+  "yuv420p12le", "yuv422p12le", "yuv444p12le"
+  "yuvj420p", "yuvj422p", "yuvj444p",
+  "nv12", "nv16", "nv21", "nv20le"
   )

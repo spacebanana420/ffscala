@@ -83,6 +83,8 @@ Sets the video/image's pixel format
 * bgr24
 * bgr0
 * gbrp
+* gbrp10le
+* gbrp12le
 * gbrap
 * rgb48
 * rgb48le
@@ -90,6 +92,7 @@ Sets the video/image's pixel format
 * rgba64le
 * gray
 * gray10le
+* gray12le
 * gray16le
 * yuv420p
 * yuv422p
@@ -97,6 +100,9 @@ Sets the video/image's pixel format
 * yuv420p10le
 * yuv422p10le
 * yuv444p10le
+* yuv420p12le
+* yuv422p12le
+* yuv444p12le
 * yuvj420p
 * yuvj422p
 * yuvj444p

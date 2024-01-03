@@ -206,6 +206,24 @@ Values between 0 and 8 are accepted.
 ---
 
 ```scala
+def av1_setTune(tune: String): List[String]
+```
+Sets the metric that the encoder tunes for.
+
+#### Supported modes:
+* psnr
+* ssim
+
+---
+
+```scala
+def av1_setTiles(w: Int, h: Int): List[String]
+```
+Sets the number of columns "w" and rows "h" for the tile configuration for the av1 encoder.
+
+---
+
+```scala
 def cfhd_setQuality(value: Int): List[String]
 ```
 Sets the encoding quality for Cineform. This affects the bitrate used.
