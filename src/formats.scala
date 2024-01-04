@@ -55,7 +55,7 @@ def supportedPixelFormats(): List[String] =
   "gray", "gray10le", "gray12le", "gray16le",
   "yuv420p", "yuv422p", "yuv444p",
   "yuv420p10le", "yuv422p10le", "yuv444p10le",
-  "yuv420p12le", "yuv422p12le", "yuv444p12le"
+  "yuv420p12le", "yuv422p12le", "yuv444p12le",
   "yuvj420p", "yuvj422p", "yuvj444p",
   "nv12", "nv16", "nv21", "nv20le"
   )
