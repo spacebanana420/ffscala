@@ -30,7 +30,7 @@ Like when you use FFmpeg directly, most parameters are optional, as you can see 
 ### Example 2 - Image conversion and resize
 ```scala
 val scaleimg = scale(700, 800)
-encode("image.bmp", "biggerimage.png", scaleimg)
+encode("image.bmp", "biggerimage.png", filters = scaleimg)
 ```
 The equivalent command should be
 ```
