@@ -35,7 +35,8 @@ Sets the amount of CPU threads to use. 0 is automatic/optimal, 1 is 1 thread, 2 
 ```scala
 def setVideoEncoder(encoder: String): List[String]
 ```
-Sets the video encoder
+Sets the video encoder.
+
 #### Supported video encoders:
 * copy
 * x264
@@ -43,6 +44,7 @@ Sets the video encoder
 * x265
 * nvenc
 * nvenc265
+* qsv
 * utvideo
 * png
 * dnxhd

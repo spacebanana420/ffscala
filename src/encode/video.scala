@@ -51,6 +51,22 @@ def nvenc_setcrf(value: Byte): List[String] =
   else
     List("-rc", "vbr_hq", "-qmin", "0", "-cq", value.toString)
 
+def qsv_setPreset(preset: String): List[String] =
+  val presets = List("veryfast", "faster", "fast", "medium", "slow", "slower", "veryslow")
+  if belongsToList(preset, presets) then
+    List("-preset:v", preset)
+  else
+    List("-preset:v", "0")
+
+def qsv_setProfile(profile: String): List[String] =
+  val profiles = List("unknown", "baseline", "main", "high")
+  if belongsToList(profile, profiles) then
+    List("-profile", profile)
+  else
+    List("-profile", "unknown")
+
+def qsv_lowPower(): List[String] = List("-low_power", "true")
+
 def dnxhd_setPreset(preset: String): List[String] =
   val presets = List("dnxhd", "dnxhr_lb", "dnxhr_sq", "dnxhr_hq", "dnxhr_hqx", "dnxhr_444")
   if belongsToList(preset, presets) then

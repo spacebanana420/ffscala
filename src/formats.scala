@@ -4,7 +4,7 @@ package ffscala.misc
 
 def supportedExtensions(mode: String = ""): List[String] =
   val imageFormats = List("png", "ppm", "apng", "avif", "jpeg", "jpg", "tiff", "tif", "bmp", "gif", "webp", "tga", "avif")
-  val audioFormats = List("flac", "wav", "ogg", "opus", "m4a", "mp3", "aiff")
+  val audioFormats = List("flac", "wav", "ogg", "opus", "m4a", "mp2", "mp3", "aiff")
   val videoFormats = List("mp4", "mov", "m4v", "avi", "mkv", "webm")
 
   mode match
@@ -22,11 +22,11 @@ def isFormatSupported(path: String, mode: String): Boolean =
     false
 
 def supportedVideoCodecs(): List[String] =
-  List("copy", "x264", "x264rgb", "x265", "nvenc", "nvenc265",
+  List("copy", "x264", "x264rgb", "x265", "nvenc", "nvenc265", "qsv",
     "utvideo", "png", "dnxhd", "prores", "tiff", "cfhd", "vp9", "av1", "mjpeg", "targa", "bmp", "h263", "h263p", "ppm")
 
 def equivalentVideoCodecs(): List[String] =
-  List("copy", "libx264", "libx264rgb", "libx265", "h264_nvenc", "hevc_nvenc",
+  List("copy", "libx264", "libx264rgb", "libx265", "h264_nvenc", "hevc_nvenc", "h264_qsv",
     "utvideo", "png", "dnxhd", "prores_ks", "tiff", "cfhd", "libvpx-vp9", "libaom-av1", "mjpeg", "targa", "bmp", "h263", "h263p", "ppm")
 
 def supportedAudioCodecs(): List[String] =
