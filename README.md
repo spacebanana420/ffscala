@@ -13,12 +13,12 @@ To get started with using FFscala, I recommend reading [this page](docs/gettings
 val encodeParams =
   setVideoEncoder("x264")
   ++ setVideoBitrate(4000)
-  ++ scale(1920, 1080)
   ++ setPixFmt("yuv420p")
   ++ setAudioEncoder("opus")
   ++ setAudioBitrate(320)
+val filters = scale(1920, 1080)
 
-encode("/home/banana/Videos/gameplay.mov", "/home/banana/Videos/gameplay.mp4", encodeParams)
+encode("/home/banana/Videos/gameplay.mov", "/home/banana/Videos/gameplay.mp4", encodeParams, filters)
 ```
 
 The equivalent command should be
