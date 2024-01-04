@@ -22,11 +22,11 @@ def isFormatSupported(path: String, mode: String): Boolean =
     false
 
 def supportedVideoCodecs(): List[String] =
-  List("copy", "x264", "x264rgb", "x265", "nvenc", "nvenc265", "qsv",
+  List("copy", "x264", "x264rgb", "x265", "nvenc", "nvenc265", "qsv", "vaapi",
     "utvideo", "png", "dnxhd", "prores", "tiff", "cfhd", "vp9", "av1", "mjpeg", "targa", "bmp", "h263", "h263p", "ppm")
 
 def equivalentVideoCodecs(): List[String] =
-  List("copy", "libx264", "libx264rgb", "libx265", "h264_nvenc", "hevc_nvenc", "h264_qsv",
+  List("copy", "libx264", "libx264rgb", "libx265", "h264_nvenc", "hevc_nvenc", "h264_qsv", "h264_vaapi",
     "utvideo", "png", "dnxhd", "prores_ks", "tiff", "cfhd", "libvpx-vp9", "libaom-av1", "mjpeg", "targa", "bmp", "h263", "h263p", "ppm")
 
 def supportedAudioCodecs(): List[String] =
@@ -57,5 +57,12 @@ def supportedPixelFormats(): List[String] =
   "yuv420p10le", "yuv422p10le", "yuv444p10le",
   "yuv420p12le", "yuv422p12le", "yuv444p12le",
   "yuvj420p", "yuvj422p", "yuvj444p",
-  "nv12", "nv16", "nv21", "nv20le"
+  "nv12", "nv16", "nv21", "nv20le",
+  "qsv", "vaapi"
+  )
+
+def supportedSampleFormats(): List[String] =
+  List(
+  "u8", "s16", "s32", "flt", "dbl", "u8p",
+  "s16p", "s32p", "fltp", "dblp", "s64", "s64p"
   )

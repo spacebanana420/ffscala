@@ -67,6 +67,28 @@ def qsv_setProfile(profile: String): List[String] =
 
 def qsv_lowPower(): List[String] = List("-low_power", "true")
 
+def vaapi_setDevice(device: String): List[String] = List("-init_hw_device", s"vaapi=foo:$device")
+
+def vaapi_setRateMode(mode: String): List[String] =
+  val modes = List("auto", "CQP", "CBR", "VBR", "ICQ", "QVBR", "AVBR")
+  if belongsToList(mode, modes) then
+    List("-rc_mode", mode)
+  else
+    List("-rc_mode", "auto")
+
+def vaapi_setQuality(value: Int): List[String] =
+  if value < -1 then
+    List("-quality", "-1")
+  else
+    List("-quality", value.toString)
+
+def vaapi_setProfile(profile: String): List[String] =
+  val profiles = List("constrained_baseline", "main", "high")
+  if belongsToList(profile, profiles) then
+    List("-profile", profile)
+  else
+    List("-profile", "-99")
+
 def dnxhd_setPreset(preset: String): List[String] =
   val presets = List("dnxhd", "dnxhr_lb", "dnxhr_sq", "dnxhr_hq", "dnxhr_hqx", "dnxhr_444")
   if belongsToList(preset, presets) then

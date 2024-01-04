@@ -181,7 +181,7 @@ def setAudioBitrate(bitrate: Int): List[String] =
     List("-b:a", s"${bitrate}k")
 
 def setSampleFormat(fmt: String): List[String] =
-  val supportedFormats = List("s16", "s32")
+  val supportedFormats = supportedSampleFormats()
   val foundformat = belongsToList(fmt, supportedFormats)
 
   if foundformat == false then

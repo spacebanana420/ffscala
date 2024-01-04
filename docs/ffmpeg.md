@@ -45,6 +45,7 @@ Sets the video encoder.
 * nvenc
 * nvenc265
 * qsv
+* vaapi
 * utvideo
 * png
 * dnxhd
@@ -112,6 +113,8 @@ Sets the video/image's pixel format
 * nv16
 * nv21
 * nv20le
+* qsv
+* vaapi
 
 ---
 
@@ -164,8 +167,18 @@ def setSampleFormat(fmt: String): List[String]
 ```
 Sets the audio's sample format
 #### Supported sample formats:
+* u8
 * s16
 * s32
+* flt
+* dbl
+* u8p
+* s16p
+* s32p
+* fltp
+* dblp
+* s64
+* s64p
 
 ---
 

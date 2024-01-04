@@ -129,9 +129,56 @@ Sets the H.264 profile for QuickSync.
 ---
 
 ```scala
-def qsv_lowPower(): List[String] = List("-low_power", "true")
+def qsv_lowPower(): List[String]
 ```
 Enables the experimental low power mode for QuickSync
+
+---
+
+```scala
+def vaapi_setDevice(device: String): List[String]
+```
+Sets the DRM hardware device to use for encoding with VAAPI.
+
+For more information, check [here](https://trac.ffmpeg.org/wiki/Hardware/VAAPI)
+
+---
+
+```scala
+def vaapi_setRateMode(mode: String): List[String]
+```
+
+Sets the bitrate control mode.
+
+#### Supported modes:
+* auto
+* CQP
+* CBR
+* VBR
+* ICQ
+* QVBR
+* AVBR
+
+---
+
+```scala
+def vaapi_setQuality(value: Int): List[String]
+```
+Sets the compression quality level of VAAPI. This affects the compression efficiency.
+
+Accepted values range from -1 to the maximum value for the Int type.
+
+---
+
+```scala
+def vaapi_setProfile(profile: String): List[String]
+```
+Sets the encoding profile for VAAPI.
+
+#### Supported modes:
+* constrained_baseline
+* main
+* high
 
 ---
 
