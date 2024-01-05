@@ -37,6 +37,17 @@ Minimum and maximum values supported are 0 and 100.
 
 ---
 
+```scala
+def crystalize(i: Float, clip: Boolean = true): List[String]
+```
+Sharpens the audio's noise (or applies the inverse effect). Use a negative value for "i" to invert the effect.
+
+Intensiy of the filter "i" ranges from values -10 to 10. 0 is neutral.
+
+Clip toggles audio clipping.
+
+---
+
 # Video Filters
 
 ```scala
