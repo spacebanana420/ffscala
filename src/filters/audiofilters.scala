@@ -26,6 +26,6 @@ def audioContrast(contrast: Byte): List[String] =
 
 def crystalize(i: Float, clip: Boolean = true): List[String] =
   if i < -10.0 || i > 10.0 then
-    List("a", "crystalize=2:true")
+    List("a", "crystalizer=2:true")
   else
-    List("a", s"crystalize=$i:${clip.toString}")
+    List("a", s"crystalizer=$i:${clip.toString}")
