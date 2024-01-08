@@ -158,3 +158,31 @@ def pixelize(w: Int, h: Int, mode: String): List[String] =
     else
       "avg"
   List("v", s"pixelize=w=$arg_w:h=$arg_h:mode=$arg_m")
+
+
+def unsharp(lx: Byte, ly: Byte, la: Float, cx: Byte, cy: Byte, ca: Float, ax: Byte, ay: Byte, aa: Float): List[String] =
+  def getVal(num: Byte, min: Byte, max: Byte, default: String): String =
+    if num >= min && num <= max then
+      num.toString
+    else
+      default
+  def getFloatVal(num: Float, min: Float, max: Float, default: String): String =
+    if num >= min && num <= max then
+      num.toString
+    else
+      default
+
+  val arg_lx = getVal(lx, 3, 23, "5")
+  val arg_ly = getVal(ly, 3, 23, "5")
+  val arg_la = getFloatVal(la, -2, 5, "1")
+
+  val arg_cx = getVal(lx, 3, 23, "5")
+  val arg_cy = getVal(ly, 3, 23, "5")
+  val arg_ca = getFloatVal(la, -2, 5, "1")
+
+  val arg_ax = getVal(lx, 3, 23, "5")
+  val arg_ay = getVal(ly, 3, 23, "5")
+  val arg_aa = getFloatVal(la, -2, 5, "1")
+
+
+  List("v", s"unsharp=$arg_lx:$arg_ly:$arg_la:$arg_cx:$arg_cy:$arg_ca:$arg_ax:$arg_ay:$arg_aa")

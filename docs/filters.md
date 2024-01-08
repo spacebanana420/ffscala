@@ -48,6 +48,17 @@ Clip toggles audio clipping.
 
 ---
 
+```scala
+def vibrato(f: Float, d: Float): List[String]
+```
+Adds a vibrato filter.
+
+"f" sets the modulation frequency. Values can range from 0.1Hz to 20000Hz.
+
+"d" sets the depth modulation percentage. Values can range from 0.0 to 1.0
+
+---
+
 # Video Filters
 
 ```scala
@@ -175,3 +186,17 @@ Supported modes:
 * min
 * max
 
+---
+
+```scala
+def unsharp(lx: Byte, ly: Byte, la: Float, cx: Byte, cy: Byte, ca: Float, ax: Byte, ay: Byte, aa: Float): List[String]
+```
+Sharpens or blurs the image/video.
+
+All arguments that start with "l", "c" and "a" are for luma, chroma and alpha respectively.
+
+Arguments that end with "x" and "y" define the sharpening radius respectively.
+
+Arguments that end with "a" define the intensity of the sharpening for the channel in question.
+
+Supported radius values are between 3 and 23, with 5 being default. Supported intensity values are between -2 to 5, with 1 being default

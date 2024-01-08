@@ -29,3 +29,16 @@ def crystalize(i: Float, clip: Boolean = true): List[String] =
     List("a", "crystalizer=2:true")
   else
     List("a", s"crystalizer=$i:${clip.toString}")
+
+def vibrato(f: Float, d: Float): List[String] =
+  val arg_f =
+    if f < 0.1 || f > 20000 then
+      "5.0"
+    else
+      f.toString
+  val arg_d =
+    if d < 0 || d > 1 then
+      "0.5"
+    else
+      d.toString
+  List("a", s"vibrato=$arg_f:$arg_d")
