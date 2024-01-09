@@ -59,6 +59,29 @@ Adds a vibrato filter.
 
 ---
 
+```scala
+def equalizer(frequency: Int, gain: Short, width: Int = 1, wtype: String = "q"): List[String]
+```
+Applies an equalizer on a certain frequency center and range. This filter only focuses on 1 center frequency. To equalize multiple points, use the filter multiple times.
+
+```frequency``` sets the center frequency. Accepted values are from 0 to 999999.
+
+```gain``` sets the boost/atenuation in decibels. Accepted values are from -900 to -900.
+
+```width``` sets the width that affects the surrounding frequencies to the center ```frequency```. Accepted values are from 0 to 999999.
+
+```wtype``` sets the type of width measurement.
+
+#### Supported width types:
+
+* h (Hz)
+* q (Q-factor)
+* o (octave)
+* s (slope)
+* k (kHz)
+
+---
+
 # Video Filters
 
 ```scala
@@ -200,3 +223,12 @@ Arguments that end with "x" and "y" define the sharpening radius respectively.
 Arguments that end with "a" define the intensity of the sharpening for the channel in question.
 
 Supported radius values are between 3 and 23, with 5 being default. Supported intensity values are between -2 to 5, with 1 being default
+
+---
+
+```scala
+def trim(start: Long, end: Long): List[String]
+```
+Trims the video.
+
+```start``` and ```end``` are the start and end of the video, in seconds.

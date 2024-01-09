@@ -42,3 +42,35 @@ def vibrato(f: Float, d: Float): List[String] =
     else
       d.toString
   List("a", s"vibrato=$arg_f:$arg_d")
+
+def equalizer(frequency: Int, gain: Short, width: Int = 1, wtype: String = "q"): List[String] =
+  val f =
+    if frequency < 0 then
+      "0"
+    else if frequency > 999999 then
+      "999999"
+    else
+      frequency.toString
+  val g =
+    if gain < -900 then
+      "-999"
+    else if gain > 900 then
+      "999"
+    else
+      gain.toString
+  val w =
+    if width < 0 then
+      "0"
+    else if width > 999999 then
+      "999999"
+    else
+      width.toString
+
+  val types = List("h", "q", "o", "s", "k")
+  val wt =
+    if belongsToList(wtype, types) then
+      wtype
+    else
+      "q"
+  List("a", s"equalizer=f=$f:t=$wt:w=$w:g=$g")
+

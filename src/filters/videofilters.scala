@@ -186,3 +186,16 @@ def unsharp(lx: Byte, ly: Byte, la: Float, cx: Byte, cy: Byte, ca: Float, ax: By
 
 
   List("v", s"unsharp=$arg_lx:$arg_ly:$arg_la:$arg_cx:$arg_cy:$arg_ca:$arg_ax:$arg_ay:$arg_aa")
+
+def trim(start: Long, end: Long): List[String] =
+    val arg_s =
+      if start >= 0 then
+        start.toString
+      else
+        "0"
+    val arg_e =
+      if end >= 0 then
+        end.toString
+      else
+        "0"
+    List("v", s"trim=$arg_s:$arg_e")
