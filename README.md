@@ -77,7 +77,9 @@ FFscala has documentation separated into multiple pages, each being respective t
 * [Getting Started](docs/gettingstarted.md)
   * An introductory guide to FFscala, what it can do and how to use the library.
 * [FFmpeg](docs/ffmpeg.md)
-  * Main library functionality
+  * Main functions for media encoding
+* [Base](docs/base.md)
+  * Base encoding and FFmpeg arguments.
 * [Video](docs/video.md)
   * Encoder-specific parameters for video and image.
 * [Audio](docs/audio.md)

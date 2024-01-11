@@ -105,121 +105,6 @@ quiet: Boolean = true, exec: String = "ffmpeg"
     catch
       case e: Exception => -1
 
-def setThreads(threads: Short): List[String] =
-  if threads >= 0 then
-    List("-threads", threads.toString)
-  else
-    List()
-
-def setVideoEncoder(encoder: String): List[String] =
-  val supportedFormats = supportedVideoCodecs()
-  val ffmpegEquivalents = equivalentVideoCodecs()
-  val i = indexFromList(encoder, supportedFormats)
-
-  if i == -1 then
-    List()
-  else
-    List("-c:v", ffmpegEquivalents(i))
-
-def setVideoBitrate(bitrate: Int): List[String] =
-  if bitrate <= 0 then
-    List()
-  else
-    List("-b:v", s"${bitrate}k")
-
-def setCRF(value: Byte): List[String] =
-  if value < 0 then
-    List("-crf", "0")
-  else
-    List("-crf", value.toString)
-
-def setQuality(q: Int): List[String] =
-  val qs = q.toString
-  if q >= 30 then
-    List("-qmax", qs, "-q", qs)
-  if q >= 0 then
-    List("-qmin", qs, "-q", qs)
-  else
-    List("-qmin", "0", "-q", "0")
-
-def setKeyframeInterval(interval: Short): List[String] =
-  if interval < 0 then
-    List()
-  else
-    List("-g", interval.toString)
-
-def setBFrames(interval: Byte): List[String] =
-  if interval < 0 || interval > 16 then
-    List()
-  else
-    List("-bf", interval.toString)
-
-def setPixFmt(fmt: String): List[String] = //use ffmpeg equivalents
-  val supportedFormats = supportedPixelFormats()
-  //val ffmpegEquivalents = List("rgb24", "rgb8", "rgb48", "gray", "yuv420p", "yuv422p", "yuv444p")
-  val foundformat = belongsToList(fmt, supportedFormats)
-
-  if foundformat == false then
-    List()
-  else
-    List("-pix_fmt", fmt)
-
-def setAudioEncoder(encoder: String): List[String] =
-  val supportedFormats = supportedAudioCodecs()
-  val ffmpegEquivalents = equivalentAudioCodecs()
-
-  val i = indexFromList(encoder, supportedFormats)
-  if i == -1 then
-    List()
-  else
-    List("-c:a", ffmpegEquivalents(i))
-
-def setAudioBitrate(bitrate: Int): List[String] =
-  if bitrate <= 0 then
-    List()
-  else
-    List("-b:a", s"${bitrate}k")
-
-def setSampleFormat(fmt: String): List[String] =
-  val supportedFormats = supportedSampleFormats()
-  val foundformat = belongsToList(fmt, supportedFormats)
-
-  if foundformat == false then
-    List()
-  else
-    List("-sample_fmt", fmt)
-
-def removeElement(element: String): List[String] =
-  element match
-    case "video" =>
-      List("-vn")
-    case "audio" =>
-      List("-an")
-    case "subtitle" =>
-      List("-sn")
-    case _ =>
-      List()
-//this doesnt work for combining multiple sources
-def mapChannel(media: String, input: Byte, channel: Byte): List[String] = //test maybe
-  if input < 0 || channel < -1 || (media != "video" && media != "audio" && media != "subtitle") then
-    List()
-  else
-    val mediashort =
-      media match
-        case "video" => "v"
-        case "audio" => "a"
-        case "subtitle" => "s"
-    if channel == -1 then
-      List("-map", s"$input:$mediashort")
-    else
-      List("-map", s"$input:$mediashort:$channel")
-
-def setDuration(seconds: Float): List[String] =
-  if seconds <= 0 then
-    List()
-  else
-    List("-t", seconds.toString)
-
 def getScreenshot(input: String, output: String, time: String, quiet: Boolean = true, exec: String = "ffmpeg") =
   val fullArgs: List[String] = List("-ss", time, "-i", input, "-frames:v", "1", output)
   if quiet == true then
@@ -228,3 +113,45 @@ def getScreenshot(input: String, output: String, time: String, quiet: Boolean = 
   else
     val cmd: List[String] = exec +: "-y" +: fullArgs
     cmd.!
+
+def extractFrames
+(
+input: String, fmt: String, args: List[String] = List(),
+quiet: Boolean = true, exec: String = "ffmpeg"
+): Int =
+  if isFormatSupported(fmt, "image") then
+    val output = s"${removeExtension(input)}-%d.$fmt" //change and test
+    val cmd = getBaseArgs(exec, quiet) ++ List("-i", input) ++ args :+ output //finish and add filter processing
+    cmd.!
+  else
+    -1
+
+def combineMedia
+(
+output: String,
+video: List[String] = List(), audio: List[String] = List(), subs: List[String] = List(),
+quiet: Boolean = true, exec: String = "ffmpeg"
+): Int =
+  def inputArgs(f: List[String], nl: List[String] = List(), i: Int = 0): List[String] =
+      if i >= f.length then
+        nl
+      else
+        inputArgs(f, nl ++ List("-i", f(i)), i+1)
+
+  def mapArgs(len: Int, mode: String, nl: List[String] = List(), i: Int = 0): List[String] =
+      if i >= len then
+        nl
+      else
+        mapArgs(len, mode, nl ++ List("-map", s"$i:$mode"), i+1)
+
+  if video.length > 0 || audio.length > 0 || subs.length > 0 then
+    val inargs = inputArgs(video ++ audio ++ subs)
+    val mapargs =
+      mapArgs(video.length, "v")
+      ++ mapArgs(video.length + audio.length, "a", i = video.length)
+      ++ mapArgs(video.length + audio.length + subs.length, "s", i = video.length + audio.length)
+
+    val cmd = getBaseArgs(exec, quiet) ++ inargs ++ mapargs ++ List("-c", "copy", output)
+    cmd.!
+  else
+    -1

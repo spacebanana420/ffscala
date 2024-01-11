@@ -9,6 +9,7 @@ import ffscala.capture.*
   getres()
   testscreenshot()
   testFilters()
+  testcombine()
 }
 
 // def batch() = {

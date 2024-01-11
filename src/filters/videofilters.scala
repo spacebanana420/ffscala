@@ -184,7 +184,6 @@ def unsharp(lx: Byte, ly: Byte, la: Float, cx: Byte, cy: Byte, ca: Float, ax: By
   val arg_ay = getVal(ly, 3, 23, "5")
   val arg_aa = getFloatVal(la, -2, 5, "0")
 
-
   List("v", s"unsharp=$arg_lx:$arg_ly:$arg_la:$arg_cx:$arg_cy:$arg_ca:$arg_ax:$arg_ay:$arg_aa")
 
 def trim(start: Long, end: Long): List[String] =

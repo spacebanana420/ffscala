@@ -29,7 +29,7 @@ To encode media files, you need to first obtain the arguments and parameters you
 
 You can also pass filter arguments to process your media.
 
-You can find the functions for base [FFmpeg encoding](ffmpeg.md), [video encoder-specific](video.md) parameters, [audio encoder-specific](audio.md) parameters and [filters](filters.md).
+You can find the functions for base [FFmpeg encoding](ffmpeg.md), [base parameters](base.md), [video encoder-specific](video.md) parameters, [audio encoder-specific](audio.md) parameters and [filters](filters.md).
 
 Just like in FFmpeg, you don't need to pass many arguments for a simple file encode. Although of course, the less arguments you specify, the more defaults will be used, or parameters that are assumed based on the input video.
 
