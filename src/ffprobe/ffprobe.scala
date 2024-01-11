@@ -1,4 +1,5 @@
 package ffscala
+import ffscala.misc.*
 
 import java.io.File
 import scala.sys.process._
@@ -7,7 +8,7 @@ import scala.sys.process._
 
 def getVideoInfo(path: String): List[String] =
   val cmd = List("ffprobe", "-loglevel", "0", "-show_streams", path)
-  val mediaInfo = cmd.!!
+  val mediaInfo = exec_safe(cmd)
 
   val format = getStreamContent(mediaInfo, "codec_name=")
   val width = getStreamContent(mediaInfo, "width=")
@@ -20,7 +21,7 @@ def getVideoInfo(path: String): List[String] =
 
 def getImageInfo(path: String): List[String] =
   val cmd = List("ffprobe", "-loglevel", "0", "-show_streams", path)
-  val mediaInfo = cmd.!!
+  val mediaInfo = exec_safe(cmd)
 
   val format = getStreamContent(mediaInfo, "codec_name=")
   val width = getStreamContent(mediaInfo, "width=")
@@ -30,7 +31,7 @@ def getImageInfo(path: String): List[String] =
 
 def getAudioInfo(path: String): List[String] =
   val cmd = List("ffprobe", "-loglevel", "0", "-show_streams", path)
-  val mediaInfo = cmd.!!
+  val mediaInfo = exec_safe(cmd)
 
   val format = getStreamContent(mediaInfo, "codec_name=")
   val bitDepth = getStreamContent(mediaInfo, "bits_per_sample=")

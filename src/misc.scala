@@ -1,5 +1,7 @@
 package ffscala.misc
 
+import scala.sys.process.*
+
 //These functions are used by ffscala
 
 //barely for now
@@ -16,6 +18,12 @@ def getBaseArgs(exec: String, quiet: Boolean): List[String] =
 // def appendIntArg(a: Int, l: List[String]): List[String] = l :+ a.toString
 //
 // def appendFloatArg(a: Float, l: List[String]): List[String] = l :+ a.toString
+
+def exec_safe(cmd: List[String]): String =
+  try
+    cmd.!!
+  catch
+    case e: Exception => ""
 
 def belongsToList(text: String, group: List[String], i: Int = 0): Boolean =
   if i >= group.length then
