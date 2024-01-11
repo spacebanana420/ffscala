@@ -42,29 +42,29 @@ def getAudioInfo(path: String): List[String] =
   List(format, bitDepth, sampleRate, channelNum, channelLayout, bitrate)
 
 def getDuration(path: String): String = //maybe change it to a list
-  val info = List("ffprobe", "-loglevel", "0", "-show_entries", "stream=duration", path).!!
+  val info = exec_safe(List("ffprobe", "-loglevel", "0", "-show_entries", "stream=duration", path))
   filterString(info)
 
 def getResolution(path: String): List[Int] =
-  val info = List("ffprobe", "-loglevel", "0", "-show_entries", "stream=width,height", path).!!
+  val info = exec_safe(List("ffprobe", "-loglevel", "0", "-show_entries", "stream=width,height", path))
   try
     filterOutput(info).map(x=>x.toInt)
   catch
     case e: Exception => List(0, 0)
 
 def getCodec(path: String): List[String] =
-  val info = List("ffprobe", "-loglevel", "0", "-show_entries", "stream=codec_name", path).!!
+  val info = exec_safe(List("ffprobe", "-loglevel", "0", "-show_entries", "stream=codec_name", path))
   filterOutput(info)
 
 def getBitrate(path: String): List[Long] =
-  val info = List("ffprobe", "-loglevel", "0", "-show_entries", "stream=bit_rate", path).!!
+  val info = exec_safe(List("ffprobe", "-loglevel", "0", "-show_entries", "stream=bit_rate", path))
   try
     filterOutput(info).map(x=>x.toLong)
   catch
     case e: Exception => List(0)
 
 def getFullInfo(path: String): String =
-  List("ffprobe", "-loglevel", "0", "-show_streams", path).!!
+  exec_safe(List("ffprobe", "-loglevel", "0", "-show_streams", path))
 
 private def filterString(stream: String, s: String = "", i: Int = 0, copy: Boolean = true): String =
   if i >= stream.length then
