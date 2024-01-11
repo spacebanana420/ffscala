@@ -34,8 +34,10 @@ private def isAlright_Audio(args: List[String]): Boolean =
 
 def checkFFmpeg(path: String = "ffmpeg"): Boolean =
   try
-    List(path, "-loglevel", "quiet", "-version").!
-    true
+    if List(path, "-loglevel", "quiet", "-version").! == 0 then
+      true
+    else
+      false
   catch
     case e: Exception => false
 
@@ -116,12 +118,22 @@ def getScreenshot(input: String, output: String, time: String, quiet: Boolean = 
 
 def extractFrames
 (
-input: String, fmt: String, args: List[String] = List(),
+input: String, fmt: String, start: Int = 0, amt: Int = 0, args: List[String] = List(),
 quiet: Boolean = true, exec: String = "ffmpeg"
 ): Int =
   if isFormatSupported(fmt, "image") then
-    val output = s"${removeExtension(input)}-%d.$fmt" //change and test
-    val cmd = getBaseArgs(exec, quiet) ++ List("-i", input) ++ args :+ output //finish and add filter processing
+    val output = s"${removeExtension(input)}-%d.$fmt"
+    val startarg =
+      if start <= 0 then
+        List()
+      else
+        List("-ss", start.toString)
+    val amtarg =
+      if amt <= 0 then
+        List()
+      else
+        List("-frames:v", amt.toString)
+    val cmd = getBaseArgs(exec, quiet) ++ startarg ++ List("-i", input) ++ amtarg ++ args :+ output //finish and add filter processing
     cmd.!
   else
     -1

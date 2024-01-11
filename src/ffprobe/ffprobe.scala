@@ -6,65 +6,45 @@ import scala.sys.process._
 
 //Functions for getting and parsing media file information
 
-def getVideoInfo(path: String): List[String] =
-  val cmd = List("ffprobe", "-loglevel", "0", "-show_streams", path)
-  val mediaInfo = exec_safe(cmd)
+private def getEntries(exec: String, streams: String): String =
+  exec_safe(List(exec, "-loglevel", "0", "-show_entries", s"stream=$streams"))
 
-  val format = getStreamContent(mediaInfo, "codec_name=")
-  val width = getStreamContent(mediaInfo, "width=")
-  val height = getStreamContent(mediaInfo, "height=")
-  val pixFmt = getStreamContent(mediaInfo, "pix_fmt=")
-  val fps = getStreamContent(mediaInfo, "r_frame_rate=")
-  val bitrate = getStreamContent(mediaInfo, "bit_rate=")
-  val profile = getStreamContent(mediaInfo, "profile=")
-  List(format, width, height, pixFmt, bitrate, profile)
+def getVideoInfo(path: String, exec: String = "ffprobe"): List[String] =
+  val mediainfo = getEntries(exec, "codec_name,width,height,pix_fmt,r_frame_rate,bit_rat,profile")
+  filterOutput(mediainfo)
 
-def getImageInfo(path: String): List[String] =
-  val cmd = List("ffprobe", "-loglevel", "0", "-show_streams", path)
-  val mediaInfo = exec_safe(cmd)
+def getImageInfo(path: String, exec: String = "ffprobe"): List[String] =
+  val mediainfo = getEntries(exec, "codec_name,width,height,pix_fmt")
+  filterOutput(mediainfo)
 
-  val format = getStreamContent(mediaInfo, "codec_name=")
-  val width = getStreamContent(mediaInfo, "width=")
-  val height = getStreamContent(mediaInfo, "height=")
-  val pixFmt = getStreamContent(mediaInfo, "pix_fmt=")
-  List(format, width, height, pixFmt)
+def getAudioInfo(path: String, exec: String = "ffprobe"): List[String] =
+  val mediainfo = getEntries(exec, "codec_name,bits_per_sample,sample_rate,channels,channel_layout,bit_rate")
+  filterOutput(mediainfo)
 
-def getAudioInfo(path: String): List[String] =
-  val cmd = List("ffprobe", "-loglevel", "0", "-show_streams", path)
-  val mediaInfo = exec_safe(cmd)
-
-  val format = getStreamContent(mediaInfo, "codec_name=")
-  val bitDepth = getStreamContent(mediaInfo, "bits_per_sample=")
-  val sampleRate = getStreamContent(mediaInfo, "sample_rate=")
-  val channelNum = getStreamContent(mediaInfo, "channels=")
-  val channelLayout = getStreamContent(mediaInfo, "channel_layout")
-  val bitrate = getStreamContent(mediaInfo, "bit_rate=")
-  List(format, bitDepth, sampleRate, channelNum, channelLayout, bitrate)
-
-def getDuration(path: String): String = //maybe change it to a list
+def getDuration(path: String, exec: String = "ffprobe"): String = //maybe change it to a list
   val info = exec_safe(List("ffprobe", "-loglevel", "0", "-show_entries", "stream=duration", path))
   filterString(info)
 
-def getResolution(path: String): List[Int] =
+def getResolution(path: String, exec: String = "ffprobe"): List[Int] =
   val info = exec_safe(List("ffprobe", "-loglevel", "0", "-show_entries", "stream=width,height", path))
   try
     filterOutput(info).map(x=>x.toInt)
   catch
     case e: Exception => List(0, 0)
 
-def getCodec(path: String): List[String] =
-  val info = exec_safe(List("ffprobe", "-loglevel", "0", "-show_entries", "stream=codec_name", path))
+def getCodec(path: String, exec: String = "ffprobe"): List[String] =
+  val info = exec_safe(List(exec, "-loglevel", "0", "-show_entries", "stream=codec_name", path))
   filterOutput(info)
 
-def getBitrate(path: String): List[Long] =
-  val info = exec_safe(List("ffprobe", "-loglevel", "0", "-show_entries", "stream=bit_rate", path))
+def getBitrate(path: String, exec: String = "ffprobe"): List[Long] =
+  val info = exec_safe(List(exec, "-loglevel", "0", "-show_entries", "stream=bit_rate", path))
   try
     filterOutput(info).map(x=>x.toLong)
   catch
     case e: Exception => List(0)
 
-def getFullInfo(path: String): String =
-  exec_safe(List("ffprobe", "-loglevel", "0", "-show_streams", path))
+def getFullInfo(path: String, exec: String = "ffprobe"): String =
+  exec_safe(List(exec, "-loglevel", "0", "-show_streams", path))
 
 private def filterString(stream: String, s: String = "", i: Int = 0, copy: Boolean = true): String =
   if i >= stream.length then
@@ -111,32 +91,3 @@ private def filterOutput(stream: String, full: Boolean = false): List[String] =
     info
   else
     removeTitles(info)
-
-//improve to find multiple variants of the same info, like with video and audio combined
-private def getStreamContent(stream: String, seek: String): String =
-  var done = false
-  var line = ""
-  var lineValue = ""
-  var i = 0
-  var startCopying = false
-
-  while done == false && i < stream.length() do {
-    if stream(i) == '\n' then
-      if line.contains(seek) == true then
-        done = true
-      else
-        line = ""
-    else
-      line += stream(i)
-    i += 1
-  }
-  if done == true then
-    for c <- line do {
-      if startCopying == true then
-        lineValue += c
-      if c == '=' then
-        startCopying = true
-    }
-    lineValue
-  else
-    ""

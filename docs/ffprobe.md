@@ -1,11 +1,11 @@
-You can collect and parse information about media files with these functions.
+You can collect and parse information about media files with these functions, such as resolution, framerate, bitrate, pixel format, encoding format, etc.
 
-These functions currently require "ffprobe" to be in your PATH environment variable, they don't let you set a custom path or name for the executable. I will change this in the future.
+Just like with other execution functions (such as ```encode()```), ```exec``` determines the name or the path to the FFprobe program, defaulting to "ffprobe".
 
 ---
 
 ```scala
-def getVideoInfo(path: String): List[String]
+def getVideoInfo(path: String, exec: String = "ffprobe"): List[String]
 ```
 Returns a list containing information of the video.
 
@@ -21,7 +21,7 @@ The order of the list is as follows:
 ---
 
 ```scala
-def getImageInfo(path: String): List[String]
+def getImageInfo(path: String, exec: String = "ffprobe"): List[String]
 ```
 Returns a list containing information of the image.
 
@@ -34,7 +34,7 @@ The order of the list is as follows:
 ---
 
 ```scala
-def getAudioInfo(path: String): List[String]
+def getAudioInfo(path: String, exec: String = "ffprobe"): List[String]
 ```
 Returns a list containing information of the audio
 
@@ -49,28 +49,28 @@ The order of the list is as follows:
 ---
 
 ```scala
-def getResolution(path: String): List[Int]
+def getResolution(path: String, exec: String = "ffprobe"): List[Int]
 ```
 Gets the resolution of each media channel, returning a list with the width and height. If an error occurs when retrieving the resolution, such as when attempting to get it from an audio file, the function returns the list ```List[Int](0, 0)```.
 
 ---
 
 ```scala
-def getCodec(path: String): List[String]
+def getCodec(path: String, exec: String = "ffprobe"): List[String]
 ```
 Gets the codec names of the file's media channels.
 
 ---
 
 ```scala
-def getBitrate(path: String): List[Long]
+def getBitrate(path: String, exec: String = "ffprobe"): List[Long]
 ```
 Gets the bitrate of each media channel, measured in bits/second. If an error occurs when retrieving the resolution, the function returns the list ```List[Long](0)```.
 
 ---
 
 ```scala
-def getFullInfo(path: String): String
+def getFullInfo(path: String, exec: String = "ffprobe"): String
 ```
 Returns the ffprobe output, unparsed.
 

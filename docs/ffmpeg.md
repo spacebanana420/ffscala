@@ -43,13 +43,17 @@ Or this: ```15s```
 ```scala
 def extractFrames
 (
-input: String, fmt: String, args: List[String] = List(),
+input: String, fmt: String, start: Int = 0, amt: Int = 0, args: List[String] = List(),
 quiet: Boolean = true, exec: String = "ffmpeg"
 ): Int
 ```
 Extracts the frames of the input video ```input```.
 
 ```fmt``` is the image file extension to use. The image format is assumed by the extension. If the extension prompted isn't supported, the function will not execute FFmpeg and will return -1.
+
+```start``` sets where to start at the video to extract frames, in seconds. If the value is equal or less than 0, then the start of the video is used.
+
+```amt``` is the amount of frames to extract from the start onwards. If the value is equal or less than 0, all frames of the video are extracted.
 
 ```args``` are used for any encoding arguments, except filters.
 
