@@ -23,3 +23,46 @@ Sets the VBR mode for the opus encoder.
 * on
 * off
 * constrained
+
+---
+
+```scala
+def opus_setApplication(mode: String): List[String]
+```
+Sets the application type for opus encoding. This tells opus what usecase is ideal, and changes some encoding configurations.
+
+#### Supported modes:
+* voip
+* audio
+* lowdelay
+
+---
+
+```scala
+def flac_predictionMethod(mode: String): List[String]
+```
+
+Sets the prediction order method for the flac encoder.
+
+#### Supported modes:
+* estimation
+* 2level
+* 4level
+* 8level
+* search
+* log
+
+---
+
+```scala
+def flac_decorrelation(mode: String): List[String]
+```
+
+Sets the stereo decorrelation mode for the flac encoder.
+
+#### Supported modes:
+* auto
+* indep
+* left_side
+* right_side
+* mid_side

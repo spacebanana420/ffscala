@@ -76,3 +76,49 @@ Combines the media tracks from multiple files into one, without converting or mo
 The lists ```video```, ```audio``` and ```subs``` are the list of input files. The video, audio, and subtitle channels will be merged into the final video.
 
 ```quiet``` and ```exec``` are the same as in ```encode()```.
+
+---
+
+# Supported formats
+
+FFscala's ```encode()``` function supports the following file extensions:
+
+#### Image
+* png
+* ppm
+* apng
+* avif
+* jpeg
+* jpg
+* tiff
+* tif
+* bmp
+* gif
+* webp
+* tga
+* avif
+
+#### Audio
+* flac
+* wav
+* ogg
+* opus
+* m4a
+* mp2
+* mp3
+* aiff
+* ac3
+
+#### Video
+* mp4
+* mov
+* m4v
+* avi
+* mkv
+* webm
+* mpeg
+* h264
+* hevc
+* dnxhd
+
+If the encoder is unspecified in the arguments list, the default encoder respective to the file extension is used.
