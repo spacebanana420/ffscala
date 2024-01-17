@@ -31,14 +31,14 @@ def setCRF(value: Byte): List[String] =
   else
     List("-crf", value.toString)
 
-def setQuality(q: Int): List[String] =
+def setQuality(q: Short): List[String] =
   val qs = q.toString
   if q >= 30 then
-    List("-qmax", qs, "-q", qs)
-  if q >= 0 then
-    List("-qmin", qs, "-q", qs)
+    List("-qmax:v", qs, "-q:v", qs)
+  if q >= 1 then
+    List("-qmin:v", qs, "-q:v", qs)
   else
-    List("-qmin", "0", "-q", "0")
+    List("-qmin:v", "1", "-q:v", "1")
 
 def setKeyframeInterval(interval: Short): List[String] =
   if interval < 0 then

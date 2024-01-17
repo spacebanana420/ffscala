@@ -55,6 +55,15 @@ Sets the value for control rate factor. Minimum value is 0 which represents loss
 ---
 
 ```scala
+def setQuality(q: Short): List[String]
+```
+Sets the general setting for video/image quality. Minimum value is 1. Higher values mean lower quality and lower file sizes.
+
+This setting is usually useful for JPG/MJPEG.
+
+---
+
+```scala
 def setPixFmt(newfmt: String): List[String]
 ```
 Sets the video/image's pixel format

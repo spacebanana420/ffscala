@@ -3,9 +3,9 @@ package ffscala.capture
 import ffscala.misc.*
 
 def supportedCaptureModes(mode: String): List[String] =
-  val desktop = List("x11grab", "dshow")
-  val audio = List("alsa", "pulse", "oss")
-  val agnostic = List("dshow")
+  lazy val desktop = List("x11grab", "dshow")
+  lazy val audio = List("alsa", "pulse", "oss")
+  lazy val agnostic = List("dshow")
 
   mode match
     case "desktop" =>

@@ -3,9 +3,9 @@ package ffscala.misc
 //Functions related to format support
 
 def supportedExtensions(mode: String = ""): List[String] =
-  val imageFormats = List("png", "ppm", "apng", "avif", "jpeg", "jpg", "tiff", "tif", "bmp", "gif", "webp", "tga", "avif")
-  val audioFormats = List("flac", "wav", "ogg", "opus", "m4a", "mp2", "mp3", "aiff")
-  val videoFormats = List("mp4", "mov", "m4v", "avi", "mkv", "webm")
+  lazy val imageFormats = List("png", "ppm", "apng", "avif", "jpeg", "jpg", "tiff", "tif", "bmp", "gif", "webp", "tga", "avif")
+  lazy val audioFormats = List("flac", "wav", "ogg", "opus", "m4a", "mp2", "mp3", "aiff")
+  lazy val videoFormats = List("mp4", "mov", "m4v", "avi", "mkv", "webm")
 
   mode match
     case "image" => imageFormats
