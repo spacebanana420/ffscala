@@ -39,6 +39,20 @@ Sets the application type for opus encoding. This tells opus what usecase is ide
 ---
 
 ```scala
+def flac_lpcAlgorithm(mode: String): List[String]
+```
+
+Sets the LPC algorithm for the flac encoder.
+
+#### Supported modes:
+* none
+* fixed
+* levinson
+* cholesky
+
+---
+
+```scala
 def flac_predictionMethod(mode: String): List[String]
 ```
 

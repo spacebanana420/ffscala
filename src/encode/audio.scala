@@ -25,6 +25,13 @@ def opus_setApplication(mode: String): List[String] =
   else
     List("-application", "audio")
 
+def flac_lpcAlgorithm(mode: String): List[String] =
+  val supported = List("none", "fixed", "levinson", "cholesky")
+  if belongsToList(mode, supported) then
+    List("-lpc_type", mode)
+  else
+    List("-lpc_type", "-1")
+
 def flac_predictionMethod(mode: String): List[String] =
   val supported = List("estimation", "2level", "4level", "8level", "search", "log")
   if belongsToList(mode, supported) then
