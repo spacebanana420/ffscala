@@ -6,12 +6,15 @@ import ffscala.capture.*
   //encodedir()
   //testoptional()
   //testcapture()
+  extract()
   getres()
   testscreenshot()
   testFilters()
   testcombine()
 }
 
+def extract() =
+  extractFrames("CHARGE.avi", "png", amt = 5)
 // def batch() = {
 //   val files: List[String] = List("Awesome Wooper.png", "Keroppi.png", "Tux OC.png")
 //   val params = {scaleFactor(0.1, 0.1)
