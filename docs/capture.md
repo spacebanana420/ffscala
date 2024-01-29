@@ -1,12 +1,22 @@
 These functions handle screen and audio capture.
 
-Currently only Linux-based and BSD-based systems are supported, with x11grab for screen capture and pulse/alsa (and oss a bit) for audio capture, but initial support has been added for DirectShow for desktop and audio capture on Windows. Avfoundation is MacOS's method to capture desktop and audio devices, and you can list avfoundation's device sources, but actual capture functionality has not been implemented.
+This part of FFscala is experimental, and support for your system can't be guaranteed. I can only guarantee it works under x11 Linux with Pulseaudio or Alsa.
+
+### Current capture modes
+
+* x11grab       (video)             (x11)
+* dshow         (video and audio)   (Windows)
+* gdigrab       (video)             (Windows)
+* pulse         (audio)             (pulseaudio)
+* alsa          (audio)             (alsa)
+* oss           (audio)             (oss)
+* avfoundation  (video and audio)   (MacOS)
+
+x11, pulseaudio, alsa and oss are common backends among open source operating systems, especially systems of the Linux and BSD families. Wayland/pipewire screen capture is not yet available on FFmpeg, so Wayland users cannot make use of screen capture yet.
 
 Remember to import ```ffscala.capture``` to use these functions.
 
-For desktop and audio capture functionality, you need to give the functions the input device/screen to capture. To know your input devices, check the function ```listSources()```.
-
-Please note that this part of the library is very recent and experimental. I can only guarantee it works under x11 Linux with Pulseaudio or Alsa.
+For desktop and audio capture functionality, you need to give the functions the input device to capture. To know your input devices, check the function ```listSources()```.
 
 ---
 
@@ -34,6 +44,7 @@ You can specify a positive offset for the screen's position with x and y
 Supported desktop capture modes:
 * x11grab
 * dshow
+* gdigrab
 
 For x11grab, the default input is "0.0", which will capture the whole main screen.
 
@@ -82,6 +93,7 @@ Supported:
 * pulse
 * oss
 * dshow
+* avfoundation
 * all
 
 For ```all```, all sources that can be listed with ```ffmpeg -sources``` will be listed and not parsed or processed.

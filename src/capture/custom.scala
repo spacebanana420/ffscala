@@ -23,7 +23,7 @@ def x11grab_captureVideo(input: String, fps: Int, showmouse: Boolean = true, wid
     else
       List("-draw_mouse", "0")
   val arg_size =
-    if width <= 0 || y <= 0 then
+    if width <= 0 || height <= 0 then
       List()
     else
       List("-video_size", s"${width}x$height")
@@ -36,7 +36,7 @@ def dshow_captureVideo(input: String, fps: Int, width: Int = 0, height: Int = 0)
     else
       List("-framerate", fps.toString)
 
-  val arg_input = List("-i", s"Video=\"$input\"")
+  val arg_input = List("-i", s"video=\"$input\"")
 
   val arg_size =
     if width <= 0 || height <= 0 then
@@ -65,7 +65,7 @@ def gdigrab_captureVideo(fps: Int, showmouse: Boolean = true, input: String = ""
       List("-draw_mouse", "0")
 
   val arg_size =
-    if width <= 0 || y <= 0 then
+    if width <= 0 || height <= 0 then
       List()
     else
       List("-video_size", s"${width}x$height")
@@ -84,7 +84,7 @@ def dshow_captureAudio(input: String, samplerate: Int, channels: Byte, depth: By
     else
       List("-sample_rate", samplerate.toString)
 
-  val arg_input = List("-i", s"Audio=\"$input\"")
+  val arg_input = List("-i", s"audio=\"$input\"")
 
   val arg_ch =
     if channels < 1 then
@@ -97,6 +97,39 @@ def dshow_captureAudio(input: String, samplerate: Int, channels: Byte, depth: By
     else
       List("-sample_size", depth.toString)
   List("-f", "dshow") ++ arg_sample ++ arg_ch ++ arg_depth ++ arg_input
+
+def avfoundation_capture(vinput: String, ainput: String, fps: Int, showmouse: Boolean = true, width: Int = 0, height: Int = 0): List[String] =
+  val vi =
+    if vinput == "" then
+      "default"
+    else
+      vinput
+  val ai =
+    if ainput == "" then
+      "default"
+    else
+      ainput
+  val arg_input = List("-i", s"$vi:$ai")
+
+  val arg_fps =
+    if fps < 1 then
+      List("-framerate", "30")
+    else
+      List("-framerate", fps.toString)
+
+  val arg_mouse =
+    if showmouse == true then
+      List("-capture_cursor", "1")
+    else
+      List("-capture_cursor", "0")
+
+  val arg_size =
+    if width <= 0 || height <= 0 then
+      List()
+    else
+      List("-video_size", s"${width}x$height")
+
+  List("-f", "avfoundation") ++ arg_fps ++ arg_size ++ arg_mouse ++ arg_input
 
 // def x11grab_hideMouse(): List[String] = List("-draw_mouse", "0") //check which is the default
 // //add the rest

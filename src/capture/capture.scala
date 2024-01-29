@@ -72,7 +72,7 @@ def takeScreenshot(mode: String, i: String, output: String, showmouse: Boolean =
     if belongsToList(mode, supported) then
       List("-f", mode)
     else
-      List("-f","x11grab")
+      List("-f", "x11grab")
   val arg_mouse =
     if showmouse then
       List("-draw_mouse", "1")
