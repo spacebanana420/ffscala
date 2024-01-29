@@ -28,12 +28,6 @@ def captureVideo(mode: String, i: String, fps: Int): List[String] =
       List("-framerate", "30")
     else
       List("-framerate", fps.toString)
-//implement later
-//   val arg_mouse =
-//     if showmouse == true then
-//       List("-draw_mouse", "1")
-//     else
-//       List("-draw_mouse", "0")
 
   List("-f", arg_mode) ++ arg_fps ++ processDesktopInput(i, mode)
 

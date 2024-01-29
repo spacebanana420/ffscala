@@ -4,6 +4,7 @@ import ffscala.*
 import scala.sys.process._
 import ffscala.misc.*
 
+//String to list
 private def parse(sources: String, s: String = "", l: List[String] = List(), i: Int = 0): List[String] =
   if i >= s.length then
     if s != "" then
@@ -17,6 +18,7 @@ private def parse(sources: String, s: String = "", l: List[String] = List(), i: 
   else
     parse(sources, s, l, i+1)
 
+//Remove unwanted list elements
 private def filterSources(s: List[String], f: List[String] = List(), i: Int = 0): List[String] =
   def filter(source: String, filtered: String = "", c: Int = 0): String =
     if c >= source.length || source(c) == ' ' then

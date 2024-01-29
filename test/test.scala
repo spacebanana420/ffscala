@@ -1,17 +1,59 @@
 import ffscala.*
 import ffscala.capture.*
+import java.io.File
 
 @main def main() = {
   //batch()
   //encodedir()
   //testoptional()
   //testcapture()
-  extract()
-  getres()
-  testscreenshot()
-  testFilters()
-  testcombine()
+
+  //extract()
+  //getres()
+  //testscreenshot()
+  //testFilters()
+  //testcombine()
+  funny()
 }
+
+def funny() =
+  val x  = List(0.1f, 0.5f, 0.8f)
+  val y = List(0.03f, 0.6f, 0.95f)
+
+  val rx = List(0f, 0.5f, 0.6f, 1f)
+  val ry = List(0f, 0.5f, 0.65f, 1f)
+
+  val gx = List(0f, 0.5f, 0.6f, 1f)
+  val gy = List(0f, 0.5f, 0.62f,1f)
+
+  val bx = List(0f, 0.2f, 0.5f, 1f)
+  val by = List(0f, 0.2f, 0.5f, 0.95f)
+
+  val filters =
+    setCurves(x, y, "all")
+    ++ setCurves(rx, ry, "r")
+    ++ setCurves(gx, gy, "g")
+    ++ setCurves(bx, by, "b")
+    ++ setHSV(0, 1.3, 0)
+
+  val argsmp4 =
+    setVideoEncoder("x264")
+    ++ x264_setPreset("superfast")
+    ++ setCRF(22)
+    ++ setAudioEncoder("flac")
+
+  val argsmxf =
+    setVideoEncoder("x264")
+    ++ x264_setPreset("superfast")
+    ++ setCRF(22)
+    ++ setAudioEncoder("copy")
+
+  for f <- File(".").list() do
+    println(f)
+    if f.contains(".MP4") then
+      encode(f, s"new/$f", argsmp4, filters, quiet = false)
+    else if f.contains(".MXF") then
+      encode(f, s"new/$f", argsmxf, filters, quiet = false)
 
 def extract() =
   extractFrames("CHARGE.avi", "png", amt = 5)

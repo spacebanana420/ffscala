@@ -16,6 +16,7 @@ Sets the video encoder.
 
 #### Supported video encoders:
 * copy
+* cinepak
 * x264
 * x264rgb
 * x265
@@ -24,6 +25,7 @@ Sets the video encoder.
 * qsv
 * vaapi
 * utvideo
+* huffyuv
 * png
 * dnxhd
 * prores

@@ -78,12 +78,10 @@ This function calls FFmpeg to retrieve the currently available audio sources fro
 ```full``` is set to false by default, which means the retrieved audio source strings are the source IDs that can be used directly on ```captureAudio```. If it's set to true, the full name of the source is displayed. If the given mode is either ```dshow``` or ```avfoundation```, the full names will be given as if full was true.
 
 Supported:
-* x11grab
 * alsa
 * pulse
 * oss
 * dshow
-* avfoundation
 * all
 
 For ```all```, all sources that can be listed with ```ffmpeg -sources``` will be listed and not parsed or processed.
