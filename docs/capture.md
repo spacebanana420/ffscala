@@ -19,6 +19,7 @@ Remember to import ```ffscala.capture``` to use these functions.
 For desktop and audio capture functionality, you need to give the functions the input device to capture. To know your input devices, check the function ```listSources()```.
 
 ---
+# Recording functions
 
 ```scala
 def record(output: String, args: List[String], quiet: Boolean = true, exec: String = "ffmpeg"): Int
@@ -32,9 +33,113 @@ To stop the recording, press ctrl + C. You can alternatively add a recording dur
 ---
 
 ```scala
+def takeScreenshot(mode: String, i: String, output: String, showmouse: Boolean = false, args: List[String] = List(), quiet: Boolean = true, exec: String = "ffmpeg"): Int
+```
+Takes a screenshot of your screen and saves it as a png file. ```output``` is the path to the screenshot, it can just be the file name if you want to save the image in the current directory.
+
+The image file format is assumed by the extension. If an unsupported or unknown extension is used, FFscala will default to PNG.
+
+```showmouse``` tells to either include the mouse in the screen capture or not
+Mode is the screen capture method.
+
+All the encoding parameter arguments can be added through ```args```. This is very useful for most image formats that are not PNG and require some manual encoding configuration to suit well your necessities.
+
+Right now only x11 is supported.
+
+The ```i``` is input screen. This varies between capture modes.
+
+You can specify a positive offset for the screen's position with x and y
+
+Supported desktop capture modes:
+* x11grab
+* dshow
+
+---
+
+# Capture argument functions
+
+```scala
+def x11grab_captureVideo(input: String, fps: Int, showmouse: Boolean = true, width: Int = 0, height: Int = 0, x: Int = 0, y: Int = 0): List[String]
+```
+Uses x11grab for video capture, for any OS that uses an x11 server.
+
+```input``` sets the display and screen to capture. Use "0.0" to use display 0 and screen 0, probably the ones you want to capture.
+
+```fps``` is the capture frame rate.
+
+```showmouse``` tells x11grab to whether show the mouse cursor in the capture.
+
+```width``` and ```height``` set the dimensions of the screen capture. Default is the native size of the screen you are capturing, and lower values than that will crop.
+
+The arguments ```x y``` set the position offset of the capture, starting at the top left.
+
+---
+
+```scala
+def dshow_captureVideo(input: String, fps: Int, width: Int = 0, height: Int = 0): List[String]
+```
+Uses DirectShow for video capture, for Windows systems.
+
+```input``` sets the input video device to capture. Check ```listSources()``` to know which you have in your system.
+
+```fps``` is the capture frame rate.
+
+```width``` and ```height``` set the dimensions of the screen capture. Default is the native size of the screen you are capturing, and lower values than that will crop.
+
+---
+
+```scala
+def gdigrab_captureVideo(fps: Int, showmouse: Boolean = true, input: String = "", width: Int = 0, height: Int = 0, x: Int = 0, y: Int = 0): List[String]
+```
+Uses Gdigrab for video capture, for Windows systems.
+
+```fps``` is the capture frame rate.
+
+```showmouse``` tells Gdigrab to whether show the mouse cursor in the capture.
+
+```input``` sets the input video device to capture. By default it is set to "", which will capture the whole screen. Set it to the name of a program window to capture that window instead.
+
+```width``` and ```height``` set the dimensions of the screen capture. Default is the native size of the screen/window you are capturing, and lower values than that will crop.
+
+The arguments ```x y``` set the position offset of the capture, starting at the top left.
+
+---
+
+```scala
+def dshow_captureAudio(input: String, samplerate: Int, channels: Byte, depth: Byte): List[String]
+```
+Uses DirectShow for audio capture, for Windows systems.
+
+```input``` sets the input audio device to capture. Check ```listSources()``` to know which you have in your system.
+
+```sampleraate``` is the audio sample rate. Minimum value accepted is 1.
+
+```channels``` sets the amount of audio channels. Minimum value accepted is 1.
+
+```depth``` sets the audio bit depth. Minimum value accepted is 8.
+
+---
+
+```scala
+def avfoundation_capture(vinput: String, ainput: String, fps: Int, showmouse: Boolean = true, width: Int = 0, height: Int = 0): List[String]
+```
+Uses Avfoundation for video capture, for MacOS systems.
+
+```vinput``` and ```ainput``` are respectively the input devices for your video and audio capture. Use index numbers, starting from 0. Leave them at "" to use the system's defaults. Set them to "none" to disable their capture.
+
+```fps``` is the capture frame rate.
+
+```showmouse``` tells Avfoundation to whether show the mouse cursor in the capture.
+
+```width``` and ```height``` set the dimensions of the screen capture. Default is the native size of the screen/window you are capturing, and lower values than that will crop.
+
+---
+
+```scala
 def captureVideo(mode: String, i: String, fps: Int): List[String]
 ```
-Returns the configuration to capture your screen.
+Returns the configuration to capture your screen. It's preferred you use the functions above, as they are specifically tailored for their respective capture backend, while this function is more generic and supports less features.
+
 ```fps``` sets the frame rate for the video capture
 
 The ```i``` is input screen. This varies between capture modes.
@@ -72,6 +177,8 @@ For Linux, it's recommended to use ```pulse```.
 
 ---
 
+# Other functions
+
 ```scala
 def addTracks(amt: Int): List[String]
 ```
@@ -98,26 +205,3 @@ Supported:
 
 For ```all```, all sources that can be listed with ```ffmpeg -sources``` will be listed and not parsed or processed.
 
----
-
-```scala
-def takeScreenshot(mode: String, i: String, output: String, showmouse: Boolean = false, args: List[String] = List(), quiet: Boolean = true, exec: String = "ffmpeg"): Int
-```
-Takes a screenshot of your screen and saves it as a png file. ```output``` is the path to the screenshot, it can just be the file name if you want to save the image in the current directory.
-
-The image file format is assumed by the extension. If an unsupported or unknown extension is used, FFscala will default to PNG.
-
-```showmouse``` tells to either include the mouse in the screen capture or not
-Mode is the screen capture method.
-
-All the encoding parameter arguments can be added through ```args```. This is very useful for most image formats that are not PNG and require some manual encoding configuration to suit well your necessities.
-
-Right now only x11 is supported.
-
-The ```i``` is input screen. This varies between capture modes.
-
-You can specify a positive offset for the screen's position with x and y
-
-Supported desktop capture modes:
-* x11grab
-* dshow
