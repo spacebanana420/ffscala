@@ -138,7 +138,7 @@ Uses Avfoundation for video capture, for MacOS systems.
 ```scala
 def captureVideo(mode: String, i: String, fps: Int): List[String]
 ```
-Returns the configuration to capture your screen. It's preferred you use the functions above, as they are specifically tailored for their respective capture backend, while this function is more generic and supports less features.
+Returns the configuration to capture your screen. It's preferred you use the functions above instead, as they are specifically tailored for their respective capture backend, while this function is more generic and supports less features.
 
 ```fps``` sets the frame rate for the video capture
 
@@ -156,9 +156,31 @@ For x11grab, the default input is "0.0", which will capture the whole main scree
 ---
 
 ```scala
+def pulse_captureAudio(input: String, samplerate: Int, channels: Byte): List[String]
+```
+```scala
+def alsa_captureAudio(input: String, samplerate: Int, channels: Byte): List[String]
+```
+```scala
+def oss_captureAudio(input: String, samplerate: Int, channels: Byte): List[String]
+```
+```scala
+def jack_captureAudio(input: String, channels: Byte): List[String]
+```
+Use pulseaudio, alsa, oss or jack to capture audio.
+
+```input``` is the input audio device.
+
+```samplerate``` and ```channels``` are the audio sample rate and the amount of audio channels, respectively. Minimum value is 1 for both.
+
+The jack function doesn't take a sample rate argument.
+
+---
+
+```scala
 def captureAudio(mode: String, input: String, ch: Byte = 2, rate: Int = 48000): List[String]
 ```
-Returns the configuration to capture audio.
+Returns the configuration to capture audio. Just like ```captureVideo()```, it's preferred you use the functions above instead, as they are specifically tailored for their respective capture backend, while this function is more generic and supports less features.
 
 Mode is the screen capture method. Right now only alsa or pulse are supported.
 

@@ -39,7 +39,7 @@ def processAudioInput(input: String, mode: String): List[String] =
 
 def processAudioChannels(ch: Byte, mode: String): List[String] =
   mode match
-    case "dshow" =>
+    case "dshow" | "alsa" =>
       List("-channels", ch.toString)
     case _ =>
       List("-ac", ch.toString)

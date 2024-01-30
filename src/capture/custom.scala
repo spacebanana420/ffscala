@@ -131,6 +131,36 @@ def avfoundation_capture(vinput: String, ainput: String, fps: Int, showmouse: Bo
 
   List("-f", "avfoundation") ++ arg_fps ++ arg_size ++ arg_mouse ++ arg_input
 
+def pulse_captureAudio(input: String, samplerate: Int, channels: Byte): List[String] =
+  generic_captureAudio("pulse", input, samplerate, channels)
+
+def alsa_captureAudio(input: String, samplerate: Int, channels: Byte): List[String] =
+  generic_captureAudio("alsa", input, samplerate, channels)
+
+def oss_captureAudio(input: String, samplerate: Int, channels: Byte): List[String] =
+  generic_captureAudio("oss", input, samplerate, channels)
+
+def jack_captureAudio(input: String, channels: Byte): List[String] =
+  generic_captureAudio("jack", input, 0, channels)
+
+private def generic_captureAudio(mode: String, input: String, samplerate: Int, channels: Byte): List[String] =
+  val arg_input = List("-i", input)
+
+  val arg_sample =
+    if samplerate < 1 then
+      List()
+    else
+      List("-sample_rate", samplerate.toString)
+
+  val arg_ch =
+    if channels < 1 then
+      List()
+    else
+      List("-channels", channels.toString)
+
+  List("-f", mode) ++ arg_sample ++ arg_ch ++ arg_input
+
+
 // def x11grab_hideMouse(): List[String] = List("-draw_mouse", "0") //check which is the default
 // //add the rest
 // def x11grab_setInput(display: Int, screen: Int): List[String] =
