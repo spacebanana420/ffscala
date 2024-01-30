@@ -165,6 +165,12 @@ def utvideo_setPred(pred: String): List[String] =
   else
     List()
 
+def huffyuv_setPred(pred: String): List[String] =
+  if pred == "left" || pred == "plane" || pred == "median" then
+    List("-pred", pred)
+  else
+    List()
+
 def png_setPred(mode: String): List[String] =
   val modes = List("none", "sub", "up", "avg", "paeth", "mixed")
   if belongsToList(mode, modes) then

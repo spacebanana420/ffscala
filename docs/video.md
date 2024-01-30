@@ -320,12 +320,24 @@ Higher value = lower bitrate and quality.
 ```scala
 def utvideo_setPred(pred: String): List[String]
 ```
-Sets the prediction method for Utvideo and HuffYUV.
+Sets the prediction method for Utvideo.
 
 #### Supported methods:
 * none
 * left
 * gradient
+* median
+
+---
+
+```scala
+def huffyuv_setPred(pred: String): List[String]
+```
+Sets the prediction method for HuffYUV.
+
+#### Supported methods:
+* left
+* plane
 * median
 
 ---
