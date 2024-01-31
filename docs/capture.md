@@ -10,6 +10,7 @@ This part of FFscala is experimental, and support for your system can't be guara
 * pulse         (audio)             (pulseaudio)
 * alsa          (audio)             (alsa)
 * oss           (audio)             (oss)
+* jack          (audio)             (jack)
 * avfoundation  (video and audio)   (MacOS)
 
 x11, pulseaudio, alsa and oss are common backends among open source operating systems, especially systems of the Linux and BSD families. Wayland/pipewire screen capture is not yet available on FFmpeg, so Wayland users cannot make use of screen capture yet.

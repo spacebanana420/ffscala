@@ -98,3 +98,30 @@ execplay("movie.mkv", args)
 ```
 
 This will call FFplay to open and play back the video "movie.mkv" in fullscreen with the volume at 12%. FFplay will close once the video ends and the display window will be titled "Homemade Cinema".
+
+# Screen and audio capture
+
+FFscala implements FFmpeg's video and audio capture functionality. Currently, this support is experimental, but it's developed enough to cover support for Windows, MacOS, Linux-based systems and systems of the BSD family or any other system that supports x11, pulseaudio, OSS or Alsa.
+
+To get started, import:
+
+```scala
+import ffscala.capture.*
+```
+
+Check [here](capture.md) for the list of supported functions.
+
+```record()``` is the main function, used for capturing your screen as a video or your desktop, microphone, etc audio. FFscala won't guess your operating system and supported backends though, so you need to do some investigation yourself. To the ```args``` argument, you should add your configuration for your target systems, there are plenty of functions.
+
+### List of capture backends
+
+* x11grab - Screen capture, for systems running an x11-based desktop. Generally it's Linux-based and BSD-based systems.
+* dshow - DirectShow screen and audio capture for Windows.
+* gdigrab - Screen and application window capture for Windows.
+* Avfoundation - Screen and audio capture for MacOS.
+* pulse - Pulseaudio audio capture, mainly for Linux-based and BSD-based systems.
+* alsa - ALSA audio capture, mainly for Linux-based and BSD-based systems.
+* OSS - OSS audio capture, mainly for Linux-based and BSD-based systems.
+* Jack - Jack audio capture, mainly for Linux-based and BSD-based systems.
+
+Currently, it is not possible to capture your screen on Wayland with FFscala. This will change once FFmpeg implements a backend that can be used for this on wayland, like pipewire.

@@ -9,11 +9,7 @@ import ffscala.misc.*
 def execplay(input: String, args: List[String], quiet: Boolean = true, exec: String = "ffplay"): Int =
   if File(input).isFile() == true then
     try
-      val cmd =
-      if quiet == true then
-          List(exec, "-y", "-loglevel", "quiet") ++ args
-      else
-          List(exec, "-y", "-hide_banner") ++ args
+      val cmd = getBaseArgs(exec, quiet) ++ args
       cmd.!
     catch
       case e: Exception => -1
