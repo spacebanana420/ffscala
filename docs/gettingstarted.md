@@ -125,3 +125,5 @@ Check [here](capture.md) for the list of supported functions.
 * Jack - Jack audio capture, mainly for Linux-based and BSD-based systems.
 
 Currently, it is not possible to capture your screen on Wayland with FFscala. This will change once FFmpeg implements a backend that can be used on Wayland, like pipewire.
+
+Each function respective to a backend varies in the argument it takes, as well as the ```input``` parameter. Check ```listSources()``` to know what input device names to use.
