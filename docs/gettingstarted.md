@@ -101,7 +101,7 @@ This will call FFplay to open and play back the video "movie.mkv" in fullscreen 
 
 # Screen and audio capture
 
-FFscala implements FFmpeg's video and audio capture functionality. Currently, this support is experimental, but it's developed enough to cover support for Windows, MacOS, Linux-based systems and systems of the BSD family or any other system that supports x11, pulseaudio, OSS or Alsa.
+FFscala implements FFmpeg's video and audio capture functionality. Currently, this support is experimental, but it's developed enough to cover support for the vast majority of desktop and server operating systems.
 
 To get started, import:
 
@@ -124,4 +124,4 @@ Check [here](capture.md) for the list of supported functions.
 * OSS - OSS audio capture, mainly for Linux-based and BSD-based systems.
 * Jack - Jack audio capture, mainly for Linux-based and BSD-based systems.
 
-Currently, it is not possible to capture your screen on Wayland with FFscala. This will change once FFmpeg implements a backend that can be used for this on wayland, like pipewire.
+Currently, it is not possible to capture your screen on Wayland with FFscala. This will change once FFmpeg implements a backend that can be used on Wayland, like pipewire.
