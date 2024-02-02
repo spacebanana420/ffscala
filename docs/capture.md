@@ -2,16 +2,28 @@ These functions handle screen and audio capture.
 
 This part of FFscala is experimental, and support for your system can't be guaranteed. I can only guarantee it works under x11 Linux with Pulseaudio or Alsa.
 
+Check the [FFmpeg device documentation](https://ffmpeg.org/ffmpeg-devices.html) for more information on how these capture backends work and what you can do with them.
+
 ### Current capture modes
 
-* x11grab       (video)             (x11)
-* dshow         (video and audio)   (Windows)
-* gdigrab       (video)             (Windows)
-* pulse         (audio)             (pulseaudio)
-* alsa          (audio)             (alsa)
-* oss           (audio)             (oss)
-* jack          (audio)             (jack)
-* avfoundation  (video and audio)   (MacOS)
+* x11grab
+  * (video) (x11)
+* dshow
+  * (video and audio) (Windows)
+* gdigrab
+  * (video) (Windows)
+* pulse
+  * (audio) (pulseaudio)
+* alsa
+  * (audio) (alsa)
+* oss
+  * (audio) (oss)
+* jack
+  * (audio) (jack)
+* avfoundation
+  * (video and audio) (MacOS)
+* android_camera
+  * (video) (Android)
 
 x11, pulseaudio, alsa and oss are common backends among open source operating systems, especially systems of the Linux and BSD families. Wayland/pipewire screen capture is not yet available on FFmpeg, so Wayland users cannot make use of screen capture yet.
 
@@ -197,6 +209,20 @@ Supported:
 * dshow
 
 For Linux, it's recommended to use ```pulse```.
+
+---
+
+```scala
+def androidcamera_capture(input: Byte, fps: Int, width: Int, height: Int): List[String]
+```
+Uses android_camera to capture the video of your android phone's cameras.
+
+```input``` Is an index number. 0 tends to be your main back-facing camera.
+
+```fps``` is the capture frame rate.
+
+
+```width``` and ```height``` set the resolution of the capture. If the given dimensions are not available in your Android camera, then it will fallback to the default setting.
 
 ---
 

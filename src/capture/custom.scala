@@ -3,7 +3,7 @@ package ffscala.capture
 import ffscala.*
 import ffscala.misc.*
 
-//Functions for custom arguments for desktop and audio capture
+//Backend-specific implementations for video and audio capture
 
 def x11grab_captureVideo(input: String, fps: Int, showmouse: Boolean = true, width: Int = 0, height: Int = 0, x: Int = 0, y: Int = 0): List[String] =
   val arg_fps =
@@ -158,3 +158,21 @@ private def generic_captureAudio(mode: String, input: String, samplerate: Int, c
       List("-channels", channels.toString)
 
   List("-f", mode) ++ arg_sample ++ arg_ch ++ arg_input
+
+
+def androidcamera_capture(input: Byte, fps: Int, width: Int, height: Int): List[String] =
+  val arg_fps =
+    if fps < 1 then
+      List("-framerate", "30")
+    else
+      List("-framerate", fps.toString)
+
+  val arg_input = List("-camera_index", input.toString)
+
+  val arg_size =
+    if width <= 0 || height <= 0 then
+      List()
+    else
+      List("-video_size", s"${width}x$height")
+
+  List("-f", "android_camera") ++ arg_fps ++ arg_size ++ arg_input
