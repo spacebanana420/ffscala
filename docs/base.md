@@ -54,6 +54,8 @@ def setCRF(value: Byte): List[String]
 ```
 Sets the value for control rate factor. Minimum value is 0 which represents lossless compression.
 
+Not all encoders support CRF bitrate control, but many do, such as x264, x265, VP9 and AV1.
+
 ---
 
 ```scala
@@ -61,14 +63,17 @@ def setQuality(q: Short): List[String]
 ```
 Sets the general setting for video/image quality. Minimum value is 1. Higher values mean lower quality and lower file sizes.
 
-This setting is usually useful for JPG/MJPEG.
+This setting is usually useful for JPG/MJPEG. Not all encoders use this parameter
 
 ---
 
 ```scala
 def setPixFmt(newfmt: String): List[String]
 ```
-Sets the video/image's pixel format
+Sets the video/image's pixel/color encoding format.
+
+If unspecified, it will use the input data's original pixel format.
+
 #### Supported pixel formats:
 * rgb24
 * bgr24
@@ -123,7 +128,8 @@ Sets the video's bframes (between 0 and 16).
 ```scala
 def setAudioEncoder(encoder: String): List[String]
 ```
-Sets the audio encoder
+Sets the audio encoder.
+
 #### Supported encoders:
 * copy
 * aac
@@ -153,7 +159,8 @@ Sets the audio bitrate in kilobits.
 ```scala
 def setSampleFormat(fmt: String): List[String]
 ```
-Sets the audio's sample format
+Sets the audio's sample format.
+
 #### Supported sample formats:
 * u8
 * s16
@@ -205,4 +212,4 @@ Example: ```mapChannel("video", 0, 0)``` grabs the first video channel of the fi
 ```scala
 def setDuration(seconds: Float): List[String]
 ```
-Sets the duration of the media encode/playback. This is compatible with both FFmpeg and FFplay. The float value represents the point in time in seconds.
+Sets the duration of the media encode/playback. This is compatible with both FFmpeg and FFplay. The float value represents the duration in seconds.
