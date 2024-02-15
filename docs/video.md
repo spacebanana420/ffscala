@@ -52,7 +52,7 @@ Sets the motion estimation for x264 encoding.
 ---
 
 ```scala
-x264_directPrediction(mode: String): List[String]
+def x264_directPrediction(mode: String): List[String]
 ```
 Sets the direct MV prediction mode for x264 encoding.
 

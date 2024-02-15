@@ -34,7 +34,7 @@ private def isAlright_Audio(args: List[String]): Boolean =
 
 def checkFFmpeg(path: String = "ffmpeg"): Boolean =
   try
-    if List(path, "-loglevel", "quiet", "-version").! == 0 then
+    if List(path, "-loglevel", "quiet", "-version").!(ProcessLogger(line => ())) == 0 then
       true
     else
       false

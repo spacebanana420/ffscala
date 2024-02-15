@@ -1,20 +1,19 @@
 package ffscala.capture
 
 import ffscala.*
-import scala.sys.process._
+import scala.sys.process.*
 import ffscala.misc.*
 
-def record(output: String, args: List[String], quiet: Boolean = false, exec: String = "ffmpeg"): Int =
+def record(output: String, captureargs: List[String], args: List[String] = List(), quiet: Boolean = true, exec: String = "ffmpeg"): Int =
   try
     val cmd: List[String] =
-      if quiet == true then
-        List(exec, "-y", "-loglevel", "quiet") ++ args :+ output
+      if quiet then
+        List(exec, "-y", "-loglevel", "quiet") ++ captureargs ++ args :+ output
       else
-        List(exec, "-y", "-hide_banner") ++ args :+ output
+        List(exec, "-y", "-hide_banner") ++ captureargs ++ args :+ output
     cmd.!
   catch
     case e: Exception => -1
-
 
 def takeScreenshot(mode: String, i: String, output: String, showmouse: Boolean = false, args: List[String] = List(), quiet: Boolean = true, exec: String = "ffmpeg"): Int =
   val path =

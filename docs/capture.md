@@ -35,7 +35,7 @@ For desktop and audio capture functionality, you need to give the functions the 
 # Recording functions
 
 ```scala
-def record(output: String, args: List[String], quiet: Boolean = true, exec: String = "ffmpeg"): Int
+def record(output: String, captureargs: List[String], args: List[String] = List(), quiet: Boolean = true, exec: String = "ffmpeg"): Int
 ```
 This executes FFmpeg and begins the desktop recording. ```output``` is for the output file's path.
 
