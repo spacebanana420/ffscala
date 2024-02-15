@@ -11,7 +11,7 @@ def record(output: String, captureargs: List[String], args: List[String] = List(
         List(exec, "-y", "-loglevel", "quiet") ++ captureargs ++ args :+ output
       else
         List(exec, "-y", "-hide_banner") ++ captureargs ++ args :+ output
-    cmd.!
+    cmd.!<
   catch
     case e: Exception => -1
 

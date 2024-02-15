@@ -41,7 +41,7 @@ This executes FFmpeg and begins the desktop recording. ```output``` is for the o
 
 ```args``` can be a mix of the argument functions seen here and encoder/filter argument functions.
 
-To stop the recording, press ctrl + C. You can alternatively add a recording duration with ```setDuration()``` (see [Base doc](../docs/base.md)).
+To stop the recording, type Q. You can also stop the recording with ctrl + C, but this will also shut down your program. You can alternatively add a recording duration with ```setDuration()``` (see [Base doc](../docs/base.md)).
 
 ---
 
