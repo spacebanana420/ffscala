@@ -49,29 +49,6 @@ def encode
 input: String, output: String, args: List[String] = List(), filters: List[String] = List(),
 quiet: Boolean = true, exec: String = "ffmpeg"
 ): Int =
-  def processFilters(vf: String = "", af: String = "", i: Int = 0): List[String] =
-    val comma =
-      if i >= filters.length-2 then
-        ""
-      else
-        ","
-    if i >= filters.length then
-      List(vf, af)
-    else if filters(i) == "v" && i < filters.length-1 then
-      processFilters(vf + filters(i+1) + comma, af, i+2)
-    else if filters(i) == "a" && i < filters.length-1 then
-      processFilters(vf, af + filters(i+1) + comma, i+2)
-    else
-      processFilters(vf, af, i+1)
-
-  def getNonFilters(nf: List[String] = List(), i: Int = 0): List[String] =
-    if i >= filters.length then
-      nf
-    else if filters(i) == "v" || filters(i) == "a" then
-      getNonFilters(nf, i+2)
-    else
-      getNonFilters(nf :+ filters(i), i+1)
-
   val imageFormats = supportedExtensions("image")
   val audioFormats = supportedExtensions("audio")
   //maybe i should scrap this idea
@@ -82,7 +59,7 @@ quiet: Boolean = true, exec: String = "ffmpeg"
       isAlright_Audio(args)
     else
       true
-  val filterlist = processFilters()
+  val filterlist = processFilters(filters)
   val filters_v =
     if filterlist(0).length > 0 then
       List("-filter:v", filterlist(0))
@@ -93,7 +70,7 @@ quiet: Boolean = true, exec: String = "ffmpeg"
       List("-filter:a", filterlist(1))
     else
       List()
-  val nonfilters = getNonFilters()
+  val nonfilters = getNonFilters(filters)
   if isAlright == false then
     -1
   else

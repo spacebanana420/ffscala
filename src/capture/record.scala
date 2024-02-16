@@ -4,13 +4,25 @@ import ffscala.*
 import scala.sys.process.*
 import ffscala.misc.*
 
-def record(output: String, captureargs: List[String], args: List[String] = List(), quiet: Boolean = true, exec: String = "ffmpeg"): Int =
+def record(output: String, captureargs: List[String], args: List[String] = List(), filters: List[String] = List(), quiet: Boolean = true, exec: String = "ffmpeg"): Int =
+  val filterlist = processFilters(filters)
+  val filters_v =
+    if filterlist(0).length > 0 then
+      List("-filter:v", filterlist(0))
+    else
+      List()
+  val filters_a =
+    if filterlist(1).length > 0 then
+      List("-filter:a", filterlist(1))
+    else
+      List()
+  val nonfilters = getNonFilters(filters)
   try
     val cmd: List[String] =
       if quiet then
-        List(exec, "-y", "-loglevel", "quiet") ++ captureargs ++ args :+ output
+        List(exec, "-y", "-loglevel", "quiet") ::: captureargs ::: args ::: filters_v ::: filters_a ::: nonfilters ::: List(output)
       else
-        List(exec, "-y", "-hide_banner") ++ captureargs ++ args :+ output
+        List(exec, "-y", "-hide_banner") ::: captureargs ::: args ::: filters_v ::: filters_a ::: nonfilters ::: List(output)
     cmd.!<
   catch
     case e: Exception => -1
