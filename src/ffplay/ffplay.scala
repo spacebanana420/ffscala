@@ -6,10 +6,14 @@ import ffscala.misc.*
 
 //FFplay functionality to play media
 
-def execplay(input: String, args: List[String], quiet: Boolean = true, exec: String = "ffplay"): Int =
+def execplay(input: String, args: List[String] = List(), quiet: Boolean = true, exec: String = "ffplay"): Int =
   if File(input).isFile() == true then
     try
-      val cmd = getBaseArgs(exec, quiet) ++ args
+      val cmd =
+        if quiet then
+          List(exec, "-loglevel", "quiet", input) ++ args
+        else
+          List(exec, "-hide_banner", input)
       cmd.!
     catch
       case e: Exception => -1

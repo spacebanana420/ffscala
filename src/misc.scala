@@ -5,7 +5,7 @@ import scala.sys.process.*
 //These functions are used by ffscala
 
 def getBaseArgs(exec: String, quiet: Boolean): List[String] =
-  if quiet == true then
+  if quiet then
     List(exec, "-y", "-loglevel", "quiet")
   else
     List(exec, "-y", "-hide_banner")
