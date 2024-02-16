@@ -141,6 +141,19 @@ Example: ```cropToAspect(2, 1)``` will crop with 2:1 aspect ratio
 ---
 
 ```scala
+def cropAndScale(crop_w: Int, crop_h: Int, scale_w: Int, scale_h: Int): List[String]
+```
+Crops the video/image and then scales it. The cropped result is centered.
+
+```crop_w``` and ```crop_h``` set the dimensions for cropping.
+
+```scale_w``` and ```scale_h``` set the dimensions for scaling.
+
+This function is merely for convenience. This results in the same as using ```crop()``` and ```scale()``` by this order.
+
+---
+
+```scala
 def setCurves(x: List[Float], y: List[Float], channel: String = "all"): List[String]
 ```
 Uses the curves filter for manipulating color, brightness and contrast smoothly for all channels or individually red, green or blue. The argument lists must have the same length and the list "x"  s values must be in ascending order, for example,```x[0]``` can have a value of 0 or 0.3 or any value, but then ```x[1]``` must have a higher value.

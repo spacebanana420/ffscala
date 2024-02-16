@@ -44,7 +44,13 @@ def cropToAspect(width: Byte, height: Byte): List[String] =
     List("v", s"crop=iw:$ih")
   else
     val iw: String = s"$width*ih/$height"
-    List("v", "crop=$iw:ih")
+    List("v", s"crop=$iw:ih")
+
+def cropAndScale(crop_w: Int, crop_h: Int, scale_w: Int, scale_h: Int): List[String] =
+  if crop_w <= 0 || crop_h <= 0 || scale_w <= 0 || scale_h <= 0  then
+    List()
+  else
+    List("v", s"crop=$crop_w:$crop_h,scale=$scale_w:$scale_h")
 
 def setCurves(x: List[Float], y: List[Float], channel: String = "all"): List[String] =
   def recurse(points: String = "", i: Int = 0): String =
