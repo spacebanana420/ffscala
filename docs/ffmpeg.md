@@ -7,6 +7,13 @@ For the filter arguments, see [here](filers.md)
 ---
 
 ```scala
+def checkFFmpeg(path: String = "ffmpeg"): Boolean
+```
+Returns ```true``` if the path points to a working FFmpeg executable, otherwise ```false```.
+
+---
+
+```scala
 def encode
 (
 input: String, output: String, args: List[String] = List(), filters: List[String] = List(),

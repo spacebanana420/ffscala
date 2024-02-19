@@ -19,6 +19,23 @@ private def parse(sources: String, s: String = "", l: List[String] = List(), i: 
   else
     parse(sources, s, l, i+1, copy)
 
+private def parse_dshow(sources: String, video: Boolean): List[String] =
+  def getLine(src: String, s: String = "", i: Int = 0, copy: Boolean = false): String =
+    if i >= src.length then
+      s
+    else if src(i) == '"' then
+      getLine(src, s, i+1, !copy)
+    else if copy then
+      getLine(src, s + src(i), i+1, copy)
+    else
+      getLine(src, s, i+1, copy)
+
+  if video then
+    mkList(sources).filter(x => x.contains("(video)")).map(x => getLine(x))
+  else
+    mkList(sources).filter(x => x.contains("(audio)")).map(x => getLine(x))
+  
+
 private def mkList(sources: String, s: String = "", l: List[String] = List(), i: Int = 0): List[String] =
   if i >= sources.length then
     if s != "" then
@@ -45,7 +62,7 @@ private def mkList(sources: String, s: String = "", l: List[String] = List(), i:
 //     filterSources(s, f :+ filter(s(i)), i+1)
 
 def listSources(mode: String, full: Boolean = false, exec: String = "ffmpeg"): List[String] =
-  val supported = supportedCaptureModes("audio")
+  val supported = supportedCaptureModes()
 
   if mode == "all" then
     val cmd = List(exec, "-hide_banner", "-sources")
@@ -53,10 +70,14 @@ def listSources(mode: String, full: Boolean = false, exec: String = "ffmpeg"): L
   else if belongsToList(mode, supported) then
     val cmd = List(exec, "-hide_banner") ++ getSourcesArgs(mode)
     val sources = cmd.!!
-    if full == false || (mode == "dshow" || mode == "avfoundation") then
-      parse(sources)
-    else
+    if full || mode == "avfoundation" then
       mkList(sources)
+    else if mode == "dshow_video" then
+      parse_dshow(sources, true)
+    else if mode == "dshow_audio" then
+      parse_dshow(sources, false)
+    else 
+      parse(sources)
   else
     List()
 

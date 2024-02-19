@@ -24,7 +24,7 @@ def exec_safe(cmd: List[String]): String =
   catch
     case e: Exception => ""
 
-def belongsToList(text: String, group: List[String], i: Int = 0): Boolean =
+def belongsToList(text: String, group: Seq[String], i: Int = 0): Boolean =
   if i >= group.length then
     false
   else if group(i) == text then
@@ -32,7 +32,7 @@ def belongsToList(text: String, group: List[String], i: Int = 0): Boolean =
   else
     belongsToList(text, group, i+1)
 
-def indexFromList(text: String, group: List[String], i: Int = 0): Int =
+def indexFromList(text: String, group: Seq[String], i: Int = 0): Int =
   if i >= group.length then
     -1
   else if group(i) == text then
@@ -41,7 +41,7 @@ def indexFromList(text: String, group: List[String], i: Int = 0): Int =
     indexFromList(text, group, i+1)
 
 
-def containsList(text: String, group: List[String], i: Int = 0): Boolean =
+def containsList(text: String, group: Seq[String], i: Int = 0): Boolean =
   if i >= group.length then
     false
   else if text.contains(group(i)) then
