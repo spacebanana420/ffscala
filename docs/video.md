@@ -102,7 +102,7 @@ For CRF, 0 means lossless, but I'm unsure if that's true for NVENC. If you want 
 ```scala
 def qsv_setPreset(preset: String): List[String]
 ```
-Sets the preset for the Intel QuickSync H.264 encoder.
+Sets the preset for the Intel QuickSync encoder.
 
 #### Supported presets:
 * veryfast
@@ -118,7 +118,7 @@ Sets the preset for the Intel QuickSync H.264 encoder.
 ```scala
 def qsv_setProfile(profile: String): List[String]
 ```
-Sets the H.264 profile for QuickSync.
+Sets the H.264/H.265 profile for QuickSync.
 
 #### Supported profiles:
 * unknown
