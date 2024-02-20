@@ -23,6 +23,7 @@ Sets the video encoder.
 * nvenc
 * nvenc265
 * qsv
+* qsv265
 * vaapi
 * utvideo
 * huffyuv
