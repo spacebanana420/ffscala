@@ -82,6 +82,7 @@ If unspecified, it will use the input data's original pixel format.
 * gbrp
 * gbrp10le
 * gbrp12le
+* bgra
 * gbrap
 * rgb48
 * rgb48le
@@ -109,6 +110,13 @@ If unspecified, it will use the input data's original pixel format.
 * nv20le
 * qsv
 * vaapi
+* vuyx
+* y210le
+* yuyv422
+* p010le
+* p012le
+* x2rgb10le
+* xv30le
 
 ---
 
