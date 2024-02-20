@@ -102,3 +102,9 @@ Supported modes:
 def setSeekInterval(interval: Float): List[String]
 ```
 Sets the seek interval for when you seek using the left and right arrow keys.
+
+---
+```scala
+def enableHWaccel(): List[String]
+```
+Enables hardware acceleration for playback.

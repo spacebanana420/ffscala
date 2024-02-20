@@ -120,3 +120,5 @@ def setSeekInterval(interval: Float): List[String] =
     List()
   else
     List("-seek_interval", interval.toString)
+
+def enableHWaccel(): List[String] = List("-hwaccel")
