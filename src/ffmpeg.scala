@@ -53,9 +53,9 @@ quiet: Boolean = true, exec: String = "ffmpeg"
   val audioFormats = supportedExtensions("audio")
   //maybe i should scrap this idea
   val isAlright =
-    if belongsToList(output, imageFormats) == true then
+    if belongsToList(output, imageFormats) then
       isAlright_Image(args)
-    else if belongsToList(output, audioFormats) == true then
+    else if belongsToList(output, audioFormats) then
       isAlright_Audio(args)
     else
       true
@@ -71,12 +71,12 @@ quiet: Boolean = true, exec: String = "ffmpeg"
     else
       List()
   val nonfilters = getNonFilters(filters)
-  if isAlright == false then
+  if !isAlright then
     -1
   else
     try
       val cmd: List[String] =
-        if quiet == true then
+        if quiet then
           List(exec, "-y", "-loglevel", "quiet", "-i", input) ++ args ++ filters_v ++ filters_a ++ nonfilters :+ output
         else
           List(exec, "-y", "-hide_banner", "-i", input) ++ args ++ filters_v ++ filters_a ++ nonfilters :+ output
@@ -86,7 +86,7 @@ quiet: Boolean = true, exec: String = "ffmpeg"
 
 def getScreenshot(input: String, output: String, time: String, quiet: Boolean = true, exec: String = "ffmpeg") =
   val fullArgs: List[String] = List("-ss", time, "-i", input, "-frames:v", "1", output)
-  if quiet == true then
+  if quiet then
     val cmd: List[String] = exec +: "-y" +: "-loglevel" +: "quiet" +: fullArgs
     cmd.!
   else

@@ -35,7 +35,9 @@ For desktop and audio capture functionality, you need to give the functions the 
 # Recording functions
 
 ```scala
-def record(output: String, captureargs: List[String], args: List[String] = List(), filters: List[String] = List(), quiet: Boolean = true, exec: String = "ffmpeg"): Int
+def record(
+output: String, captureargs: List[String], args: List[String] = List(), filters: List[String] = List(),
+hwaccel: String = "", quiet: Boolean = true, exec: String = "ffmpeg"): Int
 ```
 This executes FFmpeg and begins the desktop recording. ```output``` is for the output file's path.
 
@@ -44,6 +46,11 @@ This executes FFmpeg and begins the desktop recording. ```output``` is for the o
 ```args``` are the encoding arguments used in functions like ```encode()```.
 
 ```filters``` are the filter arguments used in functions like ```encode()```.
+
+```hwaccel``` sets a hardware acceleration encoding mode that needs extra configuration, like Intel QuickSync. Note that, if you use qsv hwaccel, you must use the ```qsv``` encoder with the ```nv12``` or ```qsv``` pixel format. QSV is only supported by Intel GPUs.
+
+Supported hwaccel values:
+* qsv
 
 To stop the recording, type Q. You can also stop the recording with ctrl + C, but this will also shut down your program. You can alternatively add a recording duration with ```setDuration()``` (see [Base doc](../docs/base.md)).
 

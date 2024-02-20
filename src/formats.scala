@@ -66,3 +66,6 @@ def supportedSampleFormats(): List[String] =
   "u8", "s16", "s32", "flt", "dbl", "u8p",
   "s16p", "s32p", "fltp", "dblp", "s64", "s64p"
   )
+
+def supportedHWAccel(): List[String] =
+  List("qsv")

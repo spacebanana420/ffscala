@@ -10,6 +10,17 @@ def getBaseArgs(exec: String, quiet: Boolean): List[String] =
   else
     List(exec, "-y", "-hide_banner")
 
+def getBaseArgs_hw(exec: String, quiet: Boolean, hwaccel: String = ""): List[String] =
+  val args_hw =
+    hwaccel match
+      case "qsv" => List("-hwaccel", "qsv", "-hwaccel_output_format", "qsv")
+      case _ => List()
+
+  if quiet then
+    List(exec, "-y", "-loglevel", "quiet") ++ args_hw
+  else
+    List(exec, "-y", "-hide_banner") ++ args_hw
+
 // def addIntArg(a: Int, s: String): List[String] = List(s, a.toString)
 //
 // def addFloatArg(a: Float, s: String): List[String] = List(s, a.toString)
@@ -18,7 +29,7 @@ def getBaseArgs(exec: String, quiet: Boolean): List[String] =
 //
 // def appendFloatArg(a: Float, l: List[String]): List[String] = l :+ a.toString
 
-def exec_safe(cmd: List[String]): String =
+def exec_safe(cmd: Seq[String]): String =
   try
     cmd.!!
   catch

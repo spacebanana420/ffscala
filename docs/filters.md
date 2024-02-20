@@ -85,9 +85,17 @@ Applies an equalizer on a certain frequency center and range. This filter only f
 # Video Filters
 
 ```scala
-def scale(width: Int, height: Int): List[String]
+def scale(width: Int, height: Int, filter: String = ""): List[String]
 ```
-Sets the video/image's width and height resolution in pixels.
+Sets the output video/image's width and height resolution in pixels.
+
+You can set a specific scale filter, though if unspecified it will default to bicubic.
+
+#### Supported scaling filters:
+* bicubic
+* bilinear
+* neighbor
+* lanczos
 
 ---
 
@@ -103,9 +111,9 @@ For example, a width of 2 and a height of 2 will correspond to 2x the input's wi
 ```scala
 def setScaleFilter(filter: String): List[String]
 ```
-Sets the video's scaling filter in case you use ```setVideoResolution```
+Sets the video's scaling filter separately in case you use ```scale()```.
 
-If unspecified, it will default to bicubic
+If unspecified, it will default to bicubic.
 
 #### Supported scaling filters:
 * bicubic

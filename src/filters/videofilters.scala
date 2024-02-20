@@ -4,9 +4,13 @@ import ffscala.misc.*
 
 //Image and audio processing and manipulation filters
 
-def scale(width: Int, height: Int): List[String] =
+def scale(width: Int, height: Int, filter: String = ""): List[String] =
+  val supportedFilters = Vector("bicubic", "bilinear", "neighbor", "lanczos")
+
   if width <= 0 || height <= 0 then
     List()
+  else if belongsToList(filter, supportedFilters) then
+    List("v", s"scale=$width:$height", "-sws_flags", filter)
   else
     List("v", s"scale=$width:$height")
 
@@ -17,9 +21,8 @@ def scaleFactor(width: Float, height: Float): List[String] =
     List("v", s"scale=iw*$width:ih*$height")
 
 def setScaleFilter(filter: String): List[String] =
-  val supportedFilters = List("bicubic", "bilinear", "neighbor", "lanczos")
-  val foundFilter = belongsToList(filter, supportedFilters)
-  if foundFilter == false then
+  val supportedFilters = Vector("bicubic", "bilinear", "neighbor", "lanczos")
+  if !belongsToList(filter, supportedFilters) then
     List()
   else
     List("-sws_flags", filter)
