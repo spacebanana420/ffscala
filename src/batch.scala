@@ -13,7 +13,7 @@ def batchExecute(paths: List[String], format: String, args: List[String] = List(
     for path <- paths do {
       if File(path).isFile() == true then
         val output = removeExtension(path) + "_new." + format
-        encode(path, output, args, filters, quiet, exec)
+        encode(path, output, args, filters, "", quiet, exec)
     }
   }
 }
@@ -40,7 +40,7 @@ def batchDir(dir: String, format: String, args: List[String] = List(), filters: 
       if belongsToList(pathfmt, formatsToSeek) == true && File(path).isFile == true then
         val output = removeExtension(path) + "_new." + format
         //println("Encoding " + path)
-        encode(path, output, args, filters, quiet, exec)
+        encode(path, output, args, filters, "", quiet, exec)
     }
 }
 
