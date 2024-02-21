@@ -47,7 +47,7 @@ def checkFFmpeg(path: String = "ffmpeg"): Boolean =
 def encode
 (
 input: String, output: String, args: List[String] = List(), filters: List[String] = List(),
-quiet: Boolean = true, exec: String = "ffmpeg"
+hwaccel: String = "", quiet: Boolean = true, exec: String = "ffmpeg"
 ): Int =
   val imageFormats = supportedExtensions("image")
   val audioFormats = supportedExtensions("audio")
@@ -59,27 +59,27 @@ quiet: Boolean = true, exec: String = "ffmpeg"
       isAlright_Audio(args)
     else
       true
-  val filterlist = processFilters(filters)
-  val filters_v =
-    if filterlist(0).length > 0 then
-      List("-filter:v", filterlist(0))
-    else
-      List()
-  val filters_a =
-    if filterlist(1).length > 0 then
-      List("-filter:a", filterlist(1))
-    else
-      List()
-  val nonfilters = getNonFilters(filters)
   if !isAlright then
     -1
   else
+    val filterlist = processFilters(filters)
+    val filters_v =
+      if filterlist(0).length > 0 then
+        List("-filter:v", filterlist(0))
+      else
+        List()
+    val filters_a =
+      if filterlist(1).length > 0 then
+        List("-filter:a", filterlist(1))
+      else
+        List()
+    val nonfilters = getNonFilters(filters)
     try
       val cmd: List[String] =
-        if quiet then
-          List(exec, "-y", "-loglevel", "quiet", "-i", input) ++ args ++ filters_v ++ filters_a ++ nonfilters :+ output
-        else
-          List(exec, "-y", "-hide_banner", "-i", input) ++ args ++ filters_v ++ filters_a ++ nonfilters :+ output
+          getBaseArgs_hw(exec, quiet, hwaccel)
+          ++ List("-i", input)
+          ++ args ++ filters_v ++ filters_a
+          ++ nonfilters :+ output
       cmd.!
     catch
       case e: Exception => -1

@@ -17,7 +17,7 @@ Returns ```true``` if the path points to a working FFmpeg executable, otherwise 
 def encode
 (
 input: String, output: String, args: List[String] = List(), filters: List[String] = List(),
-quiet: Boolean = true, exec: String = "ffmpeg"
+hwaccel: String = "", quiet: Boolean = true, exec: String = "ffmpeg"
 ): Int
 ```
 Executes FFmpeg to encode the input file.
@@ -29,6 +29,8 @@ Executes FFmpeg to encode the input file.
 ```args``` are the FFmpeg encoding arguments you get through most functions, except for filter functions.
 
 ```filters``` is the argument where you pass filters to. They cannot be passed to ```args``` because they are handled differently.
+
+```hwaccel``` sets a hardware acceleration encoding mode that needs extra configuration, like Intel QuickSync. Note that, if you use qsv hwaccel, you must use the ```qsv``` encoder with the ```nv12``` or ```qsv``` pixel format. QSV is only supported by Intel GPUs.
 
 ```quiet``` tells FFmpeg whether or not it should print information to stdout. By default, quiet is true, and FFmpeg won't output anything.
 
