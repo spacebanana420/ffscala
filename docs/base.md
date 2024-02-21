@@ -35,6 +35,7 @@ Sets the video encoder.
 * vp9
 * av1
 * mjpeg
+* mjpegqsv
 * targa
 * bmp
 * h263

@@ -23,11 +23,11 @@ def isFormatSupported(path: String, mode: String): Boolean =
 
 def supportedVideoCodecs(): List[String] =
   List("copy", "cinepak", "x264", "x264rgb", "x265", "nvenc", "nvenc265", "qsv", "qsv265", "vaapi",
-    "utvideo", "huffyuv", "png", "dnxhd", "prores", "tiff", "cfhd", "vp9", "av1", "mjpeg", "targa", "bmp", "h263", "h263p", "ppm")
+    "utvideo", "huffyuv", "png", "dnxhd", "prores", "tiff", "cfhd", "vp9", "av1", "mjpeg", "mjpegqsv", "targa", "bmp", "h263", "h263p", "ppm")
 
 def equivalentVideoCodecs(): List[String] =
   List("copy", "cinepak", "libx264", "libx264rgb", "libx265", "h264_nvenc", "hevc_nvenc", "h264_qsv", "hevc_qsv", "h264_vaapi",
-    "utvideo", "huffyuv", "png", "dnxhd", "prores_ks", "tiff", "cfhd", "libvpx-vp9", "libaom-av1", "mjpeg", "targa", "bmp", "h263", "h263p", "ppm")
+    "utvideo", "huffyuv", "png", "dnxhd", "prores_ks", "tiff", "cfhd", "libvpx-vp9", "libaom-av1", "mjpeg", "mjpeg_qsv", "targa", "bmp", "h263", "h263p", "ppm")
 
 def supportedAudioCodecs(): List[String] =
   List("copy", "aac", "opus", "vorbis", "mp3", "ac3", "flac", "pcm16", "pcm24", "pcm32", "pcm64", "pcm16be", "pcm24be", "pcm32be", "pcm64be")
