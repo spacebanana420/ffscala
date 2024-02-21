@@ -136,6 +136,15 @@ Enables the experimental low power mode for QuickSync
 ---
 
 ```scala
+def qsv_MJPEGQuality(q: Byte): List[String]
+```
+Sets the quality level for QSV MJPEG. Accepted values are between 1 and 100. Higher means higher quality and file size.
+
+If you are encoding videos in QuickSync MJPEG, use this rather than ```setQuality()``` as that function will give you issues.
+
+---
+
+```scala
 def vaapi_setDevice(device: String): List[String]
 ```
 Sets the DRM hardware device to use for encoding with VAAPI.

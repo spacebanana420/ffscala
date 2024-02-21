@@ -67,6 +67,10 @@ def qsv_setProfile(profile: String): List[String] =
 
 def qsv_lowPower(): List[String] = List("-low_power", "true")
 
+def qsv_MJPEGQuality(q: Byte): List[String] =
+  val quality = if q < 1 then 1 else if q > 100 then 100 else q
+  List("-q:v", (quality / 100f).toString)
+
 def vaapi_setDevice(device: String): List[String] = List("-init_hw_device", s"vaapi=foo:$device")
 
 def vaapi_setRateMode(mode: String): List[String] =
