@@ -45,6 +45,13 @@ Sets the video encoder.
 ---
 
 ```scala
+def setFramerate(fps: Int): List[String]
+```
+Sets the output encoding framerate. You can also use this alongside screen capture functions.
+
+---
+
+```scala
 def setVideoBitrate(bitrate: Int): List[String]
 ```
 Sets the video bitrate, measured in kilobits per second.

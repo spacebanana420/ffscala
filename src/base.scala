@@ -19,6 +19,8 @@ def setVideoEncoder(encoder: String): List[String] =
   else
     List("-c:v", ffmpegEquivalents(i))
 
+def setFramerate(fps: Int): List[String] = List("-r", fps.toString)
+
 def setVideoBitrate(bitrate: Int): List[String] =
   if bitrate <= 0 then
     List()
