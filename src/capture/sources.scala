@@ -93,7 +93,10 @@ private def getSourcesArgs(mode: String): List[String] =
 
 def listSources_OSS(): Array[String] = //alternative source listing for OSS
   if File("/dev").isDirectory() then
-    File("/dev").list().filter(x => x.contains("dsp"))
+    File("/dev")
+      .list()
+      .filter(x => x.contains("dsp"))
+      .map(x => s"/dev/$x")
   else
     Array()
 
