@@ -180,22 +180,22 @@ For x11grab, the default input is "0.0", which will capture the whole main scree
 ---
 
 ```scala
-def pulse_captureAudio(input: String, samplerate: Int, channels: Byte): List[String]
+def pulse_captureAudio(input: String, samplerate: Int = 0, channels: Byte = 0): List[String]
 ```
 ```scala
-def alsa_captureAudio(input: String, samplerate: Int, channels: Byte): List[String]
+def alsa_captureAudio(input: String, samplerate: Int = 0, channels: Byte = 0): List[String]
 ```
 ```scala
-def oss_captureAudio(input: String, samplerate: Int, channels: Byte): List[String]
+def oss_captureAudio(input: String, samplerate: Int = 0, channels: Byte = 0): List[String]
 ```
 ```scala
-def jack_captureAudio(input: String, channels: Byte): List[String]
+def jack_captureAudio(input: String, channels: Byte = 0): List[String]
 ```
 Use pulseaudio, alsa, oss or jack to capture audio.
 
 ```input``` is the input audio device.
 
-```samplerate``` and ```channels``` are the audio sample rate and the amount of audio channels, respectively. Minimum value is 1 for both.
+```samplerate``` and ```channels``` are the audio sample rate and the amount of audio channels, respectively. For both arguments, if the value is 0 or lower, FFmpeg assumes the sample rate and channel count.
 
 The jack function doesn't take a sample rate argument.
 

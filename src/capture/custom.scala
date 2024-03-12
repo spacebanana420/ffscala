@@ -130,16 +130,16 @@ def avfoundation_capture(vinput: String, ainput: String, fps: Int, showmouse: Bo
 
   List("-f", "avfoundation") ++ arg_fps ++ arg_size ++ arg_mouse ++ arg_input
 
-def pulse_captureAudio(input: String, samplerate: Int, channels: Byte): List[String] =
+def pulse_captureAudio(input: String, samplerate: Int = 0, channels: Byte = 0): List[String] =
   generic_captureAudio("pulse", input, samplerate, channels)
 
-def alsa_captureAudio(input: String, samplerate: Int, channels: Byte): List[String] =
+def alsa_captureAudio(input: String, samplerate: Int = 0, channels: Byte = 0): List[String] =
   generic_captureAudio("alsa", input, samplerate, channels)
 
-def oss_captureAudio(input: String, samplerate: Int, channels: Byte): List[String] =
+def oss_captureAudio(input: String, samplerate: Int = 0, channels: Byte = 0): List[String] =
   generic_captureAudio("oss", input, samplerate, channels)
 
-def jack_captureAudio(input: String, channels: Byte): List[String] =
+def jack_captureAudio(input: String, channels: Byte = 0): List[String] =
   generic_captureAudio("jack", input, 0, channels)
 
 private def generic_captureAudio(mode: String, input: String, samplerate: Int, channels: Byte): List[String] =
