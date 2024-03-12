@@ -267,3 +267,9 @@ Supported:
 
 For ```all```, all sources that can be listed with ```ffmpeg -sources``` will be listed and not parsed or processed.
 
+---
+
+```scala
+def listSources_OSS(): Array[String]
+```
+Lists all available devices for the OSS audio system. Use this instead of ```listSources()``` if it works better for you.

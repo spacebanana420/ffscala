@@ -3,6 +3,7 @@ package ffscala.capture
 import ffscala.*
 import scala.sys.process._
 import ffscala.misc.*
+import java.io.File
 
 private def parse(sources: String, s: String = "", l: List[String] = List(), i: Int = 0, copy: Boolean = false): List[String] =
   if i >= sources.length then
@@ -89,6 +90,12 @@ private def getSourcesArgs(mode: String): List[String] =
       List("-f", "avfoundation", "-list_devices", "true", "-i", "\"\"")
     case _ =>
       List("-sources", mode)
+
+def listSources_OSS(): Array[String] = //alternative source listing for OSS
+  if File("/dev").isDirectory() then
+    File("/dev").list().filter(x => x.contains("dsp"))
+  else
+    Array()
 
 // def listDirectSources(exec: String = "ffmpeg"): List[String] =
 //   List(exec, "-list_devices", "true", "-f", "dshow", "-i", "dummy").!!
