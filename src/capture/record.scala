@@ -7,21 +7,10 @@ import ffscala.misc.*
 def record(
 output: String, captureargs: List[String], args: List[String] = List(), filters: List[String] = List(),
 hwaccel: String = "", quiet: Boolean = true, exec: String = "ffmpeg"): Int =
-  val filterlist = processFilters(filters)
-  val filters_v =
-    if filterlist(0).length > 0 then
-      List("-filter:v", filterlist(0))
-    else
-      List()
-  val filters_a =
-    if filterlist(1).length > 0 then
-      List("-filter:a", filterlist(1))
-    else
-      List()
-  val nonfilters = getNonFilters(filters)
+  val filter_args = mkFilterArgs(filters)
   val base = getBaseArgs_hw(exec, quiet, hwaccel)
   try
-    val cmd: List[String] = base ::: captureargs ::: args ::: filters_v ::: filters_a ::: nonfilters ::: List(output)
+    val cmd: List[String] = base ::: captureargs ::: args ::: filter_args ::: List(output)
     cmd.!<
   catch
     case e: Exception => -1
