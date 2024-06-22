@@ -62,24 +62,12 @@ hwaccel: String = "", quiet: Boolean = true, exec: String = "ffmpeg"
   if !isAlright then
     -1
   else
-    val filterlist = processFilters(filters)
-    val filters_v =
-      if filterlist(0).length > 0 then
-        List("-filter:v", filterlist(0))
-      else
-        List()
-    val filters_a =
-      if filterlist(1).length > 0 then
-        List("-filter:a", filterlist(1))
-      else
-        List()
-    val nonfilters = getNonFilters(filters)
+    val filter_args = mkFilterArgs(filters)
     try
       val cmd: List[String] =
           getBaseArgs_hw(exec, quiet, hwaccel)
           ++ List("-i", input)
-          ++ args ++ filters_v ++ filters_a
-          ++ nonfilters :+ output
+          ++ args ++ filter_args :+ output
       cmd.!
     catch
       case e: Exception => -1

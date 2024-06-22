@@ -3,9 +3,11 @@ You can play any supported media with FFplay. These functions allow you to open 
 ---
 
 ```scala
-def execplay(input: String, args: List[String] = List(), quiet: Boolean = true, exec: String = "ffplay"): Int
+def execplay(input: String, args: List[String] = List(), filters: List[String] = List(), quiet: Boolean = true, exec: String = "ffplay"): Int
 ```
-Executes FFplay to play back the media located in the path ```input```. The args that go here are the ones you generate with the functions seen here.
+Executes FFplay to play back the media located in the path ```input```. The ```args``` that go here are the ones you generate with the functions seen here.
+
+You can also pass common FFmpeg video and audio filters to FFplay through ```filters```.
 
 ---
 

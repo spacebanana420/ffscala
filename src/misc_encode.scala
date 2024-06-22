@@ -1,6 +1,22 @@
 package ffscala.misc
 
-def processFilters(filters: List[String], vf: String = "", af: String = "", i: Int = 0): List[String] =
+def mkFilterArgs(filters: Seq[String]): List[String] =
+  val filterlist = processFilters(filters)
+  val nonfilters = getNonFilters(filters)
+  val filters_v =
+    if filterlist(0).length > 0 then
+      List("-vf", filterlist(0))
+    else
+      List()
+  val filters_a =
+    if filterlist(1).length > 0 then
+      List("-af", filterlist(1))
+    else
+      List()
+
+  filters_v ++ filters_a ++ nonfilters
+
+def processFilters(filters: Seq[String], vf: String = "", af: String = "", i: Int = 0): List[String] =
   val comma =
     if i >= filters.length-2 then
       ""
@@ -15,7 +31,7 @@ def processFilters(filters: List[String], vf: String = "", af: String = "", i: I
   else
     processFilters(filters, vf, af, i+1)
 
-def getNonFilters(filters: List[String], nf: List[String] = List(), i: Int = 0): List[String] =
+def getNonFilters(filters: Seq[String], nf: List[String] = List(), i: Int = 0): List[String] =
   if i >= filters.length then
     nf
   else if filters(i) == "v" || filters(i) == "a" then
