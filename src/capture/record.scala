@@ -15,13 +15,15 @@ hwaccel: String = "", quiet: Boolean = true, exec: String = "ffmpeg"): Int =
   catch
     case e: Exception => -1
 
-def takeScreenshot(mode: String, i: String, output: String, showmouse: Boolean = false, args: List[String] = List(), quiet: Boolean = true, exec: String = "ffmpeg"): Int =
+def takeScreenshot(mode: String, i: String, output: String, showmouse: Boolean = false,
+args: List[String] = List(), filters: List[String] = List(),
+quiet: Boolean = true, exec: String = "ffmpeg"): Int =
   val path =
     if isFormatSupported(output, "image") then
       output
     else
       s"${removeExtension(output)}.png"
-  val supported = supportedCaptureModes("video")
+  val supported = supportedCaptureModes()
   val arg_mode =
     if belongsToList(mode, supported) then
       List("-f", mode)
@@ -34,11 +36,9 @@ def takeScreenshot(mode: String, i: String, output: String, showmouse: Boolean =
       List("-draw_mouse", "0")
 
   val arg_base = getBaseArgs(exec, quiet)
+  val filter_args = mkFilterArgs(filters)
   val cmd: List[String] =
-    if args != List() then
-      arg_base ++ arg_mode ++ arg_mouse ++ processDesktopInput(i, mode) ++ List("-frames:v", "1", path)
-    else
-      arg_base ++ arg_mode ++ arg_mouse ++ processDesktopInput(i, mode) ++ List("-frames:v", "1") ++ args :+ path
+      arg_base ++ arg_mode ++ arg_mouse ++ processDesktopInput(i, mode) ++ List("-frames:v", "1") ++ args ++ filter_args :+ path
   try
     cmd.!
   catch

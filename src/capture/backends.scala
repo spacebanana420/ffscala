@@ -26,7 +26,8 @@ def processDesktopInput(input: String, mode: String): List[String] =
     case "x11grab" =>
       List("-i", s":$input")
     case "gdigrab" =>
-      List("-i", s"title=$input")
+      if input == "" || input == "desktop" then List("-i", "desktop")
+      else List("-i", s"title=$input")
     case _ =>
       List("-i", input)
 

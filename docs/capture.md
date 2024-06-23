@@ -57,7 +57,9 @@ To stop the recording, type Q. You can also stop the recording with ctrl + C, bu
 ---
 
 ```scala
-def takeScreenshot(mode: String, i: String, output: String, showmouse: Boolean = false, args: List[String] = List(), quiet: Boolean = true, exec: String = "ffmpeg"): Int
+def takeScreenshot(mode: String, i: String, output: String, showmouse: Boolean = false,
+args: List[String] = List(), filters: List[String] = List(),
+quiet: Boolean = true, exec: String = "ffmpeg"): Int
 ```
 Takes a screenshot of your screen and saves it as a png file. ```output``` is the path to the screenshot, it can just be the file name if you want to save the image in the current directory.
 
@@ -77,6 +79,8 @@ You can specify a positive offset for the screen's position with x and y
 Supported desktop capture modes:
 * x11grab
 * dshow
+* dshow_video
+* gdigrab
 
 ---
 
