@@ -160,7 +160,7 @@ def getres() =
   println(res)
 
 def testscreenshot() =
-  takeScreenshot("x11grab", "0.0", "screenshot.png", quiet=false)
+  takeScreenshot_auto("x11grab", "0.0", "screenshot.png", quiet=false)
 
 
 def testFilters() =
