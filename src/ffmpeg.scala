@@ -7,7 +7,7 @@ import ffscala.misc.*
 //This is the main file of ffscala, containing the base and most common FFmpeg functionality
 
 
-private def isAlright_global(args: List[String], badargs: List[String], alright: Boolean = false, c: Int = 0): Boolean =
+private def isAlright_global(args: Seq[String], badargs: Seq[String], alright: Boolean = false, c: Int = 0): Boolean =
   def isSimilar(element: String, i: Int = 0): Boolean =
     if i >= badargs.length then
       false
@@ -24,11 +24,11 @@ private def isAlright_global(args: List[String], badargs: List[String], alright:
     isAlright_global(args, badargs, alright, c+1)
 
 
-private def isAlright_Image(args: List[String]): Boolean =
+private def isAlright_Image(args: Seq[String]): Boolean =
   val badArguments = List("-c:a", "-b:a", "-b:v", "-g", "-bf", "-crf")
   isAlright_global(args, badArguments)
 
-private def isAlright_Audio(args: List[String]): Boolean =
+private def isAlright_Audio(args: Seq[String]): Boolean =
   val badArguments = List("-c:v", "-b:v", "-g", "-bf", "-crf", "-pix_fmt", "-filter:v", "-preset:v")
   isAlright_global(args, badArguments)
 
@@ -72,7 +72,7 @@ hwaccel: String = "", quiet: Boolean = true, exec: String = "ffmpeg"
     catch
       case e: Exception => -1
 
-def getScreenshot(input: String, output: String, time: String, quiet: Boolean = true, exec: String = "ffmpeg") =
+def extractFrame(input: String, output: String, time: String, quiet: Boolean = true, exec: String = "ffmpeg") =
   val fullArgs: List[String] = List("-ss", time, "-i", input, "-frames:v", "1", output)
   if quiet then
     val cmd: List[String] = exec +: "-y" +: "-loglevel" +: "quiet" +: fullArgs

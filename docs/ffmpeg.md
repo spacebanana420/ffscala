@@ -39,7 +39,7 @@ Executes FFmpeg to encode the input file.
 ---
 
 ```scala
-def getScreenshot(input: String, output: String, time: String, quiet: Boolean = true, exec = "ffmpeg")
+def extractFrame(input: String, output: String, time: String, quiet: Boolean = true, exec = "ffmpeg")
 ```
 Captures a frame from a video or image sequence.
 
