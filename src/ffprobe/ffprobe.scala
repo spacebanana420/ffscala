@@ -6,19 +6,19 @@ import scala.sys.process._
 
 //Functions for getting and parsing media file information
 
-private def getEntries(exec: String, streams: String): String =
-  exec_safe(List(exec, "-loglevel", "0", "-show_entries", s"stream=$streams"))
+private def getEntries(path: String, exec: String, streams: String): String =
+  exec_safe(List(exec, "-loglevel", "0", "-show_entries", s"stream=$streams", path))
 
 def getVideoInfo(path: String, exec: String = "ffprobe"): List[String] =
-  val mediainfo = getEntries(exec, "codec_name,width,height,pix_fmt,r_frame_rate,bit_rat,profile")
+  val mediainfo = getEntries(path, exec, "codec_name,width,height,pix_fmt,r_frame_rate,bit_rate,profile")
   filterOutput(mediainfo)
 
 def getImageInfo(path: String, exec: String = "ffprobe"): List[String] =
-  val mediainfo = getEntries(exec, "codec_name,width,height,pix_fmt")
+  val mediainfo = getEntries(path, exec, "codec_name,width,height,pix_fmt")
   filterOutput(mediainfo)
 
 def getAudioInfo(path: String, exec: String = "ffprobe"): List[String] =
-  val mediainfo = getEntries(exec, "codec_name,bits_per_sample,sample_rate,channels,channel_layout,bit_rate")
+  val mediainfo = getEntries(path, exec, "codec_name,bits_per_sample,sample_rate,channels,channel_layout,bit_rate")
   filterOutput(mediainfo)
 
 def getDuration(path: String, exec: String = "ffprobe"): String = //maybe change it to a list
@@ -42,6 +42,16 @@ def getBitrate(path: String, exec: String = "ffprobe"): List[Long] =
     filterOutput(info).map(x=>x.toLong)
   catch
     case e: Exception => List(0)
+
+def showEntries(path: String, entries: Seq[String], exec: String = "ffprobe"): List[String] =
+  def mkstring(str_entries: String = "", i: Int = 0): String =
+    if i >= entries.length then str_entries
+    else if i == entries.length-1 then mkstring(str_entries + entries(i), i+1)
+    else mkstring(str_entries + s"${entries(i)},", i+1)
+
+  val arg_entries = mkstring()
+  val output = getEntries(path, exec, arg_entries)
+  filterOutput(output)
 
 def getFullInfo(path: String, exec: String = "ffprobe"): String =
   exec_safe(List(exec, "-loglevel", "0", "-show_streams", path))

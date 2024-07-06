@@ -3,6 +3,7 @@ import ffscala.capture.*
 import java.io.File
 
 @main def main() = {
+  for i <- showEntries("Awesome Wooper.png", Vector("codec_name", "duration")) do println(i)
   //batch()
   //encodedir()
   //testoptional()
@@ -13,7 +14,7 @@ import java.io.File
   //testscreenshot()
   //testFilters()
   //testcombine()
-  funny()
+  //funny()
 }
 
 def funny() =

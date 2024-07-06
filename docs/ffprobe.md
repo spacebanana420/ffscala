@@ -70,6 +70,15 @@ Gets the bitrate of each media channel, measured in bits/second. If an error occ
 ---
 
 ```scala
+def getBitrate(path: String, entries: Seq[String], exec: String = "ffprobe"): List[String]
+```
+Obtains a set of entries of your choice from the file `path`.
+
+If you are unsure what kind of entries you can prompt, try using `getFullInfo()` first and see what's available for the media file in question.
+
+---
+
+```scala
 def getFullInfo(path: String, exec: String = "ffprobe"): String
 ```
 Returns the ffprobe output, unparsed.
